@@ -1,1 +1,11 @@
 <p>home works!</p>
+
+<h2>My Vocabularies</h2>
+<ul>
+  <li *ngFor="let voc of vocabularies">
+    <span class="badge">Id : {{voc.id}}</span><br/>
+    <span class="badge">De : {{voc.word}}</span><br/>
+    <span class="badge">Tr : {{voc.vocabularyDetail && voc.vocabularyDetail[0] && voc.vocabularyDetail[0].sentenceMeaning}}</span> 
+    <hr>
+  </li>
+</ul>
