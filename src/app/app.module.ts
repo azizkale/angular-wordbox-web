@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
 import { HttpClientModule } from '@angular/common/http';
+import { DictionaryComponent } from './dictionary/dictionary.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    DictionaryComponent
   ],
   imports: [
     BrowserModule,
