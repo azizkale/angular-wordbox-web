@@ -23,7 +23,10 @@ export class HomeComponent implements OnInit {
       this.vocabularies = data;
     });
   }
-
+  findTheMeaning(word:string){
+    this.vocabularies.filter(x=> x.word===word)
+    console.log( this.vocabularies.filter(x=> x.word===word))
+  }
  
 
 }
