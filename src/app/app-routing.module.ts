@@ -5,6 +5,8 @@ import { DictionaryComponent } from './dictionary/dictionary.component';
 
 
 const routes: Routes = [
+  {path:'', component:HomeComponent},
+  {path:'app-home', component:HomeComponent},
   { path: 'dictionary', component: DictionaryComponent }
 ];
 

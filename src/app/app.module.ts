@@ -9,12 +9,14 @@ import { HomeComponent } from './home/home.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { DictionaryComponent } from './dictionary/dictionary.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    DictionaryComponent
+    DictionaryComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
