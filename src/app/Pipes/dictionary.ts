@@ -4,10 +4,11 @@ import { Pipe, PipeTransform } from '@angular/core';
     name: 'dict'
 })
 
-export class DictionaryPipe implements PipeTransform{
-    
-    transform() {
-        throw new Error("Method not implemented.");
+export class DictionaryPipe implements PipeTransform {
+
+    transform(word: string) {
+        if (word === 'Buch')
+          return console.log(word)
     }
-    
+
 }

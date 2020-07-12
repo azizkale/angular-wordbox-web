@@ -13,20 +13,25 @@ export class HomeComponent implements OnInit {
   constructor(private vocabularyService: VocabularyService) { }
 
   vocabularies: Vocabulary[];
-
+  word;
+  _index: number = -1;
   ngOnInit(): void {
     this.showVocabulary();
   }
 
-  showVocabulary()  {
+  showVocabulary() {
     this.vocabularyService.getVocabularies().subscribe((data) => {
       this.vocabularies = data;
     });
   }
-  findTheMeaning(word:string){
-    this.vocabularies.filter(x=> x.word===word)
-    console.log( this.vocabularies.filter(x=> x.word===word))
+  findTheMeaning(word: string) {
+    this._index = this.vocabularies.indexOf(
+      this.vocabularies.find(w => w.word === word)
+    )
+    console.log(this._index)
+
+    
   }
- 
+
 
 }
