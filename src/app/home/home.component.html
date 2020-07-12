@@ -1,18 +1,45 @@
-<p>home works!</p>
-<form>
-    <div class="form-group row">
-        <label for="staticEmail" class="col-sm-2 col-form-label">Word:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control-plaintext" [(ngModel)]="word" placeholder="your word" name="word" (input)="findTheMeaning(word)">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container mt-3">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8 col-lg-6 pb-5">
+            <!--Form with header-->
+            <form>
+                <div class="card border-primary rounded-0">
+                    <div class="card-header p-0">
+                        <div class="bg-info text-white text-center py-2">
+                            <h3><i class="material-icons"></i> Dictionary</h3>
+                        </div>
+                    </div>
+                    <div class="card-body p-3">
+
+                        <!--Body-->
+                        <div class="form-group">
+                            <div class="input-group mb-2">
+                                <div class="input-group-prepend mr-1">
+                                    <div class="input-group-text"><span class="material-icons">
+                                        create
+                                        </span></div>
+                                </div>
+                                <input type="text" class="form-control-plaintext" [(ngModel)]="word" placeholder="search" name="word" (input)="findTheMeaning(word)">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <table mdbTable small="true">
+                                <tbody>
+                                    <tr mdbTableCol *ngFor="let voc of searchedWord">
+                                        <th scope="row">{{voc.word}}:</th>
+                                        <td>{{voc.vocabularyDetail && voc.vocabularyDetail[0] && voc.vocabularyDetail[0].sentenceMeaning}}</td>
+                                        <hr>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+            <!--Form with header-->
         </div>
     </div>
-</form>
-<h2>My Vocabularies</h2>
-<ul>
-    <li *ngFor='let voc of vocabularies | slice:_index:_index+1'>
-        <span class="badge">Id : {{voc.id}}</span><br/>
-        <span class="badge">De : {{voc.word}}</span><br/>
-        <span class="badge">Tr : {{voc.vocabularyDetail && voc.vocabularyDetail[0] && voc.vocabularyDetail[0].sentenceMeaning}}</span>
-        <hr>
-    </li>
-</ul>
+</div>

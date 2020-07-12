@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
 
   vocabularies: Vocabulary[];
   word;
-  _index: number = -1;
+  searchedWord: Vocabulary[];
   ngOnInit(): void {
     this.showVocabulary();
   }
@@ -24,13 +24,16 @@ export class HomeComponent implements OnInit {
       this.vocabularies = data;
     });
   }
+  
   findTheMeaning(word: string) {
-    this._index = this.vocabularies.indexOf(
-      this.vocabularies.find(w => w.word === word)
-    )
-    console.log(this._index)
+    this.searchedWord = new Array<Vocabulary>();
+    this.vocabularies.find(w => {
+      if (w.word.includes(word))
+        this.searchedWord.push(w)
+    })
 
-    
+
+
   }
 
 
