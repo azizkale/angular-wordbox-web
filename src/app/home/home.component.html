@@ -13,16 +13,24 @@
 
                         <!--Body-->
                         <div class="form-group">
-                            <div class="input-group mb-2">
-
+                            <div class="row justify-content-center" *ngIf="!vocabularies">
+                                <table>
+                                    <tr class="text-center">
+                                        <div class="spinner-border text-info" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    </tr>
+                                    <tr>
+                                        <span class="badge">Vocabularies are loading...</span>
+                                    </tr>
+                                </table>
                             </div>
-                        </div>
-                        <div class="form-group">
                             <ul>
                                 <li *ngFor="let voc of vocabularies">
-                                    <span class="badge">Id : {{voc.id}}</span><br/>
-                                    <span class="badge">De : {{voc.word}}</span><br/>
-                                    <span class="badge">Tr : {{voc.vocabularyDetail && voc.vocabularyDetail[0] && voc.vocabularyDetail[0].sentenceMeaning}}</span>
+                                    <span class="badge">Id : {{voc.id}}</span><br />
+                                    <span class="badge">De : {{voc.word}}</span><br />
+                                    <span class="badge">Tr :
+                                        {{voc.vocabularyDetail && voc.vocabularyDetail[0] && voc.vocabularyDetail[0].sentenceMeaning}}</span>
                                     <hr>
                                 </li>
                             </ul>
