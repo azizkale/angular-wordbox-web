@@ -10,13 +10,17 @@ import { HomeComponent } from './home/home.component';
 import { HttpClientModule } from '@angular/common/http';
 import { DictionaryComponent } from './dictionary/dictionary.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { MotherpageComponent } from './exercises/motherpage/motherpage.component';
+import { LevelA1Component } from './exercises/level-a1/level-a1.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DictionaryComponent,
-    NavbarComponent
+    NavbarComponent,
+    MotherpageComponent,
+    LevelA1Component
   ],
   imports: [
     BrowserModule,
