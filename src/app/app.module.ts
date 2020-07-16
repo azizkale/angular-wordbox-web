@@ -12,7 +12,7 @@ import { DictionaryComponent } from './dictionary/dictionary.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MotherpageComponent } from './exercises/motherpage/motherpage.component';
 import { LevelA1Component } from './exercises/level-a1/level-a1.component';
-import { MenuLevelComponent } from './menu-level/menu-level.component';
+import { MenuLevelComponent } from './exercises/menu-level/menu-level.component';
 import { LevelA2Component } from './exercises/level-a2/level-a2.component';
 
 @NgModule({
@@ -30,7 +30,8 @@ import { LevelA2Component } from './exercises/level-a2/level-a2.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule,CommonModule
+    FormsModule, 
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

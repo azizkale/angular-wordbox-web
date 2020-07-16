@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VocabularyService } from 'src/app/vocabulary.service';
+import { Vocabulary } from 'src/app/models/vocabulary';
 
 @Component({
   selector: 'menu-level',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuLevelComponent implements OnInit {
 
-  constructor() { }
+  levelVocabularies: Vocabulary[];
+
+  constructor(
+    private vocabularyService: VocabularyService,
+  ) { }
 
   ngOnInit(): void {
+    this.GetLevelWords();
   }
 
   SetMarginButtons() {
@@ -19,4 +26,9 @@ export class MenuLevelComponent implements OnInit {
       "btn": window.innerHeight > 0
     }
   }
+
+  GetLevelWords() {
+    this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
+  }
+
 }

@@ -13,12 +13,24 @@ import { Vocabulary } from '../app/models/vocabulary';
 export class VocabularyService {
 
   vocabularyUrl = 'assets/vocabulary.json';
+  wordsOfSelectedLevel: Vocabulary[];
 
   constructor(private httpClient: HttpClient) { }
 
-  getVocabularies() : Observable<Vocabulary[]> {
+  getVocabularies(): Observable<Vocabulary[]> {
     return this.httpClient
-    .get<Vocabulary[]>(this.vocabularyUrl)
+      .get<Vocabulary[]>(this.vocabularyUrl)
   }
-  
+
+  GetLevelWords(group: number) {
+    this.wordsOfSelectedLevel = new Array<Vocabulary>();
+    this.getVocabularies()
+      .subscribe((data) => {
+        data.map(voc => {
+          voc.group === group ? this.wordsOfSelectedLevel.push(voc) : ""
+        })
+      });
+    return this.wordsOfSelectedLevel
+  }
+
 }

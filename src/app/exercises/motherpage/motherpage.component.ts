@@ -27,15 +27,9 @@ export class MotherpageComponent implements OnInit {
   }
 
   GetLevelWords(group: number) {
-    this.levelVocabularies = new Array<Vocabulary>();
-    this.vocabularyService.getVocabularies()
-      .subscribe((data) => {
-        data.map(voc => {
-          voc.group === group ? this.levelVocabularies.push(voc) : ""
-        })
-      });
+    this.levelVocabularies = this.vocabularyService.GetLevelWords(group);
   }
 
- 
+
 
 }
