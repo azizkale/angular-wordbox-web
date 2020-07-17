@@ -11,9 +11,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { DictionaryComponent } from './dictionary/dictionary.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MotherpageComponent } from './exercises/motherpage/motherpage.component';
-import { LevelA1Component } from './exercises/level-a1/level-a1.component';
 import { MenuLevelComponent } from './exercises/menu-level/menu-level.component';
-import { LevelA2Component } from './exercises/level-a2/level-a2.component';
+import { ExercisestypesComponent } from './exercises/exercisestypes/exercisestypes.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +21,8 @@ import { LevelA2Component } from './exercises/level-a2/level-a2.component';
     DictionaryComponent,
     NavbarComponent,
     MotherpageComponent,
-    LevelA1Component,
     MenuLevelComponent,
-    LevelA2Component
+    ExercisestypesComponent
   ],
   imports: [
     BrowserModule,
