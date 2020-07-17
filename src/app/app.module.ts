@@ -13,6 +13,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { MotherpageComponent } from './exercises/motherpage/motherpage.component';
 import { MenuLevelComponent } from './exercises/menu-level/menu-level.component';
 import { ExercisestypesComponent } from './exercises/exercisestypes/exercisestypes.component';
+import { FlashcardsComponent } from './exercises/flashcards/flashcards.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ExercisestypesComponent } from './exercises/exercisestypes/exercisestyp
     NavbarComponent,
     MotherpageComponent,
     MenuLevelComponent,
-    ExercisestypesComponent
+    ExercisestypesComponent,
+    FlashcardsComponent
   ],
   imports: [
     BrowserModule,
