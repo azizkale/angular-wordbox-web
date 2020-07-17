@@ -14,6 +14,7 @@ import { MotherpageComponent } from './exercises/motherpage/motherpage.component
 import { MenuLevelComponent } from './exercises/menu-level/menu-level.component';
 import { ExercisestypesComponent } from './exercises/exercisestypes/exercisestypes.component';
 import { FlashcardsComponent } from './exercises/flashcards/flashcards.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { FlashcardsComponent } from './exercises/flashcards/flashcards.component
     AppRoutingModule,
     HttpClientModule,
     FormsModule, 
-    CommonModule
+    CommonModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

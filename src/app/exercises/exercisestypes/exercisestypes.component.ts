@@ -31,4 +31,10 @@ export class ExercisestypesComponent implements OnInit {
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
   }
 
+  flip: string = 'inactive';
+
+  toggleFlip() {
+    this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
+  }
+
 }
