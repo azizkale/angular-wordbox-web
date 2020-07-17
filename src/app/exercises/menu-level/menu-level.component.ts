@@ -12,7 +12,7 @@ export class MenuLevelComponent implements OnInit {
   levelVocabularies: Vocabulary[];
 
   constructor(
-    private vocabularyService: VocabularyService,
+    private vocabularyService: VocabularyService
   ) { }
 
   ngOnInit(): void {

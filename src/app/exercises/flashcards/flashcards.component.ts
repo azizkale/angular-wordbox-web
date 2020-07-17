@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { VocabularyService } from 'src/app/vocabulary.service';
+import { Vocabulary } from 'src/app/models/vocabulary';
 
 
 @Component({
@@ -21,13 +23,25 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 })
 export class FlashcardsComponent implements OnInit {
 
-  constructor() { }
+  levelVocabularies: Vocabulary[];
+  
+
+  constructor(
+    private vocabularyService: VocabularyService
+  ) { }
 
   ngOnInit(): void {
+    this.GetLevelWords();
   }
   flip: string = 'inactive';
 
   toggleFlip() {
     this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
   }
+
+  GetLevelWords() {
+    this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
+  }
+
+  
 }
