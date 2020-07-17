@@ -1,19 +1,14 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center" (click)="ProduceRandomWord()">
     <div class="tp-box col-8 p-3 border" (click)="toggleFlip()" [@flipState]="flip">
-        <div class="tp-box__side tp-box__front">Front
+        <div class="tp-box__side tp-box__front">
+            <div *ngFor="let item of levelVocabularies">
+                <span *ngIf="item.id==randomWordIndex">{{item.word}}</span>
+            </div>
         </div>
-        <div class="tp-box__side tp-box__back">Back
+        <div class="tp-box__side tp-box__back">
+            <div *ngFor="let item of levelVocabularies">
+                <span *ngIf="item.id==randomWordIndex">{{item.vocabularyDetail[0].sentenceMeaning}}</span>
+            </div>
         </div>
     </div>
 </div>
-
-<table>
-    <tr>
-        <td>{{levelVocabularies.length}}</td>
-    </tr>
-    <tr *ngFor="let item of levelVocabularies">
-        <td>{{item.id}}</td>
-        <td>{{item.word}}</td>
-        <td>{{item.vocabularyDetail[0].sentenceMeaning}}</td>
-    </tr>
-</table>

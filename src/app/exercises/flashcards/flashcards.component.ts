@@ -24,7 +24,7 @@ import { Vocabulary } from 'src/app/models/vocabulary';
 export class FlashcardsComponent implements OnInit {
 
   levelVocabularies: Vocabulary[];
-  
+  randomWordIndex: number;
 
   constructor(
     private vocabularyService: VocabularyService
@@ -32,6 +32,7 @@ export class FlashcardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetLevelWords();
+    this.ProduceRandomWord();
   }
   flip: string = 'inactive';
 
@@ -43,5 +44,9 @@ export class FlashcardsComponent implements OnInit {
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
   }
 
-  
+  ProduceRandomWord() {
+    let minID = this.levelVocabularies[0].id;
+    let maxID = this.levelVocabularies[this.levelVocabularies.length - 1].id;
+    this.randomWordIndex = Math.floor(Math.random() * (maxID - minID + 1)) + minID;
+  }
 }
