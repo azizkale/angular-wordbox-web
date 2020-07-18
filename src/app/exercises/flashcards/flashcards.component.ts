@@ -26,8 +26,6 @@ export class FlashcardsComponent implements OnInit {
   levelVocabularies: Vocabulary[];
   shownWord: Vocabulary;
   indexOfShownWord: number;
-  // minID: number;
-  // maxID: number;
 
   constructor(
     private vocabularyService: VocabularyService
@@ -35,8 +33,6 @@ export class FlashcardsComponent implements OnInit {
 
   ngOnInit(): void {
     this.GetLevelWords();
-    // this.minID = this.levelVocabularies[0].id;
-    // this.maxID = this.levelVocabularies[this.levelVocabularies.length - 1].id;
     this.shownWord = this.levelVocabularies[0];
     this.indexOfShownWord = 0;
   }
@@ -51,14 +47,6 @@ export class FlashcardsComponent implements OnInit {
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
   }
 
-  // ProduceRandomWord(event) {
-  //   event.stopPropagation();
-  //   let minID = this.levelVocabularies[0].id;
-  //   let maxID = this.levelVocabularies[this.levelVocabularies.length - 1].id;
-  //   let randomWordIndex = Math.floor(Math.random() * (maxID - minID + 1)) + minID;
-  //   // this.randomWord = this.levelVocabularies.find(word => word.id === randomWordIndex);
-  // }
-
   DynamicCSS() {
     return {
       'col-12': window.outerWidth < 576,
@@ -70,7 +58,6 @@ export class FlashcardsComponent implements OnInit {
     event.stopPropagation();
     if (this.indexOfShownWord <= this.levelVocabularies[this.levelVocabularies.length - 1].id) {
       this.shownWord = this.levelVocabularies[++this.indexOfShownWord]
-      // this.indexOfShownWord++;
     }
 
   }
@@ -79,7 +66,6 @@ export class FlashcardsComponent implements OnInit {
     event.stopPropagation();
     if (this.indexOfShownWord > 0) {
       this.shownWord = this.levelVocabularies[--this.indexOfShownWord]
-      // this.indexOfShownWord++;
     }
 
   }
