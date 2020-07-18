@@ -1,15 +1,17 @@
 <div class="row justify-content-center">
     <div class="tp-box p-3" [ngClass]="DynamicCSS()" (click)="toggleFlip()" [@flipState]="flip">
         <div class="tp-box__side tp-box__front">
-            {{randomWord.word}}
+            {{shownWord.word}}
             <div class="fixed-bottom">
-                <button class="btn btn-primary fixed-bottom" (click)="ProduceRandomWord($event)">button</button>
-                <button class="btn btn-primary float-right" (click)="ProduceRandomWord($event)">button2222</button>
+                <button class="btn btn-primary fixed-bottom" (click)="PreviousWord($event)">previous</button>
+                <button class="btn btn-primary float-right" (click)="NextWord($event)">next</button>
             </div>
 
         </div>
         <div class="tp-box__side tp-box__back">
-            {{randomWord.vocabularyDetail[0]['sentenceMeaning']}}
+            {{shownWord.vocabularyDetail[0]['sentenceMeaning']}}
         </div>
     </div>
 </div>
+
+<pre *ngFor="let item of levelVocabularies">{{item.id}}-{{item.word}}</pre>
