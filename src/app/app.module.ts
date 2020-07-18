@@ -11,7 +11,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { DictionaryComponent } from './dictionary/dictionary.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MotherpageComponent } from './exercises/motherpage/motherpage.component';
-import { MenuLevelComponent } from './exercises/menu-level/menu-level.component';
 import { ExercisestypesComponent } from './exercises/exercisestypes/exercisestypes.component';
 import { FlashcardsComponent } from './exercises/flashcards/flashcards.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,7 +22,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     DictionaryComponent,
     NavbarComponent,
     MotherpageComponent,
-    MenuLevelComponent,
     ExercisestypesComponent,
     FlashcardsComponent
   ],
