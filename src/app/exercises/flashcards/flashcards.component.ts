@@ -36,13 +36,30 @@ export class FlashcardsComponent implements OnInit {
     this.GetLevelWordsFromJSON();
     this.SaveAllWords();
     this.SetWordsToLearn();
-    this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
+    this.NextWord(event);
   }
 
   flip: string = 'inactive';
 
   toggleFlip() {
-    this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
+    switch (this.flip) {
+
+      case 'inactive':
+        setTimeout(() => {
+          this.flip = 'active'
+        }, 500);
+        break;
+
+      case 'active':
+        if (!this.shownWord.showCount) {
+          this.shownWord.showCount = 0;
+        }
+        this.shownWord.showCount++;
+        setTimeout(() => {
+          this.flip = 'inactive'
+        }, 1000);
+        break;
+    }
   }
 
   GetLevelWordsFromJSON() {
@@ -88,10 +105,12 @@ export class FlashcardsComponent implements OnInit {
   NextWord(event) {
     event.stopPropagation();
     this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
-    if(!this.shownWord.showCount){
-      this.shownWord.showCount=0;
-    }
-    this.shownWord.showCount++;
-    console.log(this.shownWord.word + "--" + this.shownWord.showCount)
   }
+
+  StarsArray() {
+    let array: Object[] = new Array(5)
+    array.fill(['assets/images/stargray.png', 'assets/images/staryellow.png'])
+    return array
+  } 
+
 }

@@ -1,11 +1,11 @@
 <div class="row justify-content-center">
     <div class="col-sm-7 tp-box p-3" [ngClass]="DynamicCSS()" (click)="toggleFlip()" [@flipState]="flip">
         <div class="tp-box__side tp-box__front">
-            <div class="progress m-2">
+            <!-- <div class="progress m-2">
                 <div class="progress-bar bg-success" role="progressbar" [style.width.%]="shownWord.showCount*20" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-            </div>
+            </div> -->
+            <p class="my-0"> {{shownWord.word}}</p>
 
-            {{shownWord.word}}
             <div class="fixed-bottom">
                 <!-- <button class="btn btn-primary m-3 fixed-bottom" (click)="PreviousWord($event)">previous</button> -->
                 <button class="btn btn-primary m-3 float-right" (click)="NextWord($event)">next</button>
@@ -13,6 +13,9 @@
 
         </div>
         <div class="tp-box__side tp-box__back">
+            <div class="d-flex align-items-start position-fixed m-2">
+                <img style="width: 10%;height: auto;" *ngFor="let item of StarsArray();let i=index" [src]="(shownWord.showCount>i)?item[1]:item[0]">
+            </div>
             {{shownWord.vocabularyDetail[0]['sentenceMeaning']}}
         </div>
     </div>
