@@ -25,16 +25,18 @@ export class FlashcardsComponent implements OnInit {
 
   levelVocabularies: Vocabulary[];
   shownWord: Vocabulary;
-  indexOfShownWord: number;
+  wordsToLearn: Vocabulary[];
+
 
   constructor(
     private vocabularyService: VocabularyService
   ) { }
 
   ngOnInit(): void {
-    this.GetLevelWords();
-    this.shownWord = this.levelVocabularies[0];
-    this.indexOfShownWord = 0;
+    this.GetLevelWordsFromJSON();
+    this.SaveAllWords();
+    this.SetWordsToLearn();
+    this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
   }
 
   flip: string = 'inactive';
@@ -43,8 +45,37 @@ export class FlashcardsComponent implements OnInit {
     this.flip = (this.flip == 'inactive') ? 'active' : 'inactive';
   }
 
-  GetLevelWords() {
+  GetLevelWordsFromJSON() {
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
+  }
+
+  SaveAllWords() {
+    //saves the words to localstorage if it was be not saved before
+    this.levelVocabularies.map(wrd => {
+      if (localStorage.getItem(wrd.id.toString()) === null) {
+        localStorage.setItem(wrd.id.toString(), JSON.stringify(wrd));
+      }
+    })
+  }
+
+  GetSingleWordFromLocalStorage(index: string): Object {
+    return JSON.parse(localStorage.getItem(index))
+  }
+
+  SetWordsToLearn() {
+    //picks the 10 words up to learn in every times, according to the showCount of the words
+    let ind: number = this.levelVocabularies[0].id;
+    let wrd: Vocabulary;
+    this.wordsToLearn = new Array<Vocabulary>();
+
+    for (let i = 0; i < this.levelVocabularies.length; i++) {
+      wrd = this.GetSingleWordFromLocalStorage(ind.toString()) as Vocabulary;
+      if ((wrd.showCount == null || wrd.showCount < 6) && this.wordsToLearn.length < 10) {
+        this.wordsToLearn.push(wrd);
+        ind++;
+      }
+    }
+
   }
 
   DynamicCSS() {
@@ -56,17 +87,11 @@ export class FlashcardsComponent implements OnInit {
 
   NextWord(event) {
     event.stopPropagation();
-    if (this.indexOfShownWord <= this.levelVocabularies[this.levelVocabularies.length - 1].id) {
-      this.shownWord = this.levelVocabularies[++this.indexOfShownWord]
+    this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
+    if(!this.shownWord.showCount){
+      this.shownWord.showCount=0;
     }
-
-  }
-
-  PreviousWord(event) {
-    event.stopPropagation();
-    if (this.indexOfShownWord > 0) {
-      this.shownWord = this.levelVocabularies[--this.indexOfShownWord]
-    }
-
+    this.shownWord.showCount++;
+    console.log(this.shownWord.word + "--" + this.shownWord.showCount)
   }
 }

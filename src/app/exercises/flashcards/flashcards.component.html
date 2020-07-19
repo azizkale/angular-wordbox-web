@@ -1,9 +1,13 @@
 <div class="row justify-content-center">
-    <div class="tp-box p-3" [ngClass]="DynamicCSS()" (click)="toggleFlip()" [@flipState]="flip">
+    <div class="col-sm-7 tp-box p-3" [ngClass]="DynamicCSS()" (click)="toggleFlip()" [@flipState]="flip">
         <div class="tp-box__side tp-box__front">
+            <div class="progress m-2">
+                <div class="progress-bar bg-success" role="progressbar" [style.width.%]="shownWord.showCount*20" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+            </div>
+
             {{shownWord.word}}
             <div class="fixed-bottom">
-                <button class="btn btn-primary m-3 fixed-bottom" (click)="PreviousWord($event)">previous</button>
+                <!-- <button class="btn btn-primary m-3 fixed-bottom" (click)="PreviousWord($event)">previous</button> -->
                 <button class="btn btn-primary m-3 float-right" (click)="NextWord($event)">next</button>
             </div>
 
@@ -13,5 +17,3 @@
         </div>
     </div>
 </div>
-
-<pre *ngFor="let item of levelVocabularies">{{item.id}}-{{item.word}}</pre>
