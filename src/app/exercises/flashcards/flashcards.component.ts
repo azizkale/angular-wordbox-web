@@ -41,23 +41,28 @@ export class FlashcardsComponent implements OnInit {
 
   flip: string = 'inactive';
 
-  toggleFlip() {
+  toggleFlip(shownword: Vocabulary) {
     switch (this.flip) {
 
       case 'inactive':
         setTimeout(() => {
           this.flip = 'active'
-        }, 500);
+        }, 200);
         break;
 
       case 'active':
         if (!this.shownWord.showCount) {
           this.shownWord.showCount = 0;
         }
-        this.shownWord.showCount++;
+        shownword.showCount++;
+        localStorage.setItem(shownword.id.toString(), JSON.stringify(shownword));
         setTimeout(() => {
-          this.flip = 'inactive'
+          this.flip = 'inactive';
+          setTimeout(() => { //changes shownWord to next one
+            this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
+          }, 1000);
         }, 1000);
+
         break;
     }
   }
@@ -111,6 +116,6 @@ export class FlashcardsComponent implements OnInit {
     let array: Object[] = new Array(5)
     array.fill(['assets/images/stargray.png', 'assets/images/staryellow.png'])
     return array
-  } 
+  }
 
 }

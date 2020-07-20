@@ -14,6 +14,7 @@ import { MotherpageComponent } from './exercises/motherpage/motherpage.component
 import { ExercisestypesComponent } from './exercises/exercisestypes/exercisestypes.component';
 import { FlashcardsComponent } from './exercises/flashcards/flashcards.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { LearnedwordsComponent } from './learnedwords/learnedwords.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavbarComponent,
     MotherpageComponent,
     ExercisestypesComponent,
-    FlashcardsComponent
+    FlashcardsComponent,
+    LearnedwordsComponent
   ],
   imports: [
     BrowserModule,
