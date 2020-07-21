@@ -1,28 +1,23 @@
 <div class="container">
     <div class="row">
-        <div class="col-4 tp-box">
-            <div class="progress my-1" *ngFor="let word of wordsToLearn">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" [style.width]="word.showCount*20+'%'">{{word.word}}</div>
-            </div>
-        </div>
-        <div class="col-8">
-            <div class="justify-content-center">
-                <div class="tp-box p-3" [ngClass]="DynamicCSS()" (click)="toggleFlip(shownWord)" [@flipState]="flip">
-                    <div class="tp-box__side tp-box__front">
-                        <p class="my-0"> {{shownWord.word}}</p>
-
-                        <div class="fixed-bottom">
-                            <button class="btn btn-primary m-3 float-right" (click)="NextWord($event)">next</button>
-                        </div>
-
+        <div class="col-sm-7">
+            <div class="scene scene--card">
+                <div class="card" (click)="CardAnimation(shownWord)">
+                    <div class="card__face card__face--front row justify-content-center p-3" *ngIf="showMe" (click)="showMe=!showMe">
+                        <p class="my-auto"> {{shownWord.word}}</p>
                     </div>
-                    <div class="tp-box__side tp-box__back">
+                    <div class="card__face card__face--back row justify-content-center p-3" *ngIf="!showMe" (click)="showMe=!showMe">
                         <div class="d-flex align-items-start position-fixed m-2">
                             <img style="width: 10%;height: auto;" *ngFor="let item of StarsArray();let i=index" [src]="(shownWord.showCount>i)?item[1]:item[0]">
                         </div>
-                        <p class="my-0">{{shownWord.vocabularyDetail[0]['sentenceMeaning']}}</p>
+                        <p class="my-auto">{{shownWord.vocabularyDetail[0]['sentenceMeaning']}}</p>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="col-sm-5 tp-box">
+            <div class="progress my-1" *ngFor="let word of wordsToLearn">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" [style.width]="word.showCount*20+'%'">{{word.word}}</div>
             </div>
         </div>
         <div class="row bg-info fixed-bottom p-2 mx-5 d-flex flex-row-reverse rounded">
@@ -30,3 +25,10 @@
         </div>
     </div>
 </div>
+
+<script>
+    var card = document.querySelector('.card');
+    card.addEventListener('click', function() {
+        card.classList.toggle('is-flipped');
+    });
+</script>

@@ -27,6 +27,7 @@ export class FlashcardsComponent implements OnInit {
   shownWord: Vocabulary;
   wordsToLearn: Vocabulary[];
   savedVocabularies: Vocabulary[];
+  showMe:boolean;
 
   constructor(
     private vocabularyService: VocabularyService
@@ -37,6 +38,7 @@ export class FlashcardsComponent implements OnInit {
     this.SaveAllWords();
     this.SetWordsToLearn();
     this.NextWord(event);
+    this.showMe=true;
   }
 
   flip: string = 'inactive';
@@ -85,17 +87,17 @@ export class FlashcardsComponent implements OnInit {
     return JSON.parse(localStorage.getItem(index))
   }
 
-  GetSavedWordsFromLocalStorage(){
+  GetSavedWordsFromLocalStorage() {
     this.savedVocabularies = new Array<Vocabulary>();
-    this.levelVocabularies.map((word:Vocabulary)=>{
+    this.levelVocabularies.map((word: Vocabulary) => {
       this.savedVocabularies.push(JSON.parse(localStorage.getItem(word.id.toString())));
     })
   }
 
-  SetWordsToLearn() {   
+  SetWordsToLearn() {
     this.GetSavedWordsFromLocalStorage();
     this.wordsToLearn = new Array<Vocabulary>();
-    this.savedVocabularies.map((wrd:Vocabulary)=>{
+    this.savedVocabularies.map((wrd: Vocabulary) => {
       if ((wrd.showCount == null || wrd.showCount < 6) && this.wordsToLearn.length < 10) {
         this.wordsToLearn.push(wrd);
       }
@@ -103,7 +105,7 @@ export class FlashcardsComponent implements OnInit {
 
   }
 
- 
+
 
   DynamicCSS() {
     return {
@@ -123,4 +125,19 @@ export class FlashcardsComponent implements OnInit {
     return array
   }
 
+  CardAnimation(shownword: Vocabulary) {
+    document.querySelector('.card').classList.toggle('is-flipped');
+    
+    if (!document.querySelector('.card').classList[2]) {
+      if (!this.shownWord.showCount) {
+        this.shownWord.showCount = 0;
+      }
+      shownword.showCount++;
+      localStorage.setItem(shownword.id.toString(), JSON.stringify(shownword));
+        setTimeout(() => { //changes shownWord to next one
+          this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
+        }, 1000);
+      this.SetWordsToLearn();
+    }
+  }
 }
