@@ -1,3 +1,21 @@
-<button routerLink="/flashcards">Back</button>
-
-<pre *ngFor="let word of savedVocabularies">{{word.word}}-{{word.showCount}}</pre>
+<div class="container pb-3">
+    <div class="row font-weight-bold bg-info text-white p-1 mb-1">
+        <div class="col-sm-1">No</div>
+        <div class="col-sm-4">Kelime</div>
+        <div class="col-sm-4">Anlamı</div>
+        <div class="col-sm-3"></div>
+    </div>
+    <div class="row border bordered-info align-middle" *ngFor="let word of savedVocabularies; let i=index">
+        <div class="col-sm-1 my-auto font-weight-bold">
+            {{i+1}}.
+        </div>
+        <div class="col-sm-4 my-auto">{{word.word}}</div>
+        <div class="col-sm-4 my-auto">{{word.vocabularyDetail[0].sentenceMeaning}}</div>
+        <div class="col-sm-3 my-auto text-center">
+            <img style="width: 20%;height: auto;" *ngFor="let item of StarsArray();let i=index" [src]="(word.showCount>i)?item[1]:item[0]">
+        </div>
+    </div>
+    <div class="row bg-info fixed-bottom p-2 mx-5 d-flex flex-row-reverse rounded">
+        <button class="col-2 btn btn-primary float-right r-0" routerLink="/flashcards">Back</button>
+    </div>
+</div>

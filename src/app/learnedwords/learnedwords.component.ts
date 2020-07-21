@@ -34,4 +34,10 @@ export class LearnedwordsComponent implements OnInit {
     })
   }
 
+  StarsArray() {
+    let array: Object[] = new Array(5)
+    array.fill(['assets/images/stargray.png', 'assets/images/staryellow.png'])
+    return array
+  }
+
 }

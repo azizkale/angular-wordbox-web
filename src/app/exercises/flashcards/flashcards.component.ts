@@ -26,7 +26,7 @@ export class FlashcardsComponent implements OnInit {
   levelVocabularies: Vocabulary[];
   shownWord: Vocabulary;
   wordsToLearn: Vocabulary[];
-
+  savedVocabularies: Vocabulary[];
 
   constructor(
     private vocabularyService: VocabularyService
@@ -62,6 +62,7 @@ export class FlashcardsComponent implements OnInit {
             this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
           }, 1000);
         }, 1000);
+        this.SetWordsToLearn();
 
         break;
     }
@@ -84,21 +85,25 @@ export class FlashcardsComponent implements OnInit {
     return JSON.parse(localStorage.getItem(index))
   }
 
-  SetWordsToLearn() {
-    //picks the 10 words up to learn in every times, according to the showCount of the words
-    let ind: number = this.levelVocabularies[0].id;
-    let wrd: Vocabulary;
-    this.wordsToLearn = new Array<Vocabulary>();
+  GetSavedWordsFromLocalStorage(){
+    this.savedVocabularies = new Array<Vocabulary>();
+    this.levelVocabularies.map((word:Vocabulary)=>{
+      this.savedVocabularies.push(JSON.parse(localStorage.getItem(word.id.toString())));
+    })
+  }
 
-    for (let i = 0; i < this.levelVocabularies.length; i++) {
-      wrd = this.GetSingleWordFromLocalStorage(ind.toString()) as Vocabulary;
+  SetWordsToLearn() {   
+    this.GetSavedWordsFromLocalStorage();
+    this.wordsToLearn = new Array<Vocabulary>();
+    this.savedVocabularies.map((wrd:Vocabulary)=>{
       if ((wrd.showCount == null || wrd.showCount < 6) && this.wordsToLearn.length < 10) {
         this.wordsToLearn.push(wrd);
-        ind++;
       }
-    }
+    })
 
   }
+
+ 
 
   DynamicCSS() {
     return {
