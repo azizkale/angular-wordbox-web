@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { VocabularyService } from 'src/app/vocabulary.service';
 import { Vocabulary } from 'src/app/models/vocabulary';
+import { Directive, HostListener, ElementRef } from '@angular/core';
 
 
 @Component({
@@ -27,18 +28,20 @@ export class FlashcardsComponent implements OnInit {
   shownWord: Vocabulary;
   wordsToLearn: Vocabulary[];
   savedVocabularies: Vocabulary[];
-  showMe:boolean;
+  showMe: boolean;
 
   constructor(
-    private vocabularyService: VocabularyService
+    private vocabularyService: VocabularyService,
+    private element: ElementRef
+
   ) { }
 
   ngOnInit(): void {
     this.GetLevelWordsFromJSON();
     this.SaveAllWords();
     this.SetWordsToLearn();
-    this.NextWord(event);
-    this.showMe=true;
+    this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
+    this.showMe = true;
   }
 
   flip: string = 'inactive';
@@ -114,30 +117,36 @@ export class FlashcardsComponent implements OnInit {
     }
   }
 
-  NextWord(event) {
-    event.stopPropagation();
-    this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
-  }
-
   StarsArray() {
     let array: Object[] = new Array(5)
     array.fill(['assets/images/stargray.png', 'assets/images/staryellow.png'])
     return array
   }
 
-  CardAnimation(shownword: Vocabulary) {
+  CardAnimation(shownword: Vocabulary, event) {
     document.querySelector('.card').classList.toggle('is-flipped');
-    
+
     if (!document.querySelector('.card').classList[2]) {
-      if (!this.shownWord.showCount) {
-        this.shownWord.showCount = 0;
-      }
+
+      (!this.shownWord.showCount) ? this.shownWord.showCount = 0 : '';
       shownword.showCount++;
       localStorage.setItem(shownword.id.toString(), JSON.stringify(shownword));
-        setTimeout(() => { //changes shownWord to next one
-          this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
-        }, 1000);
+      setTimeout(() => { //changes shownWord to next one
+        this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
+      }, 1000);
       this.SetWordsToLearn();
+      this.showMe = true;
+
+    }
+
+    else{
+      this.showMe = false;
+    }
+  }
+
+  WordsProgressBarHeight(){
+    return {
+      'progress': window.outerWidth < 576,
     }
   }
 }

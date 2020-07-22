@@ -2,22 +2,25 @@
     <div class="row">
         <div class="col-sm-7">
             <div class="scene scene--card">
-                <div class="card" (click)="CardAnimation(shownWord)">
-                    <div class="card__face card__face--front row justify-content-center p-3" *ngIf="showMe" (click)="showMe=!showMe">
+                <div class="card" (click)="CardAnimation(shownWord,$event)">
+                    <div class="card__face card__face--front row justify-content-center p-3" *ngIf="showMe">
                         <p class="my-auto"> {{shownWord.word}}</p>
                     </div>
-                    <div class="card__face card__face--back row justify-content-center p-3" *ngIf="!showMe" (click)="showMe=!showMe">
+                    <div class="card__face card__face--back row justify-content-center p-3" *ngIf="!showMe">
                         <div class="d-flex align-items-start position-fixed m-2">
                             <img style="width: 10%;height: auto;" *ngFor="let item of StarsArray();let i=index" [src]="(shownWord.showCount>i)?item[1]:item[0]">
                         </div>
-                        <p class="my-auto">{{shownWord.vocabularyDetail[0]['sentenceMeaning']}}</p>
+                        <p class="my-auto">
+                            {{shownWord.vocabularyDetail[0]['sentenceMeaning']}}</p>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-sm-5 tp-box">
-            <div class="progress my-1" *ngFor="let word of wordsToLearn">
-                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" [style.width]="word.showCount*20+'%'">{{word.word}}</div>
+            <div class="my-1 bg-info" [ngClass]="WordsProgressBarHeight()" *ngFor="let word of wordsToLearn">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" [style.width]="word.showCount*20+'%'">
+                    <span class="badge h6 ml-3">{{word.word}}</span>
+                </div>
             </div>
         </div>
         <div class="row bg-info fixed-bottom p-2 mx-5 d-flex flex-row-reverse rounded">
@@ -25,10 +28,3 @@
         </div>
     </div>
 </div>
-
-<script>
-    var card = document.querySelector('.card');
-    card.addEventListener('click', function() {
-        card.classList.toggle('is-flipped');
-    });
-</script>
