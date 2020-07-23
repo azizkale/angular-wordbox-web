@@ -29,6 +29,7 @@ export class FlashcardsComponent implements OnInit {
   wordsToLearn: Vocabulary[];
   savedVocabularies: Vocabulary[];
   showMe: boolean;
+  screenWidth: number;
 
   constructor(
     private vocabularyService: VocabularyService,
@@ -42,36 +43,37 @@ export class FlashcardsComponent implements OnInit {
     this.SetWordsToLearn();
     this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
     this.showMe = true;
+    this.screenWidth = window.outerWidth;
   }
 
-  flip: string = 'inactive';
+  // flip: string = 'inactive';
 
-  toggleFlip(shownword: Vocabulary) {
-    switch (this.flip) {
+  // toggleFlip(shownword: Vocabulary) {
+  //   switch (this.flip) {
 
-      case 'inactive':
-        setTimeout(() => {
-          this.flip = 'active'
-        }, 200);
-        break;
+  //     case 'inactive':
+  //       setTimeout(() => {
+  //         this.flip = 'active'
+  //       }, 200);
+  //       break;
 
-      case 'active':
-        if (!this.shownWord.showCount) {
-          this.shownWord.showCount = 0;
-        }
-        shownword.showCount++;
-        localStorage.setItem(shownword.id.toString(), JSON.stringify(shownword));
-        setTimeout(() => {
-          this.flip = 'inactive';
-          setTimeout(() => { //changes shownWord to next one
-            this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
-          }, 1000);
-        }, 1000);
-        this.SetWordsToLearn();
+  //     case 'active':
+  //       if (!this.shownWord.showCount) {
+  //         this.shownWord.showCount = 0;
+  //       }
+  //       shownword.showCount++;
+  //       localStorage.setItem(shownword.id.toString(), JSON.stringify(shownword));
+  //       setTimeout(() => {
+  //         this.flip = 'inactive';
+  //         setTimeout(() => { //changes shownWord to next one
+  //           this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
+  //         }, 1000);
+  //       }, 1000);
+  //       this.SetWordsToLearn();
 
-        break;
-    }
-  }
+  //       break;
+  //   }
+  // }
 
   GetLevelWordsFromJSON() {
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
@@ -123,7 +125,7 @@ export class FlashcardsComponent implements OnInit {
     return array
   }
 
-  CardAnimation(shownword: Vocabulary, event) {
+  CardAnimation(shownword: Vocabulary) {
     document.querySelector('.card').classList.toggle('is-flipped');
 
     if (!document.querySelector('.card').classList[2]) {
@@ -139,12 +141,12 @@ export class FlashcardsComponent implements OnInit {
 
     }
 
-    else{
+    else {
       this.showMe = false;
     }
   }
 
-  WordsProgressBarHeight(){
+  WordsProgressBarHeight() {
     return {
       'progress': window.outerWidth < 576,
     }
