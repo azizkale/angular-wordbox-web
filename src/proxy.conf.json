@@ -1,6 +1,20 @@
 {
-    "/dwdsapi": {
+    "/dwdsapi/*": {
         "target": "https://www.dwds.de/api/wb/snippet",
-        "secure": false
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/dwdsapi": ""
+        }
+    },
+    "/jwbapi/*": {
+        "target": "https://jpa-wordboxapi.herokuapp.com/api",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/jwbapi": ""
+        }
     }
 }
