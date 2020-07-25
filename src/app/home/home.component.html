@@ -1,46 +1,8 @@
-<div class="container mt-3">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-6 pb-5">
-            <!--Form with header-->
-            <form>
-                <div class="card border-primary rounded-0">
-                    <div class="card-header p-0">
-                        <div class="bg-info text-white text-center py-2">
-                            <h3><i class="material-icons"></i> My Vocabularies</h3>
-                        </div>
-                    </div>
-                    <div class="card-body p-3">
-
-                        <!--Body-->
-                        <div class="form-group">
-                            <div class="row justify-content-center" *ngIf="!vocabularies">
-                                <table>
-                                    <tr class="text-center">
-                                        <div class="spinner-border text-info" role="status">
-                                            <span class="sr-only">Loading...</span>
-                                        </div>
-                                    </tr>
-                                    <tr>
-                                        <span class="badge">Vocabularies are loading...</span>
-                                    </tr>
-                                </table>
-                            </div>
-                            <ul>
-                                <li *ngFor="let voc of vocabularies">
-                                    <span class="badge">Id : {{voc.id}}</span><br />
-                                    <span class="badge">De : {{voc.word}}</span><br />
-                                    <span class="badge">Tr :
-                                        {{voc.vocabularyDetail && voc.vocabularyDetail[0] && voc.vocabularyDetail[0].sentenceMeaning}}</span>
-                                    <hr>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-
-                </div>
-            </form>
-            <!--Form with header-->
-        </div>
-    </div>
-</div>
+<ul>
+    <li *ngFor="let w of word">
+        <span class="badge">lemma : {{w && w.lemma && w.lemma}}</span><br/>
+        <span class="badge">wortart : {{w && w.wortart && w.wortart}}</span><br/>
+        <span class="badge">input : {{w && w.input && w.input}}</span>
+        <hr>
+    </li>
+</ul>

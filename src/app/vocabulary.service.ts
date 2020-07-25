@@ -33,4 +33,7 @@ export class VocabularyService {
     return this.wordsOfSelectedLevel
   }
 
+  getFromDwdd() {
+    return this.httpClient.get('/dwdsapi/?q=Haus');
+  }
 }
