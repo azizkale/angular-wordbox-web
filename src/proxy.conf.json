@@ -1,0 +1,6 @@
+{
+    "/dwdsapi": {
+        "target": "https://www.dwds.de/api/wb/snippet",
+        "secure": false
+    }
+}
