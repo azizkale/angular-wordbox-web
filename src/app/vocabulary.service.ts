@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { HttpClient } from '@angular/common/http';
 
-import { Observable, throwError } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 
 import { Vocabulary } from '../app/models/vocabulary';
 
@@ -12,13 +11,16 @@ import { Vocabulary } from '../app/models/vocabulary';
 })
 export class VocabularyService {
 
-  vocabularyUrl = 'assets/vocabulary.json';
+  vocabularyUrl = 'assets/vocabulary.json'; //JSON
 
   constructor(private httpClient: HttpClient) { }
 
-  getVocabularies() : Observable<Vocabulary[]> {
+  getVocabularies(): Observable<Vocabulary[]> {
     return this.httpClient
-    .get<Vocabulary[]>(this.vocabularyUrl)
+      .get<Vocabulary[]>(this.vocabularyUrl)
   }
-  
+
+  getFromDwdd() {
+    return this.httpClient.get('/dwdsapi/?q=Haus');
+  }
 }
