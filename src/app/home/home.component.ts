@@ -14,13 +14,15 @@ export class HomeComponent implements OnInit {
 
   vocabularies: Vocabulary[];
   word: any;
+  sentences: any;
 
   ngOnInit(): void {
     this.showVocabulary();
     this.getDwdsResult();
+    this.getDwdsSentences();
   }
 
-  showVocabulary()  {
+  showVocabulary() {
     this.vocabularyService.getVocabularies().subscribe((data) => {
       this.vocabularies = data;
     });
@@ -35,6 +37,14 @@ export class HomeComponent implements OnInit {
     });
   }
 
- 
+  getDwdsSentences() {
+    this.vocabularyService.getFromDwdsSentences().subscribe(data => {
+      this.sentences = data;
+      console.log('Success: ' + JSON.stringify(data));
+    }, error => {
+      console.log('Error: ' + JSON.stringify(error));
+    });
+  }
+
 
 }

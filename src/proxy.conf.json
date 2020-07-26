@@ -2,5 +2,9 @@
     "/dwdsapi": {
         "target": "https://www.dwds.de/api/wb/snippet",
         "secure": false
+    },
+    "/dwdsapiSentences": {
+        "target": "https://www.dwds.de/r",
+        "secure": false
     }
 }

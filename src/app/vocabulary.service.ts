@@ -36,4 +36,10 @@ export class VocabularyService {
   getFromDwdd() {
     return this.httpClient.get('/dwdsapi/?q=Haus');
   }
+
+  getFromDwdsSentences() {
+    return this.httpClient.get('/dwdsapiSentences/?q=Haus&view=csv');
+  }
+
+
 }
