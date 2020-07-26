@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -38,7 +38,7 @@ export class VocabularyService {
   }
 
   getFromDwdsSentences() {
-    return this.httpClient.get('/dwdsapiSentences/?q=Haus&view=csv');
+    return this.httpClient.get('/jwbapi/?q=Haus&view=tsv',{responseType:'text'});
   }
 
 

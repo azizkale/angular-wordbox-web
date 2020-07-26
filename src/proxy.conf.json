@@ -1,10 +1,20 @@
 {
-    "/dwdsapi": {
+    "/dwdsapi/*": {
         "target": "https://www.dwds.de/api/wb/snippet",
-        "secure": false
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/dwdsapi": ""
+        }
     },
-    "/dwdsapiSentences": {
+    "/jwbapi/*": {
         "target": "https://www.dwds.de/r",
-        "secure": false
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/jwbapi": ""
+        }
     }
 }

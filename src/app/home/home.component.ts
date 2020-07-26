@@ -19,7 +19,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.showVocabulary();
     this.getDwdsResult();
-    this.getDwdsSentences();
+    // this.getDwdsSentences();
+
+    
   }
 
   showVocabulary() {
@@ -40,6 +42,7 @@ export class HomeComponent implements OnInit {
   getDwdsSentences() {
     this.vocabularyService.getFromDwdsSentences().subscribe(data => {
       this.sentences = data;
+      // console.log((data))
       console.log('Success: ' + JSON.stringify(data));
     }, error => {
       console.log('Error: ' + JSON.stringify(error));
