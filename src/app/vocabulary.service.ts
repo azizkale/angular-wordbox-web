@@ -38,7 +38,7 @@ export class VocabularyService {
   }
 
   getFromDwdsSentences() {
-    return this.httpClient.get('/jwbapi/?q=Haus&view=tsv',{responseType:'text'});
+    return this.httpClient.get('/jwbapi/?q=Haus&limit=3',{'responseType':'text'});
   }
 
 

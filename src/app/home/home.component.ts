@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service'
 
 import { Vocabulary } from '../models/vocabulary';
@@ -9,6 +9,8 @@ import { Vocabulary } from '../models/vocabulary';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  @ViewChild('divID') divID: ElementRef;
 
   constructor(private vocabularyService: VocabularyService) { }
 
@@ -21,7 +23,6 @@ export class HomeComponent implements OnInit {
     this.getDwdsResult();
     // this.getDwdsSentences();
 
-    
   }
 
   showVocabulary() {
@@ -42,10 +43,9 @@ export class HomeComponent implements OnInit {
   getDwdsSentences() {
     this.vocabularyService.getFromDwdsSentences().subscribe(data => {
       this.sentences = data;
-      // console.log((data))
-      console.log('Success: ' + JSON.stringify(data));
-    }, error => {
-      console.log('Error: ' + JSON.stringify(error));
+      this.divID.nativeElement.innerHTML=data;
+
+
     });
   }
 
