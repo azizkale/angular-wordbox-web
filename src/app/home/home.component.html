@@ -1,10 +1,2 @@
-<ul>
-    <li *ngFor="let w of word">
-        <span class="badge">lemma : {{w && w.lemma && w.lemma}}</span><br/>
-        <span class="badge">wortart : {{w && w.wortart && w.wortart}}</span><br/>
-        <span class="badge">input : {{w && w.input && w.input}}</span>
-        <hr>
-    </li>
-</ul>
-<button (click)="getDwdsSentences()">button</button> {{sentences}}
-<div #divID></div>
+<button (click)="getDwdsSentences()">button</button>
+<!-- <div [hidden]="true" #divID></div> -->

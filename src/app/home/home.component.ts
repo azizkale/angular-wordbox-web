@@ -17,10 +17,10 @@ export class HomeComponent implements OnInit {
   vocabularies: Vocabulary[];
   word: any;
   sentences: any;
+  exampleS: any;
 
   ngOnInit(): void {
     this.showVocabulary();
-    this.getDwdsResult();
     // this.getDwdsSentences();
 
   }
@@ -31,19 +31,22 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getDwdsResult() {
-    this.vocabularyService.getFromDwdd().subscribe(data => {
-      this.word = data;
-      console.log('Success: ' + JSON.stringify(data));
-    }, error => {
-      console.log('Error: ' + JSON.stringify(error));
-    });
-  }
-
   getDwdsSentences() {
-    this.vocabularyService.getFromDwdsSentences().subscribe(data => {
-      this.sentences = data;
-      this.divID.nativeElement.innerHTML=data;
+    let word = "Buch"
+    this.vocabularyService.getFromDwdsSentences(word).subscribe(data => {
+
+      var htmlObject = document.createElement('div');
+      htmlObject.innerHTML = data;     
+      console.log(htmlObject.getElementsByClassName('example')[0].getElementsByTagName('span')[0].textContent);
+
+
+
+
+      // this.sentences = data;
+      // this.divID.nativeElement.innerHTML = data;
+
+      // this.exampleS = document.getElementsByTagName('div').item(0).getElementsByClassName('example')[0].getElementsByTagName('span');
+      // console.log(this.exampleS)
 
 
     });

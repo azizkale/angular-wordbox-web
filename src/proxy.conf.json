@@ -9,7 +9,7 @@
         }
     },
     "/jwbapi/*": {
-        "target": "https://www.dwds.de/r",
+        "target": "https://context.reverso.net",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true,

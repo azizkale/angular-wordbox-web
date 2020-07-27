@@ -37,8 +37,8 @@ export class VocabularyService {
     return this.httpClient.get('/dwdsapi/?q=Haus');
   }
 
-  getFromDwdsSentences() {
-    return this.httpClient.get('/jwbapi/?q=Haus&limit=3',{'responseType':'text'});
+  getFromDwdsSentences(word:string) {
+    return this.httpClient.get('/jwbapi/%C3%BCbersetzung/deutsch-t%C3%BCrkisch/'+word,{'responseType':'text'});
   }
 
 
