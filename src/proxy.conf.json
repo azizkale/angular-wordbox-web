@@ -8,13 +8,22 @@
             "^/dwdsapi": ""
         }
     },
-    "/jwbapi/*": {
+    "/reversoapi/*": {
         "target": "https://context.reverso.net",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true,
         "pathRewrite": {
-            "^/jwbapi": ""
+            "^/reversoapi": ""
+        }
+    },
+    "/farlexapi/*": {
+        "target": "https://de.thefreedictionary.com",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/farlexapi": ""
         }
     }
 }

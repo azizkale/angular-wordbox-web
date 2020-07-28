@@ -1,2 +1,29 @@
-<button (click)="getDwdsSentences()">button</button>
-<!-- <div [hidden]="true" #divID></div> -->
+<div class="container my-2">
+    <div class="row">
+        <form class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" #word class="form-control" placeholder="Kelime">
+            </div>
+            <button type="submit" (click)="ShowTheWord(word.value)" class="btn btn-primary mb-2">Ara</button>
+        </form>
+    </div>
+    <div class="row my-2" *ngIf="sentencesFromReverso">
+        <div class="badge badge-info text-white">
+            Reverso
+        </div>
+    </div>
+    <div class="row border" *ngFor="let item of sentencesFromReverso">
+        <div class="col-sm-6">{{item.germanSentence}}</div>
+        <div class="col-sm-6">{{item.turkishSentence}}</div>
+    </div>
+
+    <div class="row my-2" *ngIf="sentencesFromFarlex">
+        <div class="badge badge-info text-white">
+            byFarlex
+        </div>
+    </div>
+    <div class="row border" *ngFor="let item of sentencesFromFarlex">
+        <div class="col-sm-6">{{item}}</div>
+        <div class="col-sm-6"></div>
+    </div>
+</div>

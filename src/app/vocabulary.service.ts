@@ -37,8 +37,12 @@ export class VocabularyService {
     return this.httpClient.get('/dwdsapi/?q=Haus');
   }
 
-  getFromDwdsSentences(word:string) {
-    return this.httpClient.get('/jwbapi/%C3%BCbersetzung/deutsch-t%C3%BCrkisch/'+word,{'responseType':'text'});
+  getFromRewerso(word: string) {
+    return this.httpClient.get('/reversoapi/%C3%BCbersetzung/deutsch-t%C3%BCrkisch/' + word, { 'responseType': 'text' });
+  }
+
+  getFromFarlex(word: string) {
+    return this.httpClient.get('/farlexapi/' + word, { 'responseType': 'text' });
   }
 
 

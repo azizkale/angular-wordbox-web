@@ -16,13 +16,11 @@ export class HomeComponent implements OnInit {
 
   vocabularies: Vocabulary[];
   word: any;
-  sentences: any;
-  exampleS: any;
+  sentencesFromReverso: any[];
+  sentencesFromFarlex: any[];
 
   ngOnInit(): void {
     this.showVocabulary();
-    // this.getDwdsSentences();
-
   }
 
   showVocabulary() {
@@ -31,23 +29,41 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  getDwdsSentences() {
-    let word = "Buch"
-    this.vocabularyService.getFromDwdsSentences(word).subscribe(data => {
+  ShowTheWord(word) {
+    this.SentencesFromReverso(word);
+    this.SentencesFromFarlex(word);
+  }
+
+  SentencesFromReverso(word) {
+    this.sentencesFromReverso = [];
+
+    this.vocabularyService.getFromRewerso(word).subscribe(data => {
 
       var htmlObject = document.createElement('div');
-      htmlObject.innerHTML = data;     
-      console.log(htmlObject.getElementsByClassName('example')[0].getElementsByTagName('span')[0].textContent);
+      htmlObject.innerHTML = data;
 
+      for (let i = 0; i < 5; i++) {
+        var obj = {
+          germanSentence: htmlObject.getElementsByClassName('example')[i].getElementsByTagName('span')[0].textContent,
+          turkishSentence: htmlObject.getElementsByClassName('example')[i].getElementsByTagName('span')[2].textContent
+        }
+        this.sentencesFromReverso.push(obj);
+      }
+      
+    });
+  }
 
+  SentencesFromFarlex(word) {
+    this.sentencesFromFarlex = [];
 
+    this.vocabularyService.getFromFarlex(word).subscribe(data => {
 
-      // this.sentences = data;
-      // this.divID.nativeElement.innerHTML = data;
+      var htmlObject = document.createElement('div');
+      htmlObject.innerHTML = data;
 
-      // this.exampleS = document.getElementsByTagName('div').item(0).getElementsByClassName('example')[0].getElementsByTagName('span');
-      // console.log(this.exampleS)
-
+      for (let i = 0; i < 5; i++) {
+        this.sentencesFromFarlex.push(htmlObject.getElementsByClassName('runseg')[i].getElementsByClassName('illustration')[0].textContent);
+      }
 
     });
   }
