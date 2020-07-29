@@ -25,5 +25,14 @@
         "pathRewrite": {
             "^/farlexapi": ""
         }
+    },
+    "/glosbeapi/*": {
+        "target": "https://glosbe.com",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/glosbeapi": ""
+        }
     }
 }

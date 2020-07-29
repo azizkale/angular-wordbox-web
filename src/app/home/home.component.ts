@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   word: any;
   sentencesFromReverso: any[];
   sentencesFromFarlex: any[];
+  sentencesFromGlosbe: any[];
 
   ngOnInit(): void {
     this.showVocabulary();
@@ -32,6 +33,7 @@ export class HomeComponent implements OnInit {
   ShowTheWord(word) {
     this.SentencesFromReverso(word);
     this.SentencesFromFarlex(word);
+    this.SentencesFromGlosbe(word);
   }
 
   SentencesFromReverso(word) {
@@ -49,7 +51,7 @@ export class HomeComponent implements OnInit {
         }
         this.sentencesFromReverso.push(obj);
       }
-      
+
     });
   }
 
@@ -68,5 +70,16 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  SentencesFromGlosbe(word) {
+    this.sentencesFromGlosbe = [];
 
+    this.vocabularyService.getFromGlosbe(word).subscribe(data => {
+
+      var htmlObject = document.createElement('div');
+      htmlObject.innerHTML = data;
+      this.divID.nativeElement.innerHTML = htmlObject.getElementsByClassName('tpac').item(0).getElementsByTagName('ul').item(0).outerHTML;
+      console.log(htmlObject.getElementsByClassName('tpac'))
+
+    });
+  }
 }
