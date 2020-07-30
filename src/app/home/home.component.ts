@@ -11,6 +11,7 @@ import { Vocabulary } from '../models/vocabulary';
 export class HomeComponent implements OnInit {
 
   @ViewChild('divID') divID: ElementRef;
+  @ViewChild('divID2') divID2: ElementRef;
 
   constructor(private vocabularyService: VocabularyService) { }
 
@@ -61,12 +62,15 @@ export class HomeComponent implements OnInit {
     this.vocabularyService.getFromFarlex(word).subscribe(data => {
 
       var htmlObject = document.createElement('div');
-      htmlObject.innerHTML = data;
+      htmlObject.innerHTML = data;    
+
+      this.divID2.nativeElement.innerHTML = htmlObject.getElementsByTagName('div').namedItem('Definition').outerHTML;
 
       for (let i = 0; i < 5; i++) {
         this.sentencesFromFarlex.push(htmlObject.getElementsByClassName('runseg')[i].getElementsByClassName('illustration')[0].textContent);
       }
 
+     
     });
   }
 
