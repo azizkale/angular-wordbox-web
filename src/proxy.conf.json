@@ -1,13 +1,4 @@
 {
-    "/dwdsapi/*": {
-        "target": "https://www.dwds.de/api/wb/snippet",
-        "secure": false,
-        "logLevel": "debug",
-        "changeOrigin": true,
-        "pathRewrite": {
-            "^/dwdsapi": ""
-        }
-    },
     "/reversoapi/*": {
         "target": "https://context.reverso.net",
         "secure": false,

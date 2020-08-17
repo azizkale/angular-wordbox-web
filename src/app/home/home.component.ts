@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   ShowTheWord(word) {
     this.SentencesFromReverso(word);
     this.SentencesFromFarlex(word);
-    this.SentencesFromGlosbe(word);
+    // this.SentencesFromGlosbe(word);
   }
 
   SentencesFromReverso(word) {
@@ -64,10 +64,10 @@ export class HomeComponent implements OnInit {
       var htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;    
 
-      this.divID2.nativeElement.innerHTML = htmlObject.getElementsByTagName('div').namedItem('Definition').outerHTML;
+      // this.divID2.nativeElement.innerHTML = htmlObject.getElementsByTagName('div').namedItem('Definition').outerHTML;
 
       for (let i = 0; i < 5; i++) {
-        this.sentencesFromFarlex.push(htmlObject.getElementsByClassName('runseg')[i].getElementsByClassName('illustration')[0].textContent);
+        this.sentencesFromFarlex.push(htmlObject.getElementsByTagName('div').namedItem('Definition').getElementsByTagName('section')[i].getElementsByClassName('illustration')[0].innerHTML);
       }
 
      

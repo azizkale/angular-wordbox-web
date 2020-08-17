@@ -33,10 +33,6 @@ export class VocabularyService {
     return this.wordsOfSelectedLevel
   }
 
-  getFromDwdd() {
-    return this.httpClient.get('/dwdsapi/?q=Haus');
-  }
-
   getFromRewerso(word: string) {
     return this.httpClient.get('/reversoapi/%C3%BCbersetzung/deutsch-t%C3%BCrkisch/' + word, { 'responseType': 'text' });
   }

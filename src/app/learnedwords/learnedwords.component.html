@@ -12,7 +12,7 @@
         <div class="col col-sm-4 my-auto">{{word.word}}</div>
         <div class="col col-sm-4 my-auto">{{word.vocabularyDetail[0].sentenceMeaning}}</div>
         <div class="col col-sm-3 my-auto text-center">
-            <img [ngStyle]="StarsCSS()" *ngFor="let item of StarsArray();let i=index" [src]="(word.showCount>i)?item[1]:item[0]">
+            <img [src]="(word.showCount>i)?item[1]:item[0]" [ngStyle]="StarsCSS()" *ngFor="let item of StarsArray();let i=index">
         </div>
     </div>
     <div class="row bg-info fixed-bottom p-2 mx-2 d-flex flex-row-reverse rounded">
