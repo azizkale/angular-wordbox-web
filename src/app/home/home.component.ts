@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
   ShowTheWord(word) {
     this.SentencesFromReverso(word);
     this.SentencesFromFarlex(word);
-    // this.SentencesFromGlosbe(word);
+    this.SentencesFromGlosbe(word);
   }
 
   SentencesFromReverso(word) {
