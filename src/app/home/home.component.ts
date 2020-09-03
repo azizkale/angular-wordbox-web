@@ -62,15 +62,13 @@ export class HomeComponent implements OnInit {
     this.vocabularyService.getFromFarlex(word).subscribe(data => {
 
       var htmlObject = document.createElement('div');
-      htmlObject.innerHTML = data;    
+      htmlObject.innerHTML = data;
 
       // this.divID2.nativeElement.innerHTML = htmlObject.getElementsByTagName('div').namedItem('Definition').outerHTML;
 
       for (let i = 0; i < 5; i++) {
         this.sentencesFromFarlex.push(htmlObject.getElementsByTagName('div').namedItem('Definition').getElementsByTagName('section')[i].getElementsByClassName('illustration')[0].innerHTML);
       }
-
-     
     });
   }
 
@@ -81,9 +79,12 @@ export class HomeComponent implements OnInit {
 
       var htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
-      this.divID.nativeElement.innerHTML = htmlObject.getElementsByClassName('tpac').item(0).getElementsByTagName('ul').item(0).outerHTML;
-      console.log(htmlObject.getElementsByClassName('tpac'))
-
+this.divID.nativeElement.innerHTML = htmlObject.getElementsByClassName('container')[2].innerHTML;
+      // this.divID.nativeElement.innerHTML = htmlObject.getElementsByClassName('tpac').item(0).getElementsByTagName('ul').item(0).outerHTML;
+      console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('h3')[1].getElementsByTagName('span')[0].textContent)
+      console.log(htmlObject.getElementsByClassName('container')[2].getElementsByClassName('defmetas')[0].textContent)
+      console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('ul')[1])
+      console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('ul'))
     });
   }
 }

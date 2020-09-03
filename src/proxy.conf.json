@@ -18,7 +18,7 @@
         }
     },
     "/glosbeapi/*": {
-        "target": "https://glosbe.com",
+        "target": "https://tr.glosbe.com",
         "secure": false,
         "logLevel": "debug",
         "changeOrigin": true,
