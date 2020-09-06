@@ -17,6 +17,7 @@ export class HomeComponent implements OnInit {
 
   vocabularies: Vocabulary[];
   word: any;
+  _word: Vocabulary;
   sentencesFromReverso: any[];
   sentencesFromFarlex: any[];
   sentencesFromGlosbe: any[];
@@ -35,6 +36,7 @@ export class HomeComponent implements OnInit {
     this.SentencesFromReverso(word);
     this.SentencesFromFarlex(word);
     this.SentencesFromGlosbe(word);
+    this.WordsFromDwds(word);
   }
 
   SentencesFromReverso(word) {
@@ -79,12 +81,17 @@ export class HomeComponent implements OnInit {
 
       var htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
-this.divID.nativeElement.innerHTML = htmlObject.getElementsByClassName('container')[2].innerHTML;
-      // this.divID.nativeElement.innerHTML = htmlObject.getElementsByClassName('tpac').item(0).getElementsByTagName('ul').item(0).outerHTML;
-      console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('h3')[1].getElementsByTagName('span')[0].textContent)
-      console.log(htmlObject.getElementsByClassName('container')[2].getElementsByClassName('defmetas')[0].textContent)
-      console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('ul')[1])
-      console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('ul'))
+      console.log(htmlObject)
+      // this.divID.nativeElement.innerHTML = htmlObject.getElementsByClassName('container')[2].innerHTML;
+      this.divID.nativeElement.innerHTML = htmlObject.getElementsByClassName('tpac').item(0).getElementsByTagName('ul').item(0).outerHTML;
+      // console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('h3')[1].getElementsByTagName('span')[0].textContent);
+      // console.log(htmlObject.getElementsByClassName('container')[2].getElementsByClassName('defmetas')[0].textContent);
+      // console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('ul')[1]);
+      // console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('ul'));
     });
+  }
+
+  WordsFromDwds(word) {
+    this.vocabularyService.getFromDwds(word).subscribe(data => console.log(data));
   }
 }
