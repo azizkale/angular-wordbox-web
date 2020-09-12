@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service'
 
 import { Vocabulary } from '../models/vocabulary';
+import { SearcingWord } from '../models/searcingword';
 
 @Component({
   selector: 'app-home',
@@ -17,10 +18,10 @@ export class HomeComponent implements OnInit {
 
   vocabularies: Vocabulary[];
   word: any;
-  _word: Vocabulary;
   sentencesFromReverso: any[];
   sentencesFromFarlex: any[];
-  sentencesFromGlosbe: any[];
+
+  searcingword: SearcingWord;
 
   ngOnInit(): void {
     this.showVocabulary();
@@ -33,10 +34,11 @@ export class HomeComponent implements OnInit {
   }
 
   ShowTheWord(word) {
-    this.SentencesFromReverso(word);
-    this.SentencesFromFarlex(word);
-    this.SentencesFromGlosbe(word);
+    // this.SentencesFromReverso(word);
+    // this.SentencesFromFarlex(word);
     this.WordsFromDwds(word);
+    this.SentencesFromGlosbe(word);
+
   }
 
   SentencesFromReverso(word) {
@@ -74,24 +76,53 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  WordsFromDwds(word) {
+    this.vocabularyService.getFromDwds(word).subscribe(data => console.log(data));
+  }
+
   SentencesFromGlosbe(word) {
-    this.sentencesFromGlosbe = [];
 
     this.vocabularyService.getFromGlosbe(word).subscribe(data => {
 
       var htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
-      console.log(htmlObject)
-      // this.divID.nativeElement.innerHTML = htmlObject.getElementsByClassName('container')[2].innerHTML;
-      this.divID.nativeElement.innerHTML = htmlObject.getElementsByClassName('tpac').item(0).getElementsByTagName('ul').item(0).outerHTML;
-      // console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('h3')[1].getElementsByTagName('span')[0].textContent);
-      // console.log(htmlObject.getElementsByClassName('container')[2].getElementsByClassName('defmetas')[0].textContent);
-      // console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('ul')[1]);
-      // console.log(htmlObject.getElementsByClassName('container')[2].getElementsByTagName('ul'));
+
+      this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
+
+      // this.divID2.nativeElement.innerHTML = null;
+
+      var theNodesOfMeaningsFromGlosbe = htmlObject.getElementsByClassName('gl-white-box gl-pad mat-elevation-z2');
+      var countOfMeaningOfTheWord = theNodesOfMeaningsFromGlosbe.length;
+      // this.searcingword.word = this.word;
+
+
+      for (let i = 0; i < countOfMeaningOfTheWord; i++) {
+        // this.divID2.nativeElement.innerHTML += htmlObject.getElementsByTagName('app-translate-entry-translation').item(i).innerHTML;
+        // this.divID2.nativeElement.innerHTML += theNodesOfMeaningsFromGlosbe[i].outerHTML;
+        
+        //word
+        console.log(theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('h2').item(0));
+        
+        //type        
+        console.log(theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('span').item(2));
+        
+        //meanings (j:number of h4(meanings of the same type))
+        for (let j = 0; j < theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('h4').length - 1; j++) {
+          console.log(theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('h4').item(j).innerHTML)
+        }
+        
+        //if the type is noun, this code get the Artikel
+        console.log(theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('app-translate-entry-summary-info').item(0).getElementsByClassName('translate-entry-summary-info-text ng-star-inserted').item(2))
+
+        //example sentences (j:number of h4(meanings))
+        var countOfExampleSentences = theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('app-translate-entry-translation-examples').length;
+        console.log(countOfExampleSentences)      
+
+
+      }
+
     });
   }
 
-  WordsFromDwds(word) {
-    this.vocabularyService.getFromDwds(word).subscribe(data => console.log(data));
-  }
+
 }
