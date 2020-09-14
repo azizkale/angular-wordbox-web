@@ -1,14 +1,14 @@
-import { Type } from "./type";
-import { Group } from "./group";
 
 export class SearcingWord {
     constructor(
-        public id: number,
-        public type: Type,
-        public article: string,
-        public word: string,
-        public meanings: string[],
-        public sampleSentencesInTurkish: string[],
-        public sampleSentencesInGerman: string[]
+        public id?: number,
+        public word?: string,
+        public artikel?:string,
+        public countOfTypesOfTheWord?:number,
+        public meanings?: string[],
+        public typeOfEachMeanings?: string[],
+        public exampleSentencesInTurkish?: string[],
+        public exampleSentencesInGerman?: string[],
+        public infos?: any[]
     ) { }
 }

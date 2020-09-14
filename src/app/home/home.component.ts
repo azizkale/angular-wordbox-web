@@ -21,7 +21,8 @@ export class HomeComponent implements OnInit {
   sentencesFromReverso: any[];
   sentencesFromFarlex: any[];
 
-  searcingword: SearcingWord;
+  searchingWord: SearcingWord;
+
 
   ngOnInit(): void {
     this.showVocabulary();
@@ -36,7 +37,7 @@ export class HomeComponent implements OnInit {
   ShowTheWord(word) {
     // this.SentencesFromReverso(word);
     // this.SentencesFromFarlex(word);
-    this.WordsFromDwds(word);
+    // this.WordsFromDwds(word);
     this.SentencesFromGlosbe(word);
 
   }
@@ -82,6 +83,14 @@ export class HomeComponent implements OnInit {
 
   SentencesFromGlosbe(word) {
 
+    this.searchingWord = new SearcingWord();
+    this.searchingWord.meanings = [];
+    this.searchingWord.infos = [];
+    this.searchingWord.typeOfEachMeanings = [];
+    this.searchingWord.exampleSentencesInGerman = [];
+    this.searchingWord.exampleSentencesInTurkish = [];
+
+    this.searchingWord.word = word;
     this.vocabularyService.getFromGlosbe(word).subscribe(data => {
 
       var htmlObject = document.createElement('div');
@@ -89,39 +98,83 @@ export class HomeComponent implements OnInit {
 
       this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
 
-      // this.divID2.nativeElement.innerHTML = null;
+      const theNodesOfMeaningsFromGlosbe = htmlObject.getElementsByTagName('article');
+      const countOfMeaningOfTheWord = theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info').length - 1;
 
-      var theNodesOfMeaningsFromGlosbe = htmlObject.getElementsByClassName('gl-white-box gl-pad mat-elevation-z2');
-      var countOfMeaningOfTheWord = theNodesOfMeaningsFromGlosbe.length;
-      // this.searcingword.word = this.word;
+      const countOfTypesOfTheWord = htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByTagName('h3').length;
 
+      this.searchingWord.countOfTypesOfTheWord = countOfTypesOfTheWord;
 
-      for (let i = 0; i < countOfMeaningOfTheWord; i++) {
-        // this.divID2.nativeElement.innerHTML += htmlObject.getElementsByTagName('app-translate-entry-translation').item(i).innerHTML;
-        // this.divID2.nativeElement.innerHTML += theNodesOfMeaningsFromGlosbe[i].outerHTML;
-        
-        //word
-        console.log(theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('h2').item(0));
-        
-        //type        
-        console.log(theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('span').item(2));
-        
-        //meanings (j:number of h4(meanings of the same type))
-        for (let j = 0; j < theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('h4').length - 1; j++) {
-          console.log(theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('h4').item(j).innerHTML)
+      console.log("type sayısı:" + countOfTypesOfTheWord)
+
+      for (let i = 0; i < countOfTypesOfTheWord; i++) {
+        //type (type for only general meanings)(i use it to get all infos(gender, fonetic etc.) of the word)    
+        console.log(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByTagName('h3')[i]['childNodes'][0])
+
+        //all infos of the words
+        if (htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i] != null) {
+          console.log(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i].getElementsByTagName('span'))
+          this.searchingWord.infos.push(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i].getElementsByTagName('span'))
+        }
+
+        else{
+          this.searchingWord.infos.push("no info")
         }
         
-        //if the type is noun, this code get the Artikel
-        console.log(theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('app-translate-entry-summary-info').item(0).getElementsByClassName('translate-entry-summary-info-text ng-star-inserted').item(2))
-
-        //example sentences (j:number of h4(meanings))
-        var countOfExampleSentences = theNodesOfMeaningsFromGlosbe[i].getElementsByTagName('app-translate-entry-translation-examples').length;
-        console.log(countOfExampleSentences)      
+        //to get the article
+        if (htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i] != null) {
+          const countOfAllInfosOfTheWord = htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i].getElementsByTagName('span').length;
+          console.log('info sayısı: ' + countOfAllInfosOfTheWord)
+          if (countOfAllInfosOfTheWord == 6) {
+            console.log(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i].getElementsByTagName('span')[3]);
+            this.searchingWord.artikel = htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i].getElementsByTagName('span')[3].textContent;
+          }
+        }
 
 
       }
 
+      //========Because there are some problems, that codes below are here
+      console.log("türkçe anlam sayısı" + countOfMeaningOfTheWord)
+      for (let i = 0; i < countOfMeaningOfTheWord; i++) {        
+
+        if (theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i + 1].getElementsByClassName('gender-n-phrase').item(0) != null) {
+
+          //turkis meanings of the word
+        console.log(theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i + 1].getElementsByTagName('strong').item(0));
+        this.searchingWord.meanings.push(theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i + 1].getElementsByTagName('strong').item(0)['childNodes'][0].textContent)
+
+
+          //type (type for each meanings)
+          console.log(theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i + 1].getElementsByClassName('gender-n-phrase').item(0)['childNodes'][0])
+          this.searchingWord.typeOfEachMeanings.push(theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i + 1].getElementsByClassName('gender-n-phrase').item(0)['childNodes'][0].textContent)
+
+          //example sentences(german)
+          if (htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples')[i] != null) {
+            console.log(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples')[i].getElementsByTagName('div').item(0).getElementsByTagName('div')[0]);
+            this.searchingWord.exampleSentencesInGerman.push(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples')[i].getElementsByTagName('div').item(0).getElementsByTagName('div')[0].innerText);
+
+            //example sentences(turkish)
+            console.log(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples')[i].getElementsByClassName('span6')[1].getElementsByTagName('div')[3])
+            this.searchingWord.exampleSentencesInTurkish.push(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples')[i].getElementsByClassName('span6')[1].getElementsByTagName('div')[3].innerText)
+          }
+
+        }
+        // else {
+        //   //example sentences(german)
+        //   this.searchingWord.exampleSentencesInGerman.push('no example sentence');
+
+        //   //example sentences(turkish)           
+        //   this.searchingWord.exampleSentencesInTurkish.push('no example sentence');
+
+        //   //type (type for each meanings)
+        //   this.searchingWord.typeOfEachMeanings.push('no type')
+        // }
+      }
+      this.searchingWord.id = 999;
+      console.log(this.searchingWord)      
     });
+
   }
 
 
