@@ -16,11 +16,11 @@ export class BigDictionaryComponent implements OnInit {
     private vocabularyService: VocabularyService
   ) { }
   searchingWord: SearcingWord;
-  
+
   ngOnInit(): void {
   }
 
-  ShowTheWord(word) {   
+  ShowTheWord(word) {
     this.SentencesFromGlosbe(word);
   }
 
@@ -42,7 +42,10 @@ export class BigDictionaryComponent implements OnInit {
       this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
 
       const theNodesOfMeaningsFromGlosbe = htmlObject.getElementsByTagName('article');
-      const countOfMeaningOfTheWord = theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info').length - 1;
+      const countOfMeaningOfTheWord = theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('gender-n-phrase').length; // the words with the type underneath are gotten
+
+
+      console.log("meaning sayısı: "+countOfMeaningOfTheWord);
 
       const countOfTypesOfTheWord = htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByTagName('h3').length;
 
@@ -53,43 +56,43 @@ export class BigDictionaryComponent implements OnInit {
         console.log(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByTagName('h3')[i]['childNodes'][0])
 
         //all infos of the words
-        if (htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i] != null) {         
+        if (htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i] != null) {
           this.searchingWord.infos.push(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i].getElementsByTagName('span'))
         }
-        
+
         //to get the article
         if (htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i] != null) {
           const countOfAllInfosOfTheWord = htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i].getElementsByTagName('span').length;
-          if (countOfAllInfosOfTheWord == 6) {          
+          if (countOfAllInfosOfTheWord == 6) {
             this.searchingWord.artikel = htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i].getElementsByTagName('span')[3].textContent;
           }
         }
       }
 
-      for (let i = 0; i < countOfMeaningOfTheWord; i++) {        
+      for (let i = 0; i < theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info').length; i++) {
 
-        if (theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i + 1].getElementsByClassName('gender-n-phrase').item(0) != null) {
+        if (theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i].getElementsByClassName('gender-n-phrase').item(0) != null) {
 
           //turkis meanings of the word      
-        this.searchingWord.meanings.push(theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i+1].getElementsByTagName('strong').item(0)['childNodes'][0].textContent)
+          this.searchingWord.meanings.push(theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i].getElementsByTagName('strong')[0].innerText)
 
 
           //type (type for each meanings)         
-          this.searchingWord.typeOfEachMeanings.push(theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i + 1].getElementsByClassName('gender-n-phrase').item(0)['childNodes'][0].textContent)
+          this.searchingWord.typeOfEachMeanings.push(theNodesOfMeaningsFromGlosbe[0].getElementsByClassName('text-info')[i].getElementsByClassName('gender-n-phrase').item(0)['childNodes'][0].textContent)
 
           //example sentences(german)
-          if (htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples')[i] != null) {           
-            this.searchingWord.exampleSentencesInGerman.push(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples')[i].getElementsByTagName('div').item(0).getElementsByTagName('div')[0].innerText);
+          if (htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples') != null) {
+            this.searchingWord.exampleSentencesInGerman.push(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples')[i].getElementsByTagName('div')[1].innerText);
 
             //example sentences(turkish)          
             this.searchingWord.exampleSentencesInTurkish.push(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples')[i].getElementsByClassName('span6')[1].getElementsByTagName('div')[3].innerText)
           }
 
         }
-       
+
       }
       this.searchingWord.id = 999;
-      console.log(this.searchingWord)      
+      console.log(this.searchingWord)
     });
 
   }
