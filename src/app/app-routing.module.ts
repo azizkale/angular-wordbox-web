@@ -6,6 +6,7 @@ import { MotherpageComponent } from './exercises/motherpage/motherpage.component
 import { ExercisestypesComponent } from './exercises/exercisestypes/exercisestypes.component';
 import { FlashcardsComponent } from './exercises/flashcards/flashcards.component';
 import { LearnedwordsComponent } from './learnedwords/learnedwords.component';
+import { BigDictionaryComponent } from './big-dictionary/big-dictionary.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'exercisestypes', component:ExercisestypesComponent },
   { path: 'flashcards', component:FlashcardsComponent },
   { path: 'learnedwords', component:LearnedwordsComponent },
+  { path: 'bigDictionary', component:BigDictionaryComponent },
 ];
 
 @NgModule({

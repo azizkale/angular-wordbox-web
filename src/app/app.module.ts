@@ -15,6 +15,7 @@ import { ExercisestypesComponent } from './exercises/exercisestypes/exercisestyp
 import { FlashcardsComponent } from './exercises/flashcards/flashcards.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LearnedwordsComponent } from './learnedwords/learnedwords.component';
+import { BigDictionaryComponent } from './big-dictionary/big-dictionary.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LearnedwordsComponent } from './learnedwords/learnedwords.component';
     MotherpageComponent,
     ExercisestypesComponent,
     FlashcardsComponent,
-    LearnedwordsComponent
+    LearnedwordsComponent,
+    BigDictionaryComponent
   ],
   imports: [
     BrowserModule,
