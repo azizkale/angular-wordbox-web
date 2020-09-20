@@ -49,4 +49,8 @@ export class VocabularyService {
     return this.httpClient.get('/dwdsapi/?q=' + word, { 'responseType': 'text' });
   }
 
+  getFromLinguee(word: string) {
+    return this.httpClient.get('/linguee/'+word, { 'responseType': 'text' });
+  }
+
 }

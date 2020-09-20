@@ -130,8 +130,6 @@ export class HomeComponent implements OnInit {
             this.searchingWord.artikel = htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i].getElementsByTagName('span')[3].textContent;
           }
         }
-
-
       }
 
       //========Because there are some problems, that codes below are here
@@ -159,19 +157,8 @@ export class HomeComponent implements OnInit {
             this.searchingWord.exampleSentencesInTurkish.push(htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('examples')[i].getElementsByClassName('span6')[1].getElementsByTagName('div')[3].innerText)
           }
 
-        }
-        // else {
-        //   //example sentences(german)
-        //   this.searchingWord.exampleSentencesInGerman.push('no example sentence');
-
-        //   //example sentences(turkish)           
-        //   this.searchingWord.exampleSentencesInTurkish.push('no example sentence');
-
-        //   //type (type for each meanings)
-        //   this.searchingWord.typeOfEachMeanings.push('no type')
-        // }
+        }       
       }
-      this.searchingWord.id = 999;
       console.log(this.searchingWord)      
     });
 

@@ -34,5 +34,14 @@
         "pathRewrite": {
             "^/dwdsapi": ""
         }
+    },
+    "/linguee/*": {
+        "target": "https://www.linguee.com/english-german/search?source=auto&query=",
+        "secure": false,
+        "logLevel": "debug",
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/linguee": ""
+        }
     }
 }

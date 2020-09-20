@@ -7,18 +7,11 @@
             <button type="submit" (click)="ShowTheWord(word.value)" class="btn btn-primary mb-2">Ara</button>
         </form>
     </div>
-    <div class="row">
+    <div class="row" *ngFor="let meaning of meaningsOfTheWord">
         <div>
             <div class="row">
                 <h3></h3>
             </div>
-            <div class="row">2</div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-sm-12">
-            <div id="divID" #divID></div>
         </div>
     </div>
 </div>
