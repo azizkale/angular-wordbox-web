@@ -75,17 +75,17 @@ export class BigDictionaryComponent implements OnInit {
 
         //the meanings only have type underneath
         if (li.getElementsByClassName('text-info').item(0).getElementsByClassName('gender-n-phrase').item(0) != null)
-          console.log(li.getElementsByClassName('text-info').item(0).getElementsByClassName('gender-n-phrase').item(0)['childNodes'][0].textContent.trim());
-          this.meaningsOfTheWord[index].type = li.getElementsByClassName('text-info').item(0).getElementsByClassName('gender-n-phrase').item(0);
+          // console.log(li.getElementsByClassName('text-info').item(0).getElementsByClassName('gender-n-phrase').item(0)['childNodes'][0].textContent.trim());
+          this.meaningsOfTheWord[index].type = li.getElementsByClassName('text-info').item(0).getElementsByClassName('gender-n-phrase').item(0)['childNodes'][0].textContent.replace(/\s+/g, '');
 
         //example sentences(german)
         if (li.getElementsByClassName('examples').item(0) != null) {
-          console.log(li.getElementsByClassName('examples').item(0).getElementsByTagName('div').item(0).getElementsByTagName('div')[0].innerText);
-          this.meaningsOfTheWord[index].exampleSentencesInGerman = li.getElementsByClassName('examples').item(0).getElementsByTagName('div').item(0).getElementsByTagName('div')[0].innerText; 
+          // console.log(li.getElementsByClassName('examples').item(0).getElementsByTagName('div').item(0).getElementsByTagName('div')[0].innerText);
+          this.meaningsOfTheWord[index].exampleSentencesInGerman = li.getElementsByClassName('examples').item(0).getElementsByTagName('div').item(0).getElementsByTagName('div')[0].innerText.trim();
 
           //example sentences(turkish)
           console.log(li.getElementsByClassName('examples').item(0).getElementsByClassName('span6')[1].getElementsByTagName('div')[3].innerText)
-          this.meaningsOfTheWord[index].exampleSentencesInTurkish = li.getElementsByClassName('examples').item(0).getElementsByClassName('span6')[1].getElementsByTagName('div')[3].innerText; 
+          this.meaningsOfTheWord[index].exampleSentencesInTurkish = li.getElementsByClassName('examples').item(0).getElementsByClassName('span6')[1].getElementsByTagName('div')[3].innerText;
         }
         index++;
       });
