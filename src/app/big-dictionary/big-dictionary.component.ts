@@ -17,19 +17,29 @@ export class BigDictionaryComponent implements OnInit {
     private vocabularyService: VocabularyService
   ) { }
   meaningsOfTheWord: meaningsOfTheWord[];
+  types: string[];
 
   ngOnInit(): void {
   }
 
   ShowTheWord(word) {
     this.SentencesFromGlosbe(word);
-    this.GetFromLinguee(word);
+    // this.GetFromLinguee(word);
   }
 
   GetFromLinguee(word) {
     this.vocabularyService.getFromLinguee(word).subscribe(data => {
-      console.log(JSON.stringify(data));
-    })
+      var htmlObject = document.createElement('div');
+      htmlObject.innerHTML = data;
+      this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
+
+      const wordtype = htmlObject.getElementsByTagName('div').namedItem('dictionary').getElementsByClassName('tag_wordtype');
+      this.types = [];
+      for (let i = 0; i < wordtype.length; i++) {
+        console.log(wordtype[i].textContent)
+        this.types.push(wordtype[i].textContent);
+      }
+    });
   }
 
   SentencesFromGlosbe(word) {
@@ -70,24 +80,22 @@ export class BigDictionaryComponent implements OnInit {
           //example sentences(turkish)
           this.meaningsOfTheWord[index].exampleSentencesInTurkish = li.getElementsByClassName('examples').item(0).getElementsByClassName('span6')[1].getElementsByTagName('div')[3].innerText;
         }
-        index++;
+
+        //removes the words from array, which have no type
+        if (this.meaningsOfTheWord[index].type == undefined) {
+          this.meaningsOfTheWord.splice(index, 1);
+        }
+        else {
+          index++;
+        }
       });
 
-      const countOfTypesOfTheWord = htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByTagName('h3').length;
-
-      for (let i = 0; i < countOfTypesOfTheWord; i++) {
-
-        //to get the article
-        // if (htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i] != null) {
-        //   this.meaningsOfTheWord[0].artikel = htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByClassName('defmetas')[i].getElementsByTagName('span')[3].textContent.replace(/\s+/g, '');
-        // }
-      }
-
-      // this.meaningsOfTheWord.forEach(word => {
-      //   if (word.type == "{noun}") {
-      //     word.word = word.word.charAt(0).toUpperCase() + word.word.slice(1);
-      //   }
-      // });
+      //to make the words with upprecase, which are noun
+      this.meaningsOfTheWord.forEach(word => {
+        if (word.type == "{noun}") {
+          word.word = word.word.charAt(0).toUpperCase() + word.word.slice(1);
+        }
+      });
 
       console.log(this.meaningsOfTheWord)
 
