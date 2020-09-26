@@ -15,30 +15,11 @@
                         <!--Body-->
                         <div class="form-group">
                             <div class="input-group mb-2">
-<<<<<<< HEAD
-                                <div class="input-group-prepend mr-1">
-=======
                                 <div class="input-group-prepend">
->>>>>>> 72989d9e7c83e7a784f1e049a48c2b7942a6d72d
                                     <div class="input-group-text"><span class="material-icons">
                                         create
                                         </span></div>
                                 </div>
-<<<<<<< HEAD
-                                <input type="text" class="form-control-plaintext" [(ngModel)]="word" placeholder="search" name="word" (input)="findTheMeaning(word)">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <table mdbTable small="true">
-                                <tbody>
-                                    <tr mdbTableCol *ngFor="let voc of searchedWord">
-                                        <th scope="row">{{voc.word}}:</th>
-                                        <td>{{voc.vocabularyDetail && voc.vocabularyDetail[0] && voc.vocabularyDetail[0].sentenceMeaning}}</td>
-                                        <hr>
-                                    </tr>
-                                </tbody>
-                            </table>
-=======
                                 <input type="text" class="form-control-plaintext mx-1" [(ngModel)]="word" placeholder="search" name="word" (keyup.enter)="findTheMeaning(word)">
                                 <div class="input-group-prepend mr-1">
                                     <div class="input-group-text" (click)="findTheMeaning(word)"><span class="material-icons">
@@ -51,7 +32,6 @@
                             <span class="font-weight-bold">{{voc.word}}: </span>
                             <span class="">{{voc.vocabularyDetail && voc.vocabularyDetail[0] && voc.vocabularyDetail[0].sentenceMeaning}}</span>
                             <hr>
->>>>>>> 72989d9e7c83e7a784f1e049a48c2b7942a6d72d
                         </div>
 
                     </div>

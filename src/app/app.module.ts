@@ -6,7 +6,6 @@ import { CommonModule } from "@angular/common";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
-import { DictionaryComponent } from './dictionary/dictionary.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { DictionaryComponent } from './dictionary/dictionary.component';
@@ -21,30 +20,20 @@ import { LearnedwordsComponent } from './learnedwords/learnedwords.component';
   declarations: [
     AppComponent,
     HomeComponent,
-<<<<<<< HEAD
-    FormsModule
-=======
     DictionaryComponent,
     NavbarComponent,
     MotherpageComponent,
     ExercisestypesComponent,
     FlashcardsComponent,
     LearnedwordsComponent
->>>>>>> 72989d9e7c83e7a784f1e049a48c2b7942a6d72d
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-<<<<<<< HEAD
-    FormsModule,
-    CommonModule,
-    DictionaryComponent
-=======
     FormsModule, 
     CommonModule,
     BrowserAnimationsModule
->>>>>>> 72989d9e7c83e7a784f1e049a48c2b7942a6d72d
   ],
   providers: [],
   bootstrap: [AppComponent]
