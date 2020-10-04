@@ -50,7 +50,7 @@ export class VocabularyService {
   }
 
   getFromLinguee(word: string) {
-    return this.httpClient.get('/linguee/'+word, { 'responseType': 'text' });
+    return this.httpClient.get('/linguee/' + word, { 'responseType': 'text' });
   }
 
 }
