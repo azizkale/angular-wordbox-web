@@ -12,6 +12,7 @@ export class DictionaryComponent implements OnInit {
 
   @ViewChild('divID') divID: ElementRef;
   @ViewChild('divID2') divID2: ElementRef;
+  types: any[];
 
   constructor(private vocabularyService: VocabularyService) { }
 
@@ -162,5 +163,21 @@ export class DictionaryComponent implements OnInit {
     });
 
   }
+
+  GetFromLinguee(word) {
+    this.vocabularyService.getFromLinguee(word).subscribe(data => {
+      var htmlObject = document.createElement('div');
+      htmlObject.innerHTML = data;
+      this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
+
+      const wordtype = htmlObject.getElementsByTagName('div').namedItem('dictionary').getElementsByClassName('tag_wordtype');
+      this.types = [];
+      for (let i = 0; i < wordtype.length; i++) {
+        console.log(wordtype[i].textContent)
+        this.types.push(wordtype[i].textContent);
+      }
+    });
+  }
+
 
 }
