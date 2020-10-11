@@ -42,7 +42,7 @@ export class VocabularyService {
   }
 
   getFromGlosbe(word: string) {
-    return this.httpClient.get('/glosbeapi/de/tr/' + word, { 'responseType': 'text' });
+    return this.httpClient.get('https://myserver-deploy.herokuapp.com/api?word=' + word, { 'responseType': 'text' });
   }
 
   getFromDwds(word: string) {
