@@ -9,11 +9,26 @@
         </div>
         <div class="col-sm-7">
             <div class="scene scene--card">
-                <div class="card" (click)="CardAnimation(shownWord)">
+                <div class="card">
                     <div class="card__face card__face--front row justify-content-center p-3" *ngIf="showMe">
                         <p class="my-auto" [style.fontSize]="screenWidth>576?'40px':'30px'"> {{shownWord.word}}</p>
+
+                        <div class="row fixed-bottom">
+                            <div class="col-2 justify-content-center">
+                                <span class="material-icons" type="button" data-toggle="modal" data-target="#exampleModalLong" (click)="SentencesFromGlosbe(word.value)">
+                                    info
+                                    </span>
+                            </div>
+                            <div class="col-10 justify-content-center">
+                                <span class="material-icons float-right" (click)="CardAnimation(shownWord)">
+                                    forward
+                                    </span>
+                            </div>
+                        </div>
+
                     </div>
-                    <div class="card__face card__face--back row justify-content-center p-3" *ngIf="!showMe">
+
+                    <div class="card__face card__face--back row justify-content-center p-3" *ngIf="!showMe" (click)="CardAnimation(shownWord)">
                         <div class="d-flex align-items-start position-fixed m-2">
                             <img style="width: 10%;height: auto;" *ngFor="let item of StarsArray();let i=index" [src]="(shownWord.showCount>i)?item[1]:item[0]">
                         </div>
@@ -25,6 +40,62 @@
         </div>
         <div class="row bg-info fixed-bottom p-2 mx-2 d-flex flex-row-reverse rounded">
             <button class="btn btn-primary float-right" routerLink="/learnedwords">My Words</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <form class="form-inline">
+                        <div class="form-group mx-sm-3 mb-2">
+                            <input type="text" value="{{shownWord.word}}" #word class="form-control" placeholder="Kelime">
+                        </div>
+                        <button type="submit" class="btn btn-primary mb-2" (click)="SentencesFromGlosbe(word.value)">Ara</button>
+                    </form>
+                </div>
+                <div class="row mb-2" *ngFor="let meaning of meaningsOfTheWord">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 [hidden]="!meaning.artikel">{{meaning.artikel}}
+                                    <p>,</p>
+                                </h4>
+                                <h3>{{meaning.word}}:</h3>
+                            </div>
+                            <div class="col-sm-3 mx-2">
+                                <h6>{{meaning.type}}</h6>
+                            </div>
+                            <div class="col-sm-4">
+                                <h3>{{meaning.meaning}}</h3>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <ul>
+                                <li>
+                                    <h5>{{meaning.exampleSentencesInGerman}}</h5>
+                                </li>
+                                <li>
+                                    <h5>{{meaning.exampleSentencesInTurkish}}</h5>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
         </div>
     </div>
 </div>

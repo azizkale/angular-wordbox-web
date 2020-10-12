@@ -41,13 +41,13 @@ export class VocabularyService {
     return this.httpClient.get('/farlexapi/' + word, { 'responseType': 'text' });
   }
 
-  getFromGlosbe(word: string) {
-    return this.httpClient.get('https://myserver-deploy.herokuapp.com/api?word=' + word, { 'responseType': 'text' });
-  }
-
   // getFromGlosbe(word: string) {
-  //   return this.httpClient.get('/glosbeapi/de/tr/' + word, { 'responseType': 'text' });
+  //   return this.httpClient.get('https://myserver-deploy.herokuapp.com/api?word=' + word, { 'responseType': 'text' });
   // }
+
+  getFromGlosbe(word: string) {
+    return this.httpClient.get('/glosbeapi/de/tr/' + word, { 'responseType': 'text' });
+  }
 
   getFromDwds(word: string) {
     return this.httpClient.get('/dwdsapi/?q=' + word, { 'responseType': 'text' });
