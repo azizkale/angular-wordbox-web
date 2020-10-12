@@ -43,3 +43,7 @@
     background: blue;
     transform: rotateY(180deg);
 }
+
+.material-icons {
+    font-size: 40px;
+}
