@@ -27,6 +27,7 @@ export class FlashcardsComponent implements OnInit {
 
   levelVocabularies: Vocabulary[];
   shownWord: Vocabulary;
+  surchedWord:string;
   wordsToLearn: Vocabulary[];
   savedVocabularies: Vocabulary[];
   showMe: boolean;
@@ -130,6 +131,13 @@ export class FlashcardsComponent implements OnInit {
   }
 
   SentencesFromGlosbe(word) {
+    var arr = word.split(" ");
+    console.log(arr);        
+    // the function above cut the phrase into words so to get the word without "Artikel"
+    this.surchedWord = (arr.length >=2) ? arr[1]: arr[0];
+
+    console.log(this.surchedWord)
+
     this.vocabularyService.getFromGlosbe(word).subscribe(data => {
       var htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;

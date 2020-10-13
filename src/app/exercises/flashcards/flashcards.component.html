@@ -12,10 +12,9 @@
                 <div class="card">
                     <div class="card__face card__face--front row justify-content-center p-3" *ngIf="showMe">
                         <p class="my-auto" [style.fontSize]="screenWidth>576?'40px':'30px'"> {{shownWord.word}}</p>
-
                         <div class="row fixed-bottom">
                             <div class="col-2 justify-content-center">
-                                <span class="material-icons" type="button" data-toggle="modal" data-target="#exampleModalLong" (click)="SentencesFromGlosbe(word.value)">
+                                <span class="material-icons" type="button" data-toggle="modal" data-target="#exampleModalLong" (click)="SentencesFromGlosbe(shownWord.word)">
                                     info
                                 </span>
                             </div>
@@ -25,7 +24,6 @@
                                 </span>
                             </div>
                         </div>
-
                     </div>
 
                     <div class="card__face card__face--back row justify-content-center p-3" *ngIf="!showMe" (click)="CardAnimation(shownWord)">
@@ -67,7 +65,7 @@
                 <div class="row">
                     <form class="form-inline">
                         <div class="form-group mx-sm-3 mb-2">
-                            <input type="text" value="{{shownWord.word}}" #word class="form-control" placeholder="Kelime">
+                            <input type="text" value="{{surchedWord}}" #word class="form-control" placeholder="Kelime">
                         </div>
                         <button type="submit" class="btn btn-primary mb-2" (click)="SentencesFromGlosbe(word.value)">Ara</button>
                     </form>
@@ -88,7 +86,7 @@
                             </dt>
 
                             <dd>
-                                <div class="row text-white rounded" style="background-color: #239B56;" [hidden]="!meaning.exampleSentencesInGerman || !meaning.exampleSentencesInTurkish">
+                                <div class="row text-white rounded mt-1" style="background-color: #239B56;" [hidden]="!meaning.exampleSentencesInGerman || !meaning.exampleSentencesInTurkish">
                                     <ul>
                                         <li>
                                             <h5>{{meaning.exampleSentencesInGerman}}</h5>
