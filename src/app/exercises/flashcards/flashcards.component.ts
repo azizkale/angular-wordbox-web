@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { VocabularyService } from 'src/app/vocabulary.service';
 import { Vocabulary } from 'src/app/models/vocabulary';
-import { ElementRef } from '@angular/core';
 import { meaningsOfTheWord } from 'src/app/models/meaningsOfTheWord';
 
 
@@ -34,14 +33,12 @@ export class FlashcardsComponent implements OnInit {
   screenWidth: number;
 
 
-  meaningsOfTheWord: meaningsOfTheWord[];
+  meaningsOfTheWord: meaningsOfTheWord[] = [];
   types: string[];
 
 
   constructor(
     private vocabularyService: VocabularyService,
-    private element: ElementRef
-
   ) { }
 
   ngOnInit(): void {
@@ -135,14 +132,10 @@ export class FlashcardsComponent implements OnInit {
     let arr = word.split(" ");
       // the function above cut the phrase into words so to get the word without "Artikel"
       this.surchedWord = (arr.length >= 2) ? arr[1] : arr[0];
-      arr = [];
-   
-    this.vocabularyService.getFromGlosbe( this.surchedWord).subscribe(data => {
+      arr = [];       
+    this.vocabularyService.getFromGlosbe(this.surchedWord).subscribe(data => {
       var htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
-
-      //gets related DOM elements from Glosbe
-      // this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
 
       const allLiTags = htmlObject.getElementsByTagName('div').namedItem('phraseTranslation').getElementsByTagName('li');
 
@@ -159,7 +152,7 @@ export class FlashcardsComponent implements OnInit {
         this.meaningsOfTheWord[index] = new meaningsOfTheWord();
 
         //the Word
-        this.meaningsOfTheWord[index].word = word;
+        this.meaningsOfTheWord[index].word = this.surchedWord;
         //all meanings
         this.meaningsOfTheWord[index].meaning = li.getElementsByClassName('text-info')[0]['childNodes'][0].textContent;
 
@@ -210,5 +203,10 @@ export class FlashcardsComponent implements OnInit {
 
     });
 
+  }
+
+  NoResponse(){
+    if(this.meaningsOfTheWord.length == 0)
+    alert('Üzgünüz bir sonuç bulamadık!')
   }
 }
