@@ -27,21 +27,6 @@ export class BigDictionaryComponent implements OnInit {
     // this.GetFromLinguee(word);
   }
 
-  GetFromLinguee(word) {
-    this.vocabularyService.getFromLinguee(word).subscribe(data => {
-      var htmlObject = document.createElement('div');
-      htmlObject.innerHTML = data;
-      this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
-
-      const wordtype = htmlObject.getElementsByTagName('div').namedItem('dictionary').getElementsByClassName('tag_wordtype');
-      this.types = [];
-      for (let i = 0; i < wordtype.length; i++) {
-        console.log(wordtype[i].textContent)
-        this.types.push(wordtype[i].textContent);
-      }
-    });
-  }
-
   SentencesFromGlosbe(word) {
     this.vocabularyService.getFromGlosbe(word).subscribe(data => {
       var htmlObject = document.createElement('div');
