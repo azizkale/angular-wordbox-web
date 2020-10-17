@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type } from '@angular/core';
 
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 import { Observable, throwError } from 'rxjs';
 
@@ -76,6 +77,26 @@ export class VocabularyService {
         })
       });
     return this.wordsOfSelectedLevel
+  }
+
+  getFromRewerso(word: string) {
+    return this.httpClient.get('/reversoapi/%C3%BCbersetzung/deutsch-t%C3%BCrkisch/' + word, { 'responseType': 'text' });
+  }
+
+  getFromFarlex(word: string) {
+    return this.httpClient.get('/farlexapi/' + word, { 'responseType': 'text' });
+  }
+
+  getFromGlosbe(word: string) {
+    return this.httpClient.get('/glosbeapi/de/tr/' + word, { 'responseType': 'text' });
+  }
+
+  getFromDwds(word: string) {
+    return this.httpClient.get('/dwdsapi/?q=' + word, { 'responseType': 'text' });
+  }
+
+  getFromLinguee(word: string) {
+    return this.httpClient.get('/linguee/' + word, { 'responseType': 'text' });
   }
 
 }

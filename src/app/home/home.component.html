@@ -1,77 +1,47 @@
-<div class="container mt-3">
-  <div class="row justify-content-center">
-    <div class="col-4">
-      <button (click)="AddTestItem()"> Add Test Item</button>
-    </div>
-    <div class="col-4">
-      <button  (click)="UpdateTestItem()"> Update Test Item</button>
-    </div>
-    <div class="col-4">
-      <button  (click)="DeleteTestItem()"> Delete Test Item</button>
-    </div>
-  </div>
-</div>
 
-<div class="container mt-3">
-  <div class="row justify-content-center">
-    <div class="col-6">
-        <ul *ngFor="let w of word">
-          <span class="badge">lemma : {{w && w.lemma && w.lemma}}</span><br />
-          <span class="badge">wortart : {{w && w.wortart && w.wortart}}</span><br />
-          <span class="badge">input : {{w && w.input && w.input}}</span>
-          <hr>
-        </ul>
-    </div>
-    <div class="col-6">
-      <span class="badge">vocabularyId : {{getSampleItem && getSampleItem.vocabularyId 
-             && getSampleItem.vocabularyId}}</span><br />
-      <span class="badge">word : {{getSampleItem && getSampleItem.word && getSampleItem.word}}</span><br />
-      <span class="badge">details : {{getSampleItem && getSampleItem.details[0] && getSampleItem.details[0].meaning
-             && getSampleItem.details[0].meaning}}</span>
-      <hr>
-    </div>
-  </div>
-</div>
-
-<div class="container mt-3">
-  <div class="row justify-content-center">
-    <div class="col-12 col-md-8 col-lg-6 pb-5">
-      <!--Form with header-->
-      <form>
-        <div class="card border-primary rounded-0">
-          <div class="card-header p-0">
-            <div class="bg-info text-white text-center py-2">
-              <h3><i class="material-icons"></i> My Vocabularies</h3>
+<div class="container my-2">
+    <div class="row">
+        <form class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" #word class="form-control" placeholder="Kelime">
             </div>
-          </div>
-          <div class="card-body p-3">
+            <button type="submit" (click)="ShowTheWord(word.value)" class="btn btn-primary mb-2">Ara</button>
+        </form>
+    </div>
+    <!-- <div class="row my-2" *ngIf="sentencesFromReverso.length!=0">
+        <div class="badge badge-info text-white">
+            Reverso
+        </div>
+    </div>
+    <div class="row border" *ngFor="let item of sentencesFromReverso">
+        <div class="col-sm-6">{{item.germanSentence}}</div>
+        <div class="col-sm-6">{{item.turkishSentence}}</div>
+    </div>
 
-            <!--Body-->
-            <div class="form-group">
-              <div class="row justify-content-center" *ngIf="!vocabularies">
-                <table>
-                  <tr class="text-center">
-                    <div class="spinner-border text-info" role="status">
-                      <span class="sr-only">Loading...</span>
-                    </div>
-                  </tr>
-                  <tr>
-                    <span class="badge">Vocabularies are loading...</span>
-                  </tr>
-                </table>
-              </div>
-              <ul>
-                <li *ngFor="let voc of vocabularies">
-                  <span class="badge">Id : {{voc.id}}</span><br />
-                  <span class="badge">De : {{voc.word}}</span><br />
-                  <span class="badge">Tr :
-                    {{voc.vocabularyDetail && voc.vocabularyDetail[0] && voc.vocabularyDetail[0].sentenceMeaning}}</span>
-                  <hr>
-                </li>
-              </ul>
+    <div class="row my-2" *ngIf="sentencesFromFarlex.length!=0">
+        <div class="badge badge-info text-white">
+            byFarlex
+        </div>
+    </div>
+    <div class="row border" *ngFor="let item of sentencesFromFarlex">
+        <div class="col-sm-6">{{item}}</div>
+        <div class="col-sm-6"></div>
+    </div> -->
+    <div class="row">
+        <div>
+            <div class="row">
+                <h3></h3>
             </div>
+            <div class="row">2</div>
+        </div>
+    </div>
 
-          </div>
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="divID" #divID></div>
+        </div>
+        <div class="col-sm-0">
+            <div id="divID2" #divID2></div>
 
         </div>
       </form>

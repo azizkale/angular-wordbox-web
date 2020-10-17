@@ -46,35 +46,7 @@ export class FlashcardsComponent implements OnInit {
     this.screenWidth = window.outerWidth;
   }
 
-  // flip: string = 'inactive';
-
-  // toggleFlip(shownword: Vocabulary) {
-  //   switch (this.flip) {
-
-  //     case 'inactive':
-  //       setTimeout(() => {
-  //         this.flip = 'active'
-  //       }, 200);
-  //       break;
-
-  //     case 'active':
-  //       if (!this.shownWord.showCount) {
-  //         this.shownWord.showCount = 0;
-  //       }
-  //       shownword.showCount++;
-  //       localStorage.setItem(shownword.id.toString(), JSON.stringify(shownword));
-  //       setTimeout(() => {
-  //         this.flip = 'inactive';
-  //         setTimeout(() => { //changes shownWord to next one
-  //           this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
-  //         }, 1000);
-  //       }, 1000);
-  //       this.SetWordsToLearn();
-
-  //       break;
-  //   }
-  // }
-
+  
   GetLevelWordsFromJSON() {
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
   }
@@ -144,6 +116,8 @@ export class FlashcardsComponent implements OnInit {
     else {
       this.showMe = false;
     }
+    console.log(this.shownWord)
+
   }
 
   WordsProgressBarHeight() {

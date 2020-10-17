@@ -1,0 +1,38 @@
+<div class="container my-2">
+    <div class="row">
+        <form class="form-inline">
+            <div class="form-group mx-sm-3 mb-2">
+                <input type="text" #word class="form-control" placeholder="Kelime">
+            </div>
+            <button type="submit" (click)="ShowTheWord(word.value)" class="btn btn-primary mb-2">Ara</button>
+        </form>
+    </div>
+    <div class="row mb-2" *ngFor="let meaning of meaningsOfTheWord">
+        <div class="container">
+            <div class="row">
+                <div class="sm-col-4">
+                    <h3>{{meaning.word}}:</h3>
+                </div>
+                <div class="sm-col-3 mx-2">
+                    <h6>{{meaning.type}}</h6>
+                </div>
+                <div class="sm-col-4">
+                    <h3>{{meaning.meaning}}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <ul>
+                    <li>
+                        <h5>{{meaning.exampleSentencesInGerman}}</h5>
+                    </li>
+                    <li>
+                        <h5>{{meaning.exampleSentencesInTurkish}}</h5>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <div class="col-sm-12">
+    <div id="divID" #divID></div>
+</div> -->
