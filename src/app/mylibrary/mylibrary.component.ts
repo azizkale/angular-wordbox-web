@@ -5,16 +5,14 @@ import { VocabularyService } from '../vocabulary.service';
 @Component({
   selector: 'mylibrary',
   templateUrl: './mylibrary.component.html',
-  styleUrls: ['./mylibrary.component.css']
+  styleUrls: ['./mylibrary.component.css'],
 })
 export class MylibraryComponent implements OnInit {
-
-  constructor(private vocabularyService: VocabularyService) { }
+  constructor(private vocabularyService: VocabularyService) {}
 
   vocabularies: Vocabulary[];
   searchedWord: Vocabulary[];
   word: any;
-
 
   ngOnInit(): void {
     this.showVocabulary();
@@ -25,14 +23,11 @@ export class MylibraryComponent implements OnInit {
       this.vocabularies = data;
     });
   }
-  
+
   findTheMeaning(word: string) {
     this.searchedWord = new Array<Vocabulary>();
-    this.vocabularies.find(w => {
-      if (w.word.includes(word))
-        this.searchedWord.push(w)
-    })
+    this.vocabularies.find((w) => {
+      if (w.word.includes(word)) this.searchedWord.push(w);
+    });
   }
-
-
 }
