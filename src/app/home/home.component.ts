@@ -22,7 +22,8 @@ export class HomeComponent implements OnInit {
   sentencesFromFarlex: any[];
 
   searchingWord: SearcingWord;
-
+  
+  
 
   ngOnInit(): void {
     this.showVocabulary();
@@ -131,7 +132,8 @@ export class HomeComponent implements OnInit {
           }
         }
       }
-
+      
+      
       //========Because there are some problems, that codes below are here
       console.log("türkçe anlam sayısı" + countOfMeaningOfTheWord)
       for (let i = 0; i < countOfMeaningOfTheWord; i++) {        
