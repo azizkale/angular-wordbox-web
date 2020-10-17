@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit {
   vocabularies: Vocabulary[]; 
 
 
+
   ngOnInit(): void {
     this.showVocabulary();
   }
@@ -24,7 +25,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
- 
+
 
 
 }

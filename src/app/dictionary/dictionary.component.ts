@@ -179,5 +179,4 @@ export class DictionaryComponent implements OnInit {
     });
   }
 
-
 }
