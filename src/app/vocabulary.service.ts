@@ -5,6 +5,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 
 import { Observable, throwError } from 'rxjs';
 
+// TODO : delete unused libraries
 import { catchError, retry } from 'rxjs/operators';
 
 import { Vocabulary } from '../app/models/vocabulary';

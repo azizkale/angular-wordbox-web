@@ -199,6 +199,7 @@ export class FlashcardsComponent implements OnInit {
 
       });
       
+      // TODO : Delete
       console.log(this.meaningsOfTheWord)
 
     });
@@ -207,6 +208,7 @@ export class FlashcardsComponent implements OnInit {
 
   NoResponse(){
     if(this.meaningsOfTheWord.length == 0)
+    // TODO : Popup message would be better for user.
     alert('Üzgünüz bir sonuç bulamadık!')
   }
 }

@@ -82,6 +82,7 @@ export class BigDictionaryComponent implements OnInit {
         }
       });
 
+      //TODO : Delete all console logs
       console.log(this.meaningsOfTheWord)
 
     });
