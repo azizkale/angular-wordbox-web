@@ -101,8 +101,6 @@ export class BigDictionaryComponent implements OnInit {
           word.word = word.word.charAt(0).toUpperCase() + word.word.slice(1);
         }
       });
-
-      console.log(this.meaningsOfTheWord);
     });
   }
 }

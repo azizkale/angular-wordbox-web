@@ -217,12 +217,12 @@ export class FlashcardsComponent implements OnInit {
           }
         }
       });
-
-      console.log(this.meaningsOfTheWord);
     });
   }
 
-  NoResponse() {
-    if (this.meaningsOfTheWord.length == 0) alert('Üzgünüz bir sonuç bulamadık!');
+  NoResponse(){
+    if(this.meaningsOfTheWord.length == 0)
+    // TODO : Popup message would be better for user.
+    alert('Üzgünüz bir sonuç bulamadık!')
   }
 }
