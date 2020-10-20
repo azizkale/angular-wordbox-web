@@ -9,21 +9,20 @@ import { LearnedwordsComponent } from './learnedwords/learnedwords.component';
 import { BigDictionaryComponent } from './big-dictionary/big-dictionary.component';
 import { MylibraryComponent } from './mylibrary/mylibrary.component';
 
-
 const routes: Routes = [
-  {path:'', component:HomeComponent},
-  {path:'app-home', component:HomeComponent},
-  {path:'mylibrary', component:MylibraryComponent},
+  { path: '', component: HomeComponent },
+  { path: 'app-home', component: HomeComponent },
+  { path: 'mylibrary', component: MylibraryComponent },
   // { path: 'dictionary', component: DictionaryComponent },
-  { path: 'motherpage', component:MotherpageComponent },
-  { path: 'exercisestypes', component:ExercisestypesComponent },
-  { path: 'flashcards', component:FlashcardsComponent },
-  { path: 'learnedwords', component:LearnedwordsComponent },
-  { path: 'bigDictionary', component:BigDictionaryComponent },
+  { path: 'motherpage', component: MotherpageComponent },
+  { path: 'exercisestypes', component: ExercisestypesComponent },
+  { path: 'flashcards', component: FlashcardsComponent },
+  { path: 'learnedwords', component: LearnedwordsComponent },
+  { path: 'bigDictionary', component: BigDictionaryComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

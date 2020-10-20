@@ -1,32 +1,26 @@
-import { Injectable, Type } from '@angular/core';
+import { Injectable } from '@angular/core';
 
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
-
 import { Observable, throwError } from 'rxjs';
-
-// TODO : delete unused libraries
-import { catchError, retry } from 'rxjs/operators';
 
 import { Vocabulary } from '../app/models/vocabulary';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class VocabularyService {
-
-
-  vocabularyUrl = 'assets/vocabulary.json'; //JSON
+  vocabularyUrl = 'assets/vocabulary.json'; // JSON
 
   wordsOfSelectedLevel: Vocabulary[];
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
+      'Content-Type': 'application/json',
+    }),
   };
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {}
 
   handleError(error: HttpErrorResponse) {
     if (error.error instanceof ErrorEvent) {
@@ -35,23 +29,19 @@ export class VocabularyService {
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
-      console.error(
-        `Backend returned code ${error.status}, ` +
-        `body was: ${error.error}`);
+      console.error(`Backend returned code ${error.status}, ` + `body was: ${error.error}`);
     }
     // Return an observable with a user-facing error message.
-    return throwError(
-      'Something bad happened; please try again later.');
+    return throwError('Something bad happened; please try again later.');
   }
 
   getVocabularies(): Observable<Vocabulary[]> {
-    return this.httpClient
-      .get<Vocabulary[]>(this.vocabularyUrl)
+    return this.httpClient.get<Vocabulary[]>(this.vocabularyUrl);
   }
 
   getByIDFromUrl() {
     return this.httpClient.get('/jwbapi/vocabulary/16101');
-  };
+  }
 
   addVocabularyTest(vocabulary: Vocabulary): Observable<Vocabulary> {
     return this.httpClient.post<Vocabulary>('/jwbapi/add', vocabulary, this.httpOptions);
@@ -71,21 +61,22 @@ export class VocabularyService {
 
   GetLevelWords(group: number) {
     this.wordsOfSelectedLevel = new Array<Vocabulary>();
-    this.getVocabularies()
-      .subscribe((data) => {
-        data.map(voc => {
-          voc.group === group ? this.wordsOfSelectedLevel.push(voc) : ""
-        })
+    this.getVocabularies().subscribe((data) => {
+      data.map((voc) => {
+        voc.group === group ? this.wordsOfSelectedLevel.push(voc) : '';
       });
-    return this.wordsOfSelectedLevel
+    });
+    return this.wordsOfSelectedLevel;
   }
 
   getFromRewerso(word: string) {
-    return this.httpClient.get('/reversoapi/%C3%BCbersetzung/deutsch-t%C3%BCrkisch/' + word, { 'responseType': 'text' });
+    return this.httpClient.get('/reversoapi/%C3%BCbersetzung/deutsch-t%C3%BCrkisch/' + word, {
+      responseType: 'text',
+    });
   }
 
   getFromFarlex(word: string) {
-    return this.httpClient.get('/farlexapi/' + word, { 'responseType': 'text' });
+    return this.httpClient.get('/farlexapi/' + word, { responseType: 'text' });
   }
 
   // getFromGlosbe(word: string) {
@@ -93,15 +84,14 @@ export class VocabularyService {
   // }
 
   getFromGlosbe(word: string) {
-    return this.httpClient.get('/glosbeapi/de/tr/' + word, { 'responseType': 'text' });
+    return this.httpClient.get('/glosbeapi/de/tr/' + word, { responseType: 'text' });
   }
 
   getFromDwds(word: string) {
-    return this.httpClient.get('/dwdsapi/?q=' + word, { 'responseType': 'text' });
+    return this.httpClient.get('/dwdsapi/?q=' + word, { responseType: 'text' });
   }
 
   getFromLinguee(word: string) {
-    return this.httpClient.get('/linguee/' + word, { 'responseType': 'text' });
+    return this.httpClient.get('/linguee/' + word, { responseType: 'text' });
   }
-
 }

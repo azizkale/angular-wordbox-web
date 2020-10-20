@@ -1,6 +1,6 @@
-import { Type } from "./type";
-import { Group } from "./group";
-import { VocabularyDetail } from "./vocabulary-detail";
+import { Type } from './type';
+import { Group } from './group';
+import { VocabularyDetail } from './vocabulary-detail';
 
 export class Vocabulary {
   constructor(
