@@ -1,22 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import { VocabularyService } from 'src/app/vocabulary.service';
 import { Vocabulary } from 'src/app/models/vocabulary';
+import { NgStyle } from '@angular/common';
 
 @Component({
-  selector: 'exercisestypes',
+  selector: 'app-exercisestypes',
   templateUrl: './exercisestypes.component.html',
   styleUrls: ['./exercisestypes.component.css'],
 })
 export class ExercisestypesComponent implements OnInit {
   levelVocabularies: Vocabulary[];
-
-  constructor(private vocabularyService: VocabularyService) {}
+  flip: string;
+  constructor(private vocabularyService: VocabularyService) { }
 
   ngOnInit(): void {
     this.GetLevelWords();
   }
 
-  SetMarginButtons() {
+  SetMarginButtons(): object {
     return {
       'my-3': window.innerHeight < 576,
       'btn-info': window.innerHeight > 0,
@@ -24,13 +25,13 @@ export class ExercisestypesComponent implements OnInit {
     };
   }
 
-  GetLevelWords() {
+  GetLevelWords(): void {
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
   }
 
-  flip: string = 'inactive';
 
-  toggleFlip() {
-    this.flip = this.flip == 'inactive' ? 'active' : 'inactive';
+  toggleFlip(): void {
+    this.flip = 'inactive';
+    this.flip = this.flip === 'inactive' ? 'active' : 'inactive';
   }
 }
