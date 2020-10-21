@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { VocabularyService } from 'src/app/vocabulary.service';
 import { Vocabulary } from 'src/app/models/vocabulary';
-import { meaningsOfTheWord } from 'src/app/models/meaningsOfTheWord';
+import { MeaningsOfTheWord } from 'src/app/models/meaningsOfTheWord';
 
 @Component({
   selector: 'app-flashcards',
@@ -36,7 +36,7 @@ export class FlashcardsComponent implements OnInit {
   showMe: boolean;
   screenWidth: number;
 
-  meaningsOfTheWord: meaningsOfTheWord[] = [];
+  meaningsOfTheWord: MeaningsOfTheWord[] = [];
   types: string[];
 
   constructor(private vocabularyService: VocabularyService) { }
@@ -147,7 +147,7 @@ export class FlashcardsComponent implements OnInit {
       }
 
       liTagsHaveMeaningOfTheWords.forEach((li) => {
-        this.meaningsOfTheWord[index] = new meaningsOfTheWord();
+        this.meaningsOfTheWord[index] = new MeaningsOfTheWord();
 
         // the Word
         this.meaningsOfTheWord[index].word = this.surchedWord;

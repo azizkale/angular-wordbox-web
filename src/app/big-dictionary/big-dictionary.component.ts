@@ -1,7 +1,7 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SearcingWord } from '../models/searcingword';
-import { meaningsOfTheWord } from '../models/meaningsOfTheWord';
+import { MeaningsOfTheWord } from '../models/meaningsOfTheWord';
 import { VocabularyService } from '../vocabulary.service';
 
 @Component({
@@ -13,7 +13,7 @@ export class BigDictionaryComponent implements OnInit {
   @ViewChild('divID') divID: ElementRef;
 
   constructor(private vocabularyService: VocabularyService) { }
-  meaningsOfTheWord: meaningsOfTheWord[];
+  meaningsOfTheWord: MeaningsOfTheWord[];
   types: string[];
 
   ngOnInit(): void { }
@@ -47,7 +47,7 @@ export class BigDictionaryComponent implements OnInit {
       }
 
       liTagsHaveMeaningOfTheWords.forEach((li) => {
-        this.meaningsOfTheWord[index] = new meaningsOfTheWord();
+        this.meaningsOfTheWord[index] = new MeaningsOfTheWord();
 
         // the Word
         this.meaningsOfTheWord[index].word = word;

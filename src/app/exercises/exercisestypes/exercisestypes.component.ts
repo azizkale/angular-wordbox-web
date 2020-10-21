@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VocabularyService } from 'src/app/vocabulary.service';
 import { Vocabulary } from 'src/app/models/vocabulary';
-import { NgStyle } from '@angular/common';
 
 @Component({
   selector: 'app-exercisestypes',
