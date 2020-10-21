@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
     this.showVocabulary();
   }
 
-  showVocabulary() {
+  showVocabulary(): void {
     this.vocabularyService.getVocabularies().subscribe((data) => {
       this.vocabularies = data;
     });
