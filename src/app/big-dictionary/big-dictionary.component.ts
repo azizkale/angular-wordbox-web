@@ -12,18 +12,18 @@ import { VocabularyService } from '../vocabulary.service';
 export class BigDictionaryComponent implements OnInit {
   @ViewChild('divID') divID: ElementRef;
 
-  constructor(private vocabularyService: VocabularyService) {}
+  constructor(private vocabularyService: VocabularyService) { }
   meaningsOfTheWord: meaningsOfTheWord[];
   types: string[];
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  ShowTheWord(word):void {
+  ShowTheWord(word): void {
     this.SentencesFromGlosbe(word);
     // this.GetFromLinguee(word);
   }
 
-  SentencesFromGlosbe(word):void{
+  SentencesFromGlosbe(word): void {
     this.vocabularyService.getFromGlosbe(word).subscribe((data) => {
       const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
@@ -41,8 +41,9 @@ export class BigDictionaryComponent implements OnInit {
       let index = 0;
 
       for (let i = 0; i < allLiTags.length; i++) {
-        if (i % 3 === 0){ 
-        liTagsHaveMeaningOfTheWords.push(allLiTags[i]);
+        if (i % 3 === 0) {
+          liTagsHaveMeaningOfTheWords.push(allLiTags[i]);
+        }
       }
 
       liTagsHaveMeaningOfTheWords.forEach((li) => {
@@ -62,15 +63,15 @@ export class BigDictionaryComponent implements OnInit {
             .item(0)
             .getElementsByClassName('gender-n-phrase')
             .item(0) != null
-        ){
+        ) {
           this.meaningsOfTheWord[index].type = li
-          .getElementsByClassName('text-info')
-          .item(0)
-          .getElementsByClassName('gender-n-phrase')
-          .item(0)
+            .getElementsByClassName('text-info')
+            .item(0)
+            .getElementsByClassName('gender-n-phrase')
+            .item(0)
           ['childNodes'][0].textContent.replace(/\s+/g, '');
         }
-          
+
 
         // example sentences(german)
         if (li.getElementsByClassName('examples').item(0) != null) {
@@ -99,9 +100,9 @@ export class BigDictionaryComponent implements OnInit {
       });
 
       // to make the words with upprecase, which are noun
-      this.meaningsOfTheWord.forEach((word) => {
-        if (word.type === '{noun}') {
-          word.word = word.word.charAt(0).toUpperCase() + word.word.slice(1);
+      this.meaningsOfTheWord.forEach((w) => {
+        if (w.type === '{noun}') {
+          w.word = w.word.charAt(0).toUpperCase() + w.word.slice(1);
         }
       });
     });
