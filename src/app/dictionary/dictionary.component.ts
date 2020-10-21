@@ -4,7 +4,7 @@ import { Vocabulary } from '../models/vocabulary';
 import { SearcingWord } from '../models/searcingword';
 
 @Component({
-  selector: 'dictionary',
+  selector: 'app-dictionary',
   templateUrl: './dictionary.component.html',
   styleUrls: ['./dictionary.component.css'],
 })
@@ -13,7 +13,7 @@ export class DictionaryComponent implements OnInit {
   @ViewChild('divID2') divID2: ElementRef;
   types: any[];
 
-  constructor(private vocabularyService: VocabularyService) {}
+  constructor(private vocabularyService: VocabularyService) { }
 
   vocabularies: Vocabulary[];
   searchedWord: Vocabulary[];
@@ -27,45 +27,47 @@ export class DictionaryComponent implements OnInit {
     this.showVocabulary();
   }
 
-  showVocabulary() {
+  showVocabulary(): void {
     this.vocabularyService.getVocabularies().subscribe((data) => {
       this.vocabularies = data;
     });
   }
 
-  findTheMeaning(word: string) {
+  findTheMeaning(word: string): void {
     this.searchedWord = new Array<Vocabulary>();
     this.vocabularies.find((w) => {
-      if (w.word.includes(word)) this.searchedWord.push(w);
+      if (w.word.includes(word)) {
+        this.searchedWord.push(w);
+      }
     });
   }
 
-  SentencesFromReverso(word) {
+  SentencesFromReverso(word): void {
     this.sentencesFromReverso = [];
 
     this.vocabularyService.getFromRewerso(word).subscribe((data) => {
-      var htmlObject = document.createElement('div');
+      const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
 
       for (let i = 0; i < 5; i++) {
-        var obj = {
+        const obj = {
           germanSentence: htmlObject
             .getElementsByClassName('example')
-            [i].getElementsByTagName('span')[0].textContent,
+          [i].getElementsByTagName('span')[0].textContent,
           turkishSentence: htmlObject
             .getElementsByClassName('example')
-            [i].getElementsByTagName('span')[2].textContent,
+          [i].getElementsByTagName('span')[2].textContent,
         };
         this.sentencesFromReverso.push(obj);
       }
     });
   }
 
-  SentencesFromFarlex(word) {
+  SentencesFromFarlex(word): void {
     this.sentencesFromFarlex = [];
 
     this.vocabularyService.getFromFarlex(word).subscribe((data) => {
-      var htmlObject = document.createElement('div');
+      const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
 
       // this.divID2.nativeElement.innerHTML = htmlObject.getElementsByTagName('div').namedItem('Definition').outerHTML;
@@ -76,17 +78,17 @@ export class DictionaryComponent implements OnInit {
             .getElementsByTagName('div')
             .namedItem('Definition')
             .getElementsByTagName('section')
-            [i].getElementsByClassName('illustration')[0].innerHTML
+          [i].getElementsByClassName('illustration')[0].innerHTML
         );
       }
     });
   }
 
-  WordsFromDwds(word) {
+  WordsFromDwds(word): void {
     this.vocabularyService.getFromDwds(word).subscribe((data) => console.log(data));
   }
 
-  SentencesFromGlosbe(word) {
+  SentencesFromGlosbe(word): void {
     this.searchingWord = new SearcingWord();
     this.searchingWord.meanings = [];
     this.searchingWord.infos = [];
@@ -96,7 +98,7 @@ export class DictionaryComponent implements OnInit {
 
     this.searchingWord.word = word;
     this.vocabularyService.getFromGlosbe(word).subscribe((data) => {
-      var htmlObject = document.createElement('div');
+      const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
 
       this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
@@ -112,43 +114,28 @@ export class DictionaryComponent implements OnInit {
 
       this.searchingWord.countOfTypesOfTheWord = countOfTypesOfTheWord;
 
-      console.log('type sayısı:' + countOfTypesOfTheWord);
-
       for (let i = 0; i < countOfTypesOfTheWord; i++) {
-        //type (type for only general meanings)(i use it to get all infos(gender, fonetic etc.) of the word)
-        console.log(
-          htmlObject
-            .getElementsByTagName('div')
-            .namedItem('phraseTranslation')
-            .getElementsByTagName('h3')[i]['childNodes'][0]
-        );
+        // type (type for only general meanings)(i use it to get all infos(gender, fonetic etc.) of the word)
 
-        //all infos of the words
+        // all infos of the words
         if (
           htmlObject
             .getElementsByTagName('div')
             .namedItem('phraseTranslation')
             .getElementsByClassName('defmetas')[i] != null
         ) {
-          console.log(
-            htmlObject
-              .getElementsByTagName('div')
-              .namedItem('phraseTranslation')
-              .getElementsByClassName('defmetas')
-              [i].getElementsByTagName('span')
-          );
           this.searchingWord.infos.push(
             htmlObject
               .getElementsByTagName('div')
               .namedItem('phraseTranslation')
               .getElementsByClassName('defmetas')
-              [i].getElementsByTagName('span')
+            [i].getElementsByTagName('span')
           );
         } else {
           this.searchingWord.infos.push('no info');
         }
 
-        //to get the article
+        // to get the article
         if (
           htmlObject
             .getElementsByTagName('div')
@@ -159,115 +146,77 @@ export class DictionaryComponent implements OnInit {
             .getElementsByTagName('div')
             .namedItem('phraseTranslation')
             .getElementsByClassName('defmetas')
-            [i].getElementsByTagName('span').length;
-          console.log('info sayısı: ' + countOfAllInfosOfTheWord);
-          if (countOfAllInfosOfTheWord == 6) {
-            console.log(
-              htmlObject
-                .getElementsByTagName('div')
-                .namedItem('phraseTranslation')
-                .getElementsByClassName('defmetas')
-                [i].getElementsByTagName('span')[3]
-            );
+          [i].getElementsByTagName('span').length;
+         
+          if (countOfAllInfosOfTheWord === 6) {
             this.searchingWord.artikel = htmlObject
               .getElementsByTagName('div')
               .namedItem('phraseTranslation')
               .getElementsByClassName('defmetas')
-              [i].getElementsByTagName('span')[3].textContent;
+            [i].getElementsByTagName('span')[3].textContent;
           }
         }
       }
 
-      //========Because there are some problems, that codes below are here
-      console.log('türkçe anlam sayısı' + countOfMeaningOfTheWord);
+      // ========Because there are some problems, that codes below are here
       for (let i = 0; i < countOfMeaningOfTheWord; i++) {
         if (
           theNodesOfMeaningsFromGlosbe[0]
             .getElementsByClassName('text-info')
-            [i + 1].getElementsByClassName('gender-n-phrase')
+          [i + 1].getElementsByClassName('gender-n-phrase')
             .item(0) != null
         ) {
-          //turkis meanings of the word
-          console.log(
-            theNodesOfMeaningsFromGlosbe[0]
-              .getElementsByClassName('text-info')
-              [i + 1].getElementsByTagName('strong')
-              .item(0)
-          );
+          // turkis meanings of the word
           this.searchingWord.meanings.push(
             theNodesOfMeaningsFromGlosbe[0]
               .getElementsByClassName('text-info')
-              [i + 1].getElementsByTagName('strong')
+            [i + 1].getElementsByTagName('strong')
               .item(0)['childNodes'][0].textContent
           );
 
-          //type (type for each meanings)
-          console.log(
-            theNodesOfMeaningsFromGlosbe[0]
-              .getElementsByClassName('text-info')
-              [i + 1].getElementsByClassName('gender-n-phrase')
-              .item(0)['childNodes'][0]
-          );
+          // type (type for each meanings)
           this.searchingWord.typeOfEachMeanings.push(
             theNodesOfMeaningsFromGlosbe[0]
               .getElementsByClassName('text-info')
-              [i + 1].getElementsByClassName('gender-n-phrase')
+            [i + 1].getElementsByClassName('gender-n-phrase')
               .item(0)['childNodes'][0].textContent
           );
 
-          //example sentences(german)
+          // example sentences(german)
           if (
             htmlObject
               .getElementsByTagName('div')
               .namedItem('phraseTranslation')
               .getElementsByClassName('examples')[i] != null
           ) {
-            console.log(
-              htmlObject
-                .getElementsByTagName('div')
-                .namedItem('phraseTranslation')
-                .getElementsByClassName('examples')
-                [i].getElementsByTagName('div')
-                .item(0)
-                .getElementsByTagName('div')[0]
-            );
             this.searchingWord.exampleSentencesInGerman.push(
               htmlObject
                 .getElementsByTagName('div')
                 .namedItem('phraseTranslation')
                 .getElementsByClassName('examples')
-                [i].getElementsByTagName('div')
+              [i].getElementsByTagName('div')
                 .item(0)
                 .getElementsByTagName('div')[0].innerText
             );
 
-            //example sentences(turkish)
-            console.log(
-              htmlObject
-                .getElementsByTagName('div')
-                .namedItem('phraseTranslation')
-                .getElementsByClassName('examples')
-                [i].getElementsByClassName('span6')[1]
-                .getElementsByTagName('div')[3]
-            );
+            // example sentences(turkish)
             this.searchingWord.exampleSentencesInTurkish.push(
               htmlObject
                 .getElementsByTagName('div')
                 .namedItem('phraseTranslation')
                 .getElementsByClassName('examples')
-                [i].getElementsByClassName('span6')[1]
+              [i].getElementsByClassName('span6')[1]
                 .getElementsByTagName('div')[3].innerText
             );
           }
         }
       }
-      console.log(this.searchingWord);
     });
   }
 
-  GetFromLinguee(word) {
+  GetFromLinguee(word): void {
     this.vocabularyService.getFromLinguee(word).subscribe((data) => {
-      var htmlObject = document.createElement('div');
+      const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
       this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
 
