@@ -3,7 +3,7 @@ import { VocabularyService } from 'src/app/vocabulary.service';
 import { Vocabulary } from 'src/app/models/vocabulary';
 
 @Component({
-  selector: 'motherpage',
+  selector: 'app-motherpage',
   templateUrl: './motherpage.component.html',
   styleUrls: ['./motherpage.component.css'],
 })
@@ -14,7 +14,7 @@ export class MotherpageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  SetMarginButtons() {
+  SetMarginButtons(): object {
     return {
       'my-3': window.innerHeight < 576,
       'btn-info': window.innerHeight > 0,
@@ -22,7 +22,7 @@ export class MotherpageComponent implements OnInit {
     };
   }
 
-  GetLevelWords(group: number) {
+  GetLevelWords(group: number): void {
     this.levelVocabularies = this.vocabularyService.GetLevelWords(group);
   }
 }
