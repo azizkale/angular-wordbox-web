@@ -5,7 +5,7 @@ import { Vocabulary } from 'src/app/models/vocabulary';
 import { meaningsOfTheWord } from 'src/app/models/meaningsOfTheWord';
 
 @Component({
-  selector: 'flashcards',
+  selector: 'app-flashcards',
   templateUrl: './flashcards.component.html',
   styleUrls: ['./flashcards.component.css'],
   animations: [
@@ -39,7 +39,7 @@ export class FlashcardsComponent implements OnInit {
   meaningsOfTheWord: meaningsOfTheWord[] = [];
   types: string[];
 
-  constructor(private vocabularyService: VocabularyService) {}
+  constructor(private vocabularyService: VocabularyService) { }
 
   ngOnInit(): void {
     this.GetLevelWordsFromJSON();
@@ -50,12 +50,12 @@ export class FlashcardsComponent implements OnInit {
     this.screenWidth = window.outerWidth;
   }
 
-  GetLevelWordsFromJSON() {
+  GetLevelWordsFromJSON(): void {
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
   }
 
-  SaveAllWords() {
-    //saves the words to localstorage if it was be not saved before
+  SaveAllWords(): void {
+    // saves the words to localstorage if it was be not saved before
     this.levelVocabularies.map((wrd) => {
       if (localStorage.getItem(wrd.id.toString()) === null) {
         localStorage.setItem(wrd.id.toString(), JSON.stringify(wrd));
@@ -63,18 +63,18 @@ export class FlashcardsComponent implements OnInit {
     });
   }
 
-  GetSingleWordFromLocalStorage(index: string): Object {
+  GetSingleWordFromLocalStorage(index: string): object {
     return JSON.parse(localStorage.getItem(index));
   }
 
-  GetSavedWordsFromLocalStorage() {
+  GetSavedWordsFromLocalStorage(): void {
     this.savedVocabularies = new Array<Vocabulary>();
     this.levelVocabularies.map((word: Vocabulary) => {
       this.savedVocabularies.push(JSON.parse(localStorage.getItem(word.id.toString())));
     });
   }
 
-  SetWordsToLearn() {
+  SetWordsToLearn(): void {
     this.GetSavedWordsFromLocalStorage();
     this.wordsToLearn = new Array<Vocabulary>();
     this.savedVocabularies.map((wrd: Vocabulary) => {
@@ -84,28 +84,28 @@ export class FlashcardsComponent implements OnInit {
     });
   }
 
-  DynamicCSS() {
+  DynamicCSS(): object {
     return {
       'col-12': window.outerWidth < 576,
       'col-8': window.outerWidth >= 576,
     };
   }
 
-  StarsArray() {
-    let array: Object[] = new Array(5);
+  StarsArray(): Array<object> {
+    const array: object[] = new Array(5);
     array.fill(['assets/images/stargray.png', 'assets/images/staryellow.png']);
     return array;
   }
 
-  CardAnimation(shownword: Vocabulary) {
+  CardAnimation(shownword: Vocabulary): void {
     document.querySelector('.card').classList.toggle('is-flipped');
 
     if (!document.querySelector('.card').classList[2]) {
-      !this.shownWord.showCount ? (this.shownWord.showCount = 0) : '';
+      (!this.shownWord.showCount) ? (this.shownWord.showCount = 0) : this.shownWord.showCount = this.shownWord.showCount;
       shownword.showCount++;
       localStorage.setItem(shownword.id.toString(), JSON.stringify(shownword));
       setTimeout(() => {
-        //changes shownWord to next one
+        // changes shownWord to next one
         this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
       }, 1000);
       this.SetWordsToLearn();
@@ -116,19 +116,19 @@ export class FlashcardsComponent implements OnInit {
     this.meaningsOfTheWord = [];
   }
 
-  WordsProgressBarHeight() {
+  WordsProgressBarHeight(): object {
     return {
       progress: window.outerWidth < 576,
     };
   }
 
-  SentencesFromGlosbe(word) {
+  SentencesFromGlosbe(word): void {
     let arr = word.split(' ');
     // the function above cut the phrase into words so to get the word without "Artikel"
     this.surchedWord = arr.length >= 2 ? arr[1] : arr[0];
     arr = [];
     this.vocabularyService.getFromGlosbe(this.surchedWord).subscribe((data) => {
-      var htmlObject = document.createElement('div');
+      const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
 
       const allLiTags = htmlObject
@@ -141,35 +141,38 @@ export class FlashcardsComponent implements OnInit {
       let index = 0;
 
       for (let i = 0; i < allLiTags.length; i++) {
-        if (i % 3 == 0) liTagsHaveMeaningOfTheWords.push(allLiTags[i]);
+        if (i % 3 === 0) {
+          liTagsHaveMeaningOfTheWords.push(allLiTags[i]);
+        }
       }
 
       liTagsHaveMeaningOfTheWords.forEach((li) => {
         this.meaningsOfTheWord[index] = new meaningsOfTheWord();
 
-        //the Word
+        // the Word
         this.meaningsOfTheWord[index].word = this.surchedWord;
-        //all meanings
+        // all meanings
         this.meaningsOfTheWord[index].meaning = li.getElementsByClassName('text-info')[0][
           'childNodes'
         ][0].textContent;
 
-        //the meanings only have type underneath
+        // the meanings only have type underneath
         if (
           li
             .getElementsByClassName('text-info')
             .item(0)
             .getElementsByClassName('gender-n-phrase')
             .item(0) != null
-        )
+        ) {
           this.meaningsOfTheWord[index].type = li
             .getElementsByClassName('text-info')
             .item(0)
             .getElementsByClassName('gender-n-phrase')
             .item(0)
-            ['childNodes'][0].textContent.replace(/\s+/g, '');
+          ['childNodes'][0].textContent.replace(/\s+/g, '');
+        }
 
-        //example sentences(german)
+        // example sentences(german)
         if (li.getElementsByClassName('examples').item(0) != null) {
           this.meaningsOfTheWord[index].exampleSentencesInGerman = li
             .getElementsByClassName('examples')
@@ -179,7 +182,7 @@ export class FlashcardsComponent implements OnInit {
             .getElementsByTagName('div')[0]
             .innerText.trim();
 
-          //example sentences(turkish)
+          // example sentences(turkish)
           this.meaningsOfTheWord[index].exampleSentencesInTurkish = li
             .getElementsByClassName('examples')
             .item(0)
@@ -187,32 +190,32 @@ export class FlashcardsComponent implements OnInit {
             .getElementsByTagName('div')[3].innerText;
         }
 
-        //removes the words from array, which have no type
-        if (this.meaningsOfTheWord[index].type == undefined) {
+        // removes the words from array, which have no type
+        if (this.meaningsOfTheWord[index].type === undefined) {
           this.meaningsOfTheWord.splice(index, 1);
         } else {
           index++;
         }
       });
 
-      //to make the words with upprecase, which are noun
-      this.meaningsOfTheWord.forEach((word) => {
-        if (word.type == '{noun}') {
-          word.word = word.word.charAt(0).toUpperCase() + word.word.slice(1);
-          //artikel
-          const arr = htmlObject
+      // to make the words with upprecase, which are noun
+      this.meaningsOfTheWord.forEach((w) => {
+        if (w.type === '{noun}') {
+          w.word = w.word.charAt(0).toUpperCase() + w.word.slice(1);
+          // artikel
+          const Arr = htmlObject
             .getElementsByTagName('div')
             .namedItem('phraseTranslation')
             .getElementsByTagName('span');
-          for (let index = 0; index < arr.length; index++) {
-            if (arr[index].innerHTML.trim() == 'masculine;') {
-              word.artikel = 'der';
+          for (let i = 0; i < Arr.length; i++) {
+            if (Arr[i].innerHTML.trim() === 'masculine;') {
+              w.artikel = 'der';
             }
-            if (arr[index].innerHTML.trim() == 'feminine;') {
-              word.artikel = 'die';
+            if (Arr[i].innerHTML.trim() === 'feminine;') {
+              w.artikel = 'die';
             }
-            if (arr[index].innerHTML.trim() == 'neuter;') {
-              word.artikel = 'das';
+            if (Arr[i].innerHTML.trim() === 'neuter;') {
+              w.artikel = 'das';
             }
           }
         }
@@ -220,9 +223,10 @@ export class FlashcardsComponent implements OnInit {
     });
   }
 
-  NoResponse(){
-    if(this.meaningsOfTheWord.length == 0)
-    // TODO : Popup message would be better for user.
-    alert('Üzgünüz bir sonuç bulamadık!')
+  NoResponse(): void {
+    if (this.meaningsOfTheWord.length === 0){
+      // TODO : Popup message would be better for user.
+      alert('Üzgünüz bir sonuç bulamadık!');
+    }
   }
 }
