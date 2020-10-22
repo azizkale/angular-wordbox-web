@@ -63,9 +63,9 @@ export class FlashcardsComponent implements OnInit {
     });
   }
 
-  GetSingleWordFromLocalStorage(index: string): object {
-    return JSON.parse(localStorage.getItem(index));
-  }
+  // GetSingleWordFromLocalStorage(index: string): object {
+  //   return JSON.parse(localStorage.getItem(index));
+  // }
 
   GetSavedWordsFromLocalStorage(): void {
     this.savedVocabularies = new Array<Vocabulary>();
@@ -84,12 +84,12 @@ export class FlashcardsComponent implements OnInit {
     });
   }
 
-  DynamicCSS(): object {
-    return {
-      'col-12': window.outerWidth < 576,
-      'col-8': window.outerWidth >= 576,
-    };
-  }
+  // DynamicCSS(): { 'col-12': boolean, 'col-8': boolean } {
+  //   return {
+  //     'col-12': window.outerWidth < 576,
+  //     'col-8': window.outerWidth >= 576,
+  //   };
+  // }
 
   StarsArray(): Array<object> {
     const array: object[] = new Array(5);
@@ -101,7 +101,7 @@ export class FlashcardsComponent implements OnInit {
     document.querySelector('.card').classList.toggle('is-flipped');
 
     if (!document.querySelector('.card').classList[2]) {
-      (!this.shownWord.showCount) ? (this.shownWord.showCount = 0) : this.shownWord.showCount = this.shownWord.showCount;
+      this.shownWord.showCount = !this.shownWord.showCount ? 0 : this.shownWord.showCount;
       shownword.showCount++;
       localStorage.setItem(shownword.id.toString(), JSON.stringify(shownword));
       setTimeout(() => {
@@ -116,7 +116,7 @@ export class FlashcardsComponent implements OnInit {
     this.meaningsOfTheWord = [];
   }
 
-  WordsProgressBarHeight(): object {
+  WordsProgressBarHeight(): { progress: boolean } {
     return {
       progress: window.outerWidth < 576,
     };
@@ -224,7 +224,7 @@ export class FlashcardsComponent implements OnInit {
   }
 
   NoResponse(): void {
-    if (this.meaningsOfTheWord.length === 0){
+    if (this.meaningsOfTheWord.length === 0) {
       // TODO : Popup message would be better for user.
       alert('Üzgünüz bir sonuç bulamadık!');
     }
