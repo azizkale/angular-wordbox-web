@@ -1,4 +1,4 @@
-export class meaningsOfTheWord {
+export class MeaningsOfTheWord {
   constructor(
     public word?: string,
     public meaning?: string,
