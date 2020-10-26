@@ -222,11 +222,4 @@ export class FlashcardsComponent implements OnInit {
       });
     });
   }
-
-  NoResponse(): void {
-    if (this.meaningsOfTheWord.length === 0) {
-      // TODO : Popup message would be better for user.
-      alert('Üzgünüz bir sonuç bulamadık!');
-    }
-  }
 }

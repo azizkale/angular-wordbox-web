@@ -42,52 +42,6 @@ export class DictionaryComponent implements OnInit {
     });
   }
 
-  SentencesFromReverso(word): void {
-    this.sentencesFromReverso = [];
-
-    this.vocabularyService.getFromRewerso(word).subscribe((data) => {
-      const htmlObject = document.createElement('div');
-      htmlObject.innerHTML = data;
-
-      for (let i = 0; i < 5; i++) {
-        const obj = {
-          germanSentence: htmlObject
-            .getElementsByClassName('example')
-          [i].getElementsByTagName('span')[0].textContent,
-          turkishSentence: htmlObject
-            .getElementsByClassName('example')
-          [i].getElementsByTagName('span')[2].textContent,
-        };
-        this.sentencesFromReverso.push(obj);
-      }
-    });
-  }
-
-  SentencesFromFarlex(word): void {
-    this.sentencesFromFarlex = [];
-
-    this.vocabularyService.getFromFarlex(word).subscribe((data) => {
-      const htmlObject = document.createElement('div');
-      htmlObject.innerHTML = data;
-
-      // this.divID2.nativeElement.innerHTML = htmlObject.getElementsByTagName('div').namedItem('Definition').outerHTML;
-
-      for (let i = 0; i < 5; i++) {
-        this.sentencesFromFarlex.push(
-          htmlObject
-            .getElementsByTagName('div')
-            .namedItem('Definition')
-            .getElementsByTagName('section')
-          [i].getElementsByClassName('illustration')[0].innerHTML
-        );
-      }
-    });
-  }
-
-  WordsFromDwds(word): void {
-    this.vocabularyService.getFromDwds(word).subscribe((data) => console.log(data));
-  }
-
   SentencesFromGlosbe(word): void {
     this.searchingWord = new SearcingWord();
     this.searchingWord.meanings = [];
@@ -210,24 +164,6 @@ export class DictionaryComponent implements OnInit {
             );
           }
         }
-      }
-    });
-  }
-
-  GetFromLinguee(word): void {
-    this.vocabularyService.getFromLinguee(word).subscribe((data) => {
-      const htmlObject = document.createElement('div');
-      htmlObject.innerHTML = data;
-      this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
-
-      const wordtype = htmlObject
-        .getElementsByTagName('div')
-        .namedItem('dictionary')
-        .getElementsByClassName('tag_wordtype');
-      this.types = [];
-      for (let i = 0; i < wordtype.length; i++) {
-        console.log(wordtype[i].textContent);
-        this.types.push(wordtype[i].textContent);
       }
     });
   }

@@ -1,6 +1,4 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { SearcingWord } from '../models/searcingword';
 import { MeaningsOfTheWord } from '../models/meaningsOfTheWord';
 import { VocabularyService } from '../vocabulary.service';
 
@@ -15,7 +13,7 @@ export class BigDictionaryComponent implements OnInit {
   constructor(private vocabularyService: VocabularyService) { }
   meaningsOfTheWord: MeaningsOfTheWord[];
   types: string[];
-
+  surchedWord: string;
   ngOnInit(): void { }
 
   ShowTheWord(word): void {

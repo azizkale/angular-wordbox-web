@@ -52,10 +52,6 @@ export class VocabularyService {
     return this.httpClient.post<Vocabulary>('/jwbapi/delete', vocabulary, this.httpOptions);
   }
 
-  getFromDwdd(): Observable<any> {
-    return this.httpClient.get('/dwdsapi/?q=Haus');
-  }
-
   GetLevelWords(groupp: number): Vocabulary[] {
     this.wordsOfSelectedLevel = new Array<Vocabulary>();
     this.getVocabularies().subscribe((data) => {
@@ -66,29 +62,11 @@ export class VocabularyService {
     return this.wordsOfSelectedLevel;
   }
 
-  getFromRewerso(word: string): Observable<any> {
-    return this.httpClient.get('/reversoapi/%C3%BCbersetzung/deutsch-t%C3%BCrkisch/' + word, {
-      responseType: 'text',
-    });
-  }
-
-  getFromFarlex(word: string): Observable<any> {
-    return this.httpClient.get('/farlexapi/' + word, { responseType: 'text' });
-  }
-
   // getFromGlosbe(word: string): Observable<any> {
   //   return this.httpClient.get('https://myserver-deploy.herokuapp.com/api?word=' + word, { 'responseType': 'text' });
   // }
 
   getFromGlosbe(word: string): Observable<any> {
     return this.httpClient.get('/glosbeapi/de/tr/' + word, { responseType: 'text' });
-  }
-
-  getFromDwds(word: string): Observable<any> {
-    return this.httpClient.get('/dwdsapi/?q=' + word, { responseType: 'text' });
-  }
-
-  getFromLinguee(word: string): Observable<any> {
-    return this.httpClient.get('/linguee/' + word, { responseType: 'text' });
   }
 }
