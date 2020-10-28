@@ -18,16 +18,12 @@ export class BigDictionaryComponent implements OnInit {
 
   ShowTheWord(word): void {
     this.SentencesFromGlosbe(word);
-    // this.GetFromLinguee(word);
   }
 
   SentencesFromGlosbe(word): void {
     this.vocabularyService.getFromGlosbe(word).subscribe((data) => {
       const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
-
-      // gets related DOM elements from Glosbe
-      // this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
 
       const allLiTags = htmlObject
         .getElementsByTagName('div')

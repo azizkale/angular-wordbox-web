@@ -63,10 +63,6 @@ export class FlashcardsComponent implements OnInit {
     });
   }
 
-  // GetSingleWordFromLocalStorage(index: string): object {
-  //   return JSON.parse(localStorage.getItem(index));
-  // }
-
   GetSavedWordsFromLocalStorage(): void {
     this.savedVocabularies = new Array<Vocabulary>();
     this.levelVocabularies.map((word: Vocabulary) => {
@@ -83,13 +79,6 @@ export class FlashcardsComponent implements OnInit {
       }
     });
   }
-
-  // DynamicCSS(): { 'col-12': boolean, 'col-8': boolean } {
-  //   return {
-  //     'col-12': window.outerWidth < 576,
-  //     'col-8': window.outerWidth >= 576,
-  //   };
-  // }
 
   StarsArray(): Array<object> {
     const array: object[] = new Array(5);
