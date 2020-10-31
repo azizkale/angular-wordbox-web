@@ -2,9 +2,9 @@
     <div class="row mt-2">
         <form class="form-inline">
             <div class="form-group mx-sm-3 mb-2">
-                <input type="text" value="{{surchedWord}}" #word class="form-control" placeholder="Kelime">
+                <input type="text" required [(ngModel)]="binding" [ngModelOptions]="{standalone: true}" value="{{surchedWord}}" name="word" #word="ngModel" class="form-control" placeholder="Kelime">
             </div>
-            <button type="submit" class="btn btn-primary mb-2" (click)="SentencesFromGlosbe(word.value)">Ara</button>
+            <button type="submit" [disabled]="!word.valid" class="btn btn-primary mb-2" (click)="SentencesFromGlosbe(word)">Ara</button>
         </form>
     </div>
     <div class="row" *ngFor="let meaning of meaningsOfTheWord">

@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MeaningsOfTheWord } from '../models/meaningsOfTheWord';
 import { VocabularyService } from '../vocabulary.service';
 
+
 @Component({
   selector: 'app-big-dictionary',
   templateUrl: './big-dictionary.component.html',
@@ -20,7 +21,9 @@ export class BigDictionaryComponent implements OnInit {
     this.SentencesFromGlosbe(word);
   }
 
-  SentencesFromGlosbe(word): void {
+  SentencesFromGlosbe(input): void {
+    console.log(input);
+    let word = input.model;
     this.vocabularyService.getFromGlosbe(word).subscribe((data) => {
       const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
@@ -101,4 +104,5 @@ export class BigDictionaryComponent implements OnInit {
       });
     });
   }
+
 }
