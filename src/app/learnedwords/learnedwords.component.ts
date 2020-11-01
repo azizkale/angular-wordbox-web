@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service';
 import { Vocabulary } from '../models/vocabulary';
 
@@ -7,6 +7,8 @@ import { Vocabulary } from '../models/vocabulary';
   templateUrl: './learnedwords.component.html',
   styleUrls: ['./learnedwords.component.css'],
 })
+
+@Injectable()
 export class LearnedwordsComponent implements OnInit {
   levelVocabularies: Vocabulary[];
   savedVocabularies: Vocabulary[];

@@ -1,4 +1,18 @@
-<div class="container my-2">
-
-
+<div class="container">
+    <div class="row my-3">
+        <div class="col-sm-6 text-center">
+            <button [ngClass]="SetMarginButtons()" routerLink="/mylibrary">My Library</button>
+        </div>
+        <div class="col-sm-6 text-center">
+            <button [ngClass]="SetMarginButtons()" routerLink="/bigDictionary">Dictionary</button>
+        </div>
+    </div>
+    <div class="row my-3">
+        <div class="col-sm-6 text-center">
+            <button [ngClass]="SetMarginButtons()" routerLink="/exercisestypes">Exercises</button>
+        </div>
+        <div class="col-sm-6 text-center">
+            <button [ngClass]="SetMarginButtons()" routerLink="/learnedwords">My Words</button>
+        </div>
+    </div>
 </div>
