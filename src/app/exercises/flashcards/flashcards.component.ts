@@ -35,6 +35,7 @@ export class FlashcardsComponent implements OnInit {
   savedVocabularies: Vocabulary[];
   showMe: boolean;
   screenWidth: number;
+  error;
 
   meaningsOfTheWord: MeaningsOfTheWord[] = [];
   types: string[];
@@ -209,6 +210,21 @@ export class FlashcardsComponent implements OnInit {
           }
         }
       });
+
+      //when the response is empty, it gives alert 
+      if (this.meaningsOfTheWord.length === 0) {
+        this.error = true;
+      }
+      else{
+        this.error = false;
+      }
+    },error => {
+      if (error) {
+        this.meaningsOfTheWord = [];
+        this.error = true;
+      }
     });
+
+
   }
 }

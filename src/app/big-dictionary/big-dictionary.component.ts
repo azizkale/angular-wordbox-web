@@ -98,18 +98,25 @@ export class BigDictionaryComponent implements OnInit {
         }
       });
 
+      //when the response is empty, it gives alert 
+      if (this.meaningsOfTheWord.length === 0) {
+        this.error = true;
+      }
+
       // to make the words with upprecase, which are noun
       this.meaningsOfTheWord.forEach((w) => {
         if (w.type === '{noun}') {
           w.word = w.word.charAt(0).toUpperCase() + w.word.slice(1);
         }
+        else {
+          this.error = false;
+        }
       });
     }, error => {
-      console.log(error)
-   
-        this.error === true;
-      
-
+      if (error) {
+        this.error = true;
+        this.meaningsOfTheWord = [];
+      }
     });
   }
 

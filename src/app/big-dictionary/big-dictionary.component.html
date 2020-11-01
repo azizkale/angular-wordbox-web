@@ -5,9 +5,12 @@
                 <input type="text" required [(ngModel)]="surchedWord" [ngModelOptions]="{standalone: true}" name="word" #word="ngModel" class="form-control" placeholder="Kelime">
             </div>
             <button type="submit" [disabled]="!word.valid" class="btn btn-primary mb-2" (click)="SentencesFromGlosbe(word)">Ara</button>
-            <div class="alert alert-danger" [hidden]="!error">
-                Bir sonuç bulunamadı
-            </div>
+            <p class="alert alert-danger form-group mx-sm-3 mb-2" *ngIf="error">
+                Bir sonuç bulunamadı!
+                <span class="material-icons ml-2">
+                    sentiment_very_dissatisfied
+                    </span>
+            </p>
         </form>
     </div>
     <div class="row" *ngFor="let meaning of meaningsOfTheWord">
