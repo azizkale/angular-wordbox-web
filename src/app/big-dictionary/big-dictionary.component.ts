@@ -15,6 +15,8 @@ export class BigDictionaryComponent implements OnInit {
   meaningsOfTheWord: MeaningsOfTheWord[];
   types: string[];
   surchedWord: string;
+  error: boolean = false;
+
   ngOnInit(): void { }
 
   ShowTheWord(word): void {
@@ -22,7 +24,7 @@ export class BigDictionaryComponent implements OnInit {
   }
 
   SentencesFromGlosbe(input): void {
-    console.log(input);
+    this.error = false;
     let word = input.model;
     this.vocabularyService.getFromGlosbe(word).subscribe((data) => {
       const htmlObject = document.createElement('div');
@@ -102,6 +104,12 @@ export class BigDictionaryComponent implements OnInit {
           w.word = w.word.charAt(0).toUpperCase() + w.word.slice(1);
         }
       });
+    }, error => {
+      console.log(error)
+   
+        this.error === true;
+      
+
     });
   }
 
