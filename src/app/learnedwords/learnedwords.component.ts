@@ -1,6 +1,7 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service';
 import { Vocabulary } from '../models/vocabulary';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-learnedwords',
@@ -13,7 +14,10 @@ export class LearnedwordsComponent implements OnInit {
   levelVocabularies: Vocabulary[];
   savedVocabularies: Vocabulary[];
 
-  constructor(private vocabularyService: VocabularyService) { }
+  constructor(
+    private vocabularyService: VocabularyService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.GetLevelWordsFromJSON();
@@ -30,6 +34,17 @@ export class LearnedwordsComponent implements OnInit {
       this.savedVocabularies.push(JSON.parse(localStorage.getItem(word.id.toString())));
     });
   }
+
+  GetLevelWords(groupp: number): void {
+    this.vocabularyService.GetLevelWords(groupp)
+      .map((word: Vocabulary) => {
+        this.savedVocabularies.push(JSON.parse(localStorage.getItem(word.id.toString())));
+      });
+
+  }
+
+
+
 
   StarsArray(): Array<object> {
     const array: object[] = new Array(5);

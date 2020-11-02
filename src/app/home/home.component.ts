@@ -10,8 +10,8 @@ export class HomeComponent implements OnInit {
 
 
   ngOnInit(): void {
-   
   }
+
   SetMarginButtons(): object {
     return {
       'my-3': window.innerHeight < 576,
@@ -19,6 +19,7 @@ export class HomeComponent implements OnInit {
       btn: window.innerHeight > 0,
     };
   }
+
   
 }
 

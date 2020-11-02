@@ -36,37 +36,39 @@ export class VocabularyService {
     return this.httpClient.get<Vocabulary[]>(this.vocabularyUrl);
   }
 
-  getByIDFromUrl(): Observable<any> {
-    return this.httpClient.get('/jwbapi/vocabulary/16101');
-  }
+  // getByIDFromUrl(): Observable<any> {
+  //   return this.httpClient.get('/jwbapi/vocabulary/16101');
+  // }
 
-  addVocabularyTest(vocabulary: Vocabulary): Observable<Vocabulary> {
-    return this.httpClient.post<Vocabulary>('/jwbapi/add', vocabulary, this.httpOptions);
-  }
+  // addVocabularyTest(vocabulary: Vocabulary): Observable<Vocabulary> {
+  //   return this.httpClient.post<Vocabulary>('/jwbapi/add', vocabulary, this.httpOptions);
+  // }
 
-  updateVocabularyTest(vocabulary: Vocabulary): Observable<Vocabulary> {
-    return this.httpClient.post<Vocabulary>('/jwbapi/update', vocabulary, this.httpOptions);
-  }
+  // updateVocabularyTest(vocabulary: Vocabulary): Observable<Vocabulary> {
+  //   return this.httpClient.post<Vocabulary>('/jwbapi/update', vocabulary, this.httpOptions);
+  // }
 
-  deleteVocabularyTest(vocabulary: Vocabulary): Observable<Vocabulary> {
-    return this.httpClient.post<Vocabulary>('/jwbapi/delete', vocabulary, this.httpOptions);
-  }
+  // deleteVocabularyTest(vocabulary: Vocabulary): Observable<Vocabulary> {
+  //   return this.httpClient.post<Vocabulary>('/jwbapi/delete', vocabulary, this.httpOptions);
+  // }
 
   GetLevelWords(groupp: number): Vocabulary[] {
     this.wordsOfSelectedLevel = new Array<Vocabulary>();
     this.getVocabularies().subscribe((data) => {
       data.map((voc) => {
-        voc.group === groupp ? this.wordsOfSelectedLevel.push(voc) : this.wordsOfSelectedLevel = this.wordsOfSelectedLevel;
+        voc.group === groupp 
+        ? this.wordsOfSelectedLevel.push(voc) 
+        : this.wordsOfSelectedLevel = this.wordsOfSelectedLevel;
       });
     });
     return this.wordsOfSelectedLevel;
   }
 
-  getFromGlosbe(word: string): Observable<any> {
-    return this.httpClient.get('https://myserver-deploy.herokuapp.com/api?word=' + word, { 'responseType': 'text' });
-  }
-
   // getFromGlosbe(word: string): Observable<any> {
-  //   return this.httpClient.get('/glosbeapi/de/tr/' + word, { responseType: 'text' });
+  //   return this.httpClient.get('https://myserver-deploy.herokuapp.com/api?word=' + word, { 'responseType': 'text' });
   // }
+
+  getFromGlosbe(word: string): Observable<any> {
+    return this.httpClient.get('/glosbeapi/de/tr/' + word, { responseType: 'text' });
+  }
 }

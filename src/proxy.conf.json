@@ -1,22 +1,4 @@
 {
-    "/reversoapi/*": {
-        "target": "https://context.reverso.net",
-        "secure": false,
-        "logLevel": "debug",
-        "changeOrigin": true,
-        "pathRewrite": {
-            "^/reversoapi": ""
-        }
-    },
-    "/farlexapi/*": {
-        "target": "https://de.thefreedictionary.com",
-        "secure": false,
-        "logLevel": "debug",
-        "changeOrigin": true,
-        "pathRewrite": {
-            "^/farlexapi": ""
-        }
-    },
     "/glosbeapi/*": {
         "target": "https://glosbe.com",
         "secure": false,
@@ -24,25 +6,6 @@
         "changeOrigin": true,
         "pathRewrite": {
             "^/glosbeapi": ""
-        }
-    },
-    "/dwdsapi/*": {
-        "target": "https://www.dwds.de/api/wb/snippet",
-        "secure": false,
-        "logLevel": "debug",
-        "changeOrigin": true,
-        "pathRewrite": {
-            "^/dwdsapi": ""
-        }
-    },
-    "/linguee/*": {
-        "target": "https://www.linguee.com/english-german/search?source=auto&query=",
-
-        "secure": false,
-        "logLevel": "debug",
-        "changeOrigin": true,
-        "pathRewrite": {
-            "^/linguee": ""
         }
     }
 }

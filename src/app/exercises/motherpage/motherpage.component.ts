@@ -10,8 +10,6 @@ import { Vocabulary } from 'src/app/models/vocabulary';
 export class MotherpageComponent implements OnInit {
   constructor(private vocabularyService: VocabularyService) {}
 
-  levelVocabularies: Vocabulary[];
-
   ngOnInit(): void {}
 
   SetMarginButtons(): object {
@@ -23,6 +21,6 @@ export class MotherpageComponent implements OnInit {
   }
 
   GetLevelWords(group: number): void {
-    this.levelVocabularies = this.vocabularyService.GetLevelWords(group);
+    this.vocabularyService.GetLevelWords(group);
   }
 }
