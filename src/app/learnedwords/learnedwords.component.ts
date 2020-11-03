@@ -1,7 +1,6 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service';
 import { Vocabulary } from '../models/vocabulary';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-learnedwords',
@@ -11,8 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable()
 export class LearnedwordsComponent implements OnInit {
-  levelVocabularies: Vocabulary[];
-  savedVocabularies: Vocabulary[];
+  learnedWordsInAGroup: Vocabulary[];
 
   constructor(
     private vocabularyService: VocabularyService
@@ -23,26 +21,18 @@ export class LearnedwordsComponent implements OnInit {
   }
 
   GetSavedWordsFromLocalStorage(): void {
-    this.savedVocabularies = new Array<Vocabulary>();
-    this.savedVocabularies = this.vocabularyService.wordsOfSelectedLevel;
-    // this.vocabularyService.wordsOfSelectedLevel
-    // .map((word: Vocabulary) => {
-    //   this.savedVocabularies.push(JSON.parse(localStorage.getItem(word.id.toString())));
-    // });   
-
+    this.learnedWordsInAGroup = this.vocabularyService.wordsOfSelectedLevel;
   }
 
   GetLevelWords(groupp: number): void {
-    // this.savedVocabularies
-    //   = this.vocabularyService.GetLevelWords(groupp);
    
-    this.savedVocabularies= [];
+    this.learnedWordsInAGroup= [];
       this.vocabularyService.getVocabularies()
       .subscribe((data) => {
         data.map((voc) => {
           voc.group === groupp
-            ?  this.savedVocabularies.push(JSON.parse(localStorage.getItem(voc.id.toString())))
-            : this.savedVocabularies =  this.savedVocabularies;
+            ?  this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(voc.id.toString())))
+            : this.learnedWordsInAGroup =  this.learnedWordsInAGroup;
         });
       });
 
