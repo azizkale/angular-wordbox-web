@@ -211,14 +211,14 @@ export class FlashcardsComponent implements OnInit {
         }
       });
 
-      //when the response is empty, it gives alert 
+      // when the response is empty, it gives alert 
       if (this.meaningsOfTheWord.length === 0) {
         this.error = true;
       }
-      else{
+      else {
         this.error = false;
       }
-    },error => {
+    }, error => {
       if (error) {
         this.meaningsOfTheWord = [];
         this.error = true;

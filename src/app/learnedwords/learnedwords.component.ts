@@ -25,19 +25,19 @@ export class LearnedwordsComponent implements OnInit {
   }
 
   GetLevelWords(groupp: number): void {
-   
-    this.learnedWordsInAGroup= [];
-      this.vocabularyService.getVocabularies()
+
+    this.learnedWordsInAGroup = [];
+    this.vocabularyService.getVocabularies()
       .subscribe((data) => {
         data.map((voc) => {
           voc.group === groupp
-            ?  this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(voc.id.toString())))
-            : this.learnedWordsInAGroup =  this.learnedWordsInAGroup;
+            ? this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(voc.id.toString())))
+            : this.learnedWordsInAGroup = this.learnedWordsInAGroup;
         });
       });
 
-     
-    
+
+
   }
 
 

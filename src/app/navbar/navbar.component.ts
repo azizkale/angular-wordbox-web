@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit {
-  constructor() {}
+  constructor() { }
 
   ngOnInit(): void {
     this.CloseNavbarWhenClicked();
@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
       navbarItem.addEventListener('click', () => {
         const navbar = document.querySelector('.navbar-collapse');
         navbar.classList.remove('show');
-      })
+      });
     });
   }
 }

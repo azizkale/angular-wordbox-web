@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './exercisestypes.component.html',
   styleUrls: ['./exercisestypes.component.css'],
 })
-export class ExercisestypesComponent implements OnInit {  
+export class ExercisestypesComponent implements OnInit {
   flip: string;
   constructor(
     private vocabularyService: VocabularyService,
@@ -15,11 +15,11 @@ export class ExercisestypesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-      this.route.paramMap.subscribe(par => {
-        let group = par.get('group');
-        this.vocabularyService.GetLevelWords(+group);
-      }
-    )
+    this.route.paramMap.subscribe(par => {
+      const group = par.get('group');
+      this.vocabularyService.GetLevelWords(+group);
+    }
+    );
   }
 
   SetMarginButtons(): object {

@@ -15,7 +15,7 @@ export class BigDictionaryComponent implements OnInit {
   meaningsOfTheWord: MeaningsOfTheWord[];
   types: string[];
   surchedWord: string;
-  error: boolean = false;
+  error: boolean;
 
   ngOnInit(): void { }
 
@@ -25,7 +25,7 @@ export class BigDictionaryComponent implements OnInit {
 
   SentencesFromGlosbe(input): void {
     this.error = false;
-    let word = input.model;
+    const word = input.model;
     this.vocabularyService.getFromGlosbe(word).subscribe((data) => {
       const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
@@ -98,7 +98,7 @@ export class BigDictionaryComponent implements OnInit {
         }
       });
 
-      //when the response is empty, it gives alert 
+      // when the response is empty, it gives alert 
       if (this.meaningsOfTheWord.length === 0) {
         this.error = true;
       }
