@@ -1,6 +1,7 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service';
 import { Vocabulary } from '../models/vocabulary';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-learnedwords',
@@ -32,9 +33,21 @@ export class LearnedwordsComponent implements OnInit {
   }
 
   GetLevelWords(groupp: number): void {
-    this.savedVocabularies
-      = this.vocabularyService.GetLevelWords(groupp);
+    // this.savedVocabularies
+    //   = this.vocabularyService.GetLevelWords(groupp);
+   
+    this.savedVocabularies= [];
+      this.vocabularyService.getVocabularies()
+      .subscribe((data) => {
+        data.map((voc) => {
+          voc.group === groupp
+            ?  this.savedVocabularies.push(JSON.parse(localStorage.getItem(voc.id.toString())))
+            : this.savedVocabularies =  this.savedVocabularies;
+        });
+      });
 
+     
+    
   }
 
 

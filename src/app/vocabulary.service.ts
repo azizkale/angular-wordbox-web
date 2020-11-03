@@ -61,6 +61,7 @@ export class VocabularyService {
           : this.wordsOfSelectedLevel = this.wordsOfSelectedLevel;
       });
     });
+
     return this.wordsOfSelectedLevel;
   }
 
