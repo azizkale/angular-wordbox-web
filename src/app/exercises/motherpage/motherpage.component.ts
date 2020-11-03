@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { VocabularyService } from 'src/app/vocabulary.service';
 import { Vocabulary } from 'src/app/models/vocabulary';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-motherpage',
@@ -8,11 +9,12 @@ import { Vocabulary } from 'src/app/models/vocabulary';
   styleUrls: ['./motherpage.component.css'],
 })
 export class MotherpageComponent implements OnInit {
-  constructor(private vocabularyService: VocabularyService) {}
+  constructor(
+    private vocabularyService: VocabularyService
+  ) { }
 
-  levelVocabularies: Vocabulary[];
-
-  ngOnInit(): void {}
+  ngOnInit(): void {   
+  }
 
   SetMarginButtons(): object {
     return {
@@ -20,9 +22,5 @@ export class MotherpageComponent implements OnInit {
       'btn-info': window.innerHeight > 0,
       btn: window.innerHeight > 0,
     };
-  }
-
-  GetLevelWords(group: number): void {
-    this.levelVocabularies = this.vocabularyService.GetLevelWords(group);
   }
 }

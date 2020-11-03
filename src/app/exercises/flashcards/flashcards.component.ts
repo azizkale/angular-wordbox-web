@@ -35,9 +35,10 @@ export class FlashcardsComponent implements OnInit {
   savedVocabularies: Vocabulary[];
   showMe: boolean;
   screenWidth: number;
+  error;
 
   meaningsOfTheWord: MeaningsOfTheWord[] = [];
-  types: string[];
+  // types: string[];
 
   constructor(private vocabularyService: VocabularyService) { }
 
@@ -63,10 +64,6 @@ export class FlashcardsComponent implements OnInit {
     });
   }
 
-  // GetSingleWordFromLocalStorage(index: string): object {
-  //   return JSON.parse(localStorage.getItem(index));
-  // }
-
   GetSavedWordsFromLocalStorage(): void {
     this.savedVocabularies = new Array<Vocabulary>();
     this.levelVocabularies.map((word: Vocabulary) => {
@@ -83,13 +80,6 @@ export class FlashcardsComponent implements OnInit {
       }
     });
   }
-
-  // DynamicCSS(): { 'col-12': boolean, 'col-8': boolean } {
-  //   return {
-  //     'col-12': window.outerWidth < 576,
-  //     'col-8': window.outerWidth >= 576,
-  //   };
-  // }
 
   StarsArray(): Array<object> {
     const array: object[] = new Array(5);
@@ -220,13 +210,21 @@ export class FlashcardsComponent implements OnInit {
           }
         }
       });
-    });
-  }
 
-  NoResponse(): void {
-    if (this.meaningsOfTheWord.length === 0) {
-      // TODO : Popup message would be better for user.
-      alert('Üzgünüz bir sonuç bulamadık!');
-    }
+      // when the response is empty, it gives alert 
+      if (this.meaningsOfTheWord.length === 0) {
+        this.error = true;
+      }
+      else {
+        this.error = false;
+      }
+    }, error => {
+      if (error) {
+        this.meaningsOfTheWord = [];
+        this.error = true;
+      }
+    });
+
+
   }
 }

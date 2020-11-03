@@ -61,16 +61,20 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="spinner-border align-self-center" role="status" [hidden]="meaningsOfTheWord.length != 0">
-                <span class="sr-only">Loading...</span>
-            </div>
+
             <div class="modal-body">
                 <div class="row">
                     <form class="form-inline">
                         <div class="form-group mx-sm-3 mb-2">
                             <input type="text" value="{{surchedWord}}" #word class="form-control" placeholder="Kelime">
                         </div>
-                        <button type="submit" class="btn btn-primary mb-2" (click)="SentencesFromGlosbe(word.value);NoResponse()">Ara</button>
+                        <button type="submit" class="btn btn-primary mb-2" (click)="SentencesFromGlosbe(word.value)">Ara</button>
+                        <p class="alert alert-danger form-group mx-sm-3 mb-2" *ngIf="error">
+                            Bir sonuç bulunamadı!
+                            <span class="material-icons ml-2">
+                                sentiment_very_dissatisfied
+                                </span>
+                        </p>
                     </form>
                 </div>
                 <div class="row mb-2" *ngFor="let meaning of meaningsOfTheWord">
@@ -107,7 +111,6 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>

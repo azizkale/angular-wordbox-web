@@ -1,11 +1,24 @@
 <div class="container pb-3 my-2">
-    <div class="row font-weight-bold bg-info text-white p-1 mb-1">
+    <div class="row font-weight-bold bg-info text-white p-1 mb-1 align-items-center">
         <div class="col col-sm-1">No</div>
         <div class="col col-sm-4">Kelime</div>
         <div class="col col-sm-4">Anlamı</div>
-        <div class="col col-sm-3"></div>
+        <div class="col col-sm-3">
+            <div class="dropdown">
+                <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Grup Seç
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <button class="col btn btn-primary my-1" (click)="GetLevelWords(1)">A1</button>
+                    <button class="col btn btn-primary my-1" (click)="GetLevelWords(2)">A2</button>
+                    <button class="col btn btn-primary my-1" (click)="GetLevelWords(3)">B1</button>
+                    <button class="col btn btn-primary my-1" (click)="GetLevelWords(4)">B2</button>
+                    <button class="col btn btn-primary my-1" (click)="GetLevelWords(5)">C1</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="row border bordered-info align-middle" *ngFor="let word of savedVocabularies; let i=index">
+    <div class="row border bordered-info align-middle" *ngFor="let word of learnedWordsInAGroup; let i=index">
         <div class="col-sm-1 my-auto font-weight-bold">
             {{i+1}}.
         </div>

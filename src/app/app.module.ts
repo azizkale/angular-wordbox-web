@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
 import { HttpClientModule } from '@angular/common/http';
-import { DictionaryComponent } from './dictionary/dictionary.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { MotherpageComponent } from './exercises/motherpage/motherpage.component';
 import { ExercisestypesComponent } from './exercises/exercisestypes/exercisestypes.component';
@@ -22,7 +21,6 @@ import { MylibraryComponent } from './mylibrary/mylibrary.component';
   declarations: [
     AppComponent,
     HomeComponent,
-    DictionaryComponent,
     NavbarComponent,
     MotherpageComponent,
     ExercisestypesComponent,

@@ -1,8 +1,7 @@
-import { stringify } from '@angular/compiler/src/util';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { SearcingWord } from '../models/searcingword';
 import { MeaningsOfTheWord } from '../models/meaningsOfTheWord';
 import { VocabularyService } from '../vocabulary.service';
+
 
 @Component({
   selector: 'app-big-dictionary',
@@ -15,21 +14,21 @@ export class BigDictionaryComponent implements OnInit {
   constructor(private vocabularyService: VocabularyService) { }
   meaningsOfTheWord: MeaningsOfTheWord[];
   types: string[];
+  surchedWord: string;
+  error: boolean;
 
   ngOnInit(): void { }
 
   ShowTheWord(word): void {
     this.SentencesFromGlosbe(word);
-    // this.GetFromLinguee(word);
   }
 
-  SentencesFromGlosbe(word): void {
+  SentencesFromGlosbe(input): void {
+    this.error = false;
+    const word = input.model;
     this.vocabularyService.getFromGlosbe(word).subscribe((data) => {
       const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
-
-      // gets related DOM elements from Glosbe
-      // this.divID.nativeElement.innerHTML = htmlObject.outerHTML;
 
       const allLiTags = htmlObject
         .getElementsByTagName('div')
@@ -99,12 +98,26 @@ export class BigDictionaryComponent implements OnInit {
         }
       });
 
+      // when the response is empty, it gives alert 
+      if (this.meaningsOfTheWord.length === 0) {
+        this.error = true;
+      }
+
       // to make the words with upprecase, which are noun
       this.meaningsOfTheWord.forEach((w) => {
         if (w.type === '{noun}') {
           w.word = w.word.charAt(0).toUpperCase() + w.word.slice(1);
         }
+        else {
+          this.error = false;
+        }
       });
+    }, error => {
+      if (error) {
+        this.error = true;
+        this.meaningsOfTheWord = [];
+      }
     });
   }
+
 }
