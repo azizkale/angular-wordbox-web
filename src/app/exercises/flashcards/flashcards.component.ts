@@ -38,7 +38,7 @@ export class FlashcardsComponent implements OnInit {
   error;
 
   meaningsOfTheWord: MeaningsOfTheWord[] = [];
-  types: string[];
+  // types: string[];
 
   constructor(private vocabularyService: VocabularyService) { }
 

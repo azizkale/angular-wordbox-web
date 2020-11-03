@@ -1,7 +1,6 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service';
 import { Vocabulary } from '../models/vocabulary';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-learnedwords',
@@ -15,31 +14,26 @@ export class LearnedwordsComponent implements OnInit {
   savedVocabularies: Vocabulary[];
 
   constructor(
-    private vocabularyService: VocabularyService,
-    private router: Router
+    private vocabularyService: VocabularyService
   ) { }
 
   ngOnInit(): void {
-    this.GetLevelWordsFromJSON();
     this.GetSavedWordsFromLocalStorage();
-  }
-
-  GetLevelWordsFromJSON(): void {
-    this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
   }
 
   GetSavedWordsFromLocalStorage(): void {
     this.savedVocabularies = new Array<Vocabulary>();
-    this.levelVocabularies.map((word: Vocabulary) => {
-      this.savedVocabularies.push(JSON.parse(localStorage.getItem(word.id.toString())));
-    });
+    this.savedVocabularies = this.vocabularyService.wordsOfSelectedLevel;
+    // this.vocabularyService.wordsOfSelectedLevel
+    // .map((word: Vocabulary) => {
+    //   this.savedVocabularies.push(JSON.parse(localStorage.getItem(word.id.toString())));
+    // });   
+
   }
 
   GetLevelWords(groupp: number): void {
-    this.vocabularyService.GetLevelWords(groupp)
-      .map((word: Vocabulary) => {
-        this.savedVocabularies.push(JSON.parse(localStorage.getItem(word.id.toString())));
-      });
+    this.savedVocabularies
+      = this.vocabularyService.GetLevelWords(groupp);
 
   }
 

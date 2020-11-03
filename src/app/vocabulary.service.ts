@@ -56,9 +56,9 @@ export class VocabularyService {
     this.wordsOfSelectedLevel = new Array<Vocabulary>();
     this.getVocabularies().subscribe((data) => {
       data.map((voc) => {
-        voc.group === groupp 
-        ? this.wordsOfSelectedLevel.push(voc) 
-        : this.wordsOfSelectedLevel = this.wordsOfSelectedLevel;
+        voc.group === groupp
+          ? this.wordsOfSelectedLevel.push(voc)
+          : this.wordsOfSelectedLevel = this.wordsOfSelectedLevel;
       });
     });
     return this.wordsOfSelectedLevel;

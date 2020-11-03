@@ -12,7 +12,7 @@
             <button [ngClass]="SetMarginButtons()" routerLink="/motherpage">Exercises</button>
         </div>
         <div class="col-sm-6 text-center">
-            <button [ngClass]="SetMarginButtons()" routerLink="/learnedwords">My Words</button>
+            <button [ngClass]="SetMarginButtons()" [routerLink]="['/learnedwords',1]">My Words</button>
         </div>
     </div>
 </div>

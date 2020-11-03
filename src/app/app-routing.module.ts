@@ -15,9 +15,9 @@ const routes: Routes = [
   { path: 'mylibrary', component: MylibraryComponent },
   // { path: 'dictionary', component: DictionaryComponent },
   { path: 'motherpage', component: MotherpageComponent },
-  { path: 'exercisestypes', component: ExercisestypesComponent },
+  { path: 'exercisestypes/:group', component: ExercisestypesComponent },
   { path: 'flashcards', component: FlashcardsComponent },
-  { path: 'learnedwords', component: LearnedwordsComponent },
+  { path: 'learnedwords/:group', component: LearnedwordsComponent },
   { path: 'bigDictionary', component: BigDictionaryComponent },
 ];
 
