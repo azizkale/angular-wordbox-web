@@ -13,8 +13,7 @@ export class MotherpageComponent implements OnInit {
     private vocabularyService: VocabularyService
   ) { }
 
-  ngOnInit(): void {
-   
+  ngOnInit(): void {   
   }
 
   SetMarginButtons(): object {
@@ -24,8 +23,4 @@ export class MotherpageComponent implements OnInit {
       btn: window.innerHeight > 0,
     };
   }
-
-  // GetLevelWords(group: number): void {
-  //   this.vocabularyService.GetLevelWords(group);
-  // }
 }

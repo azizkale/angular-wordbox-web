@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-// import { DictionaryComponent } from './dictionary/dictionary.component';
 import { MotherpageComponent } from './exercises/motherpage/motherpage.component';
 import { ExercisestypesComponent } from './exercises/exercisestypes/exercisestypes.component';
 import { FlashcardsComponent } from './exercises/flashcards/flashcards.component';

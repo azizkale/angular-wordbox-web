@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { VocabularyService } from 'src/app/vocabulary.service';
-import { Vocabulary } from 'src/app/models/vocabulary';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({

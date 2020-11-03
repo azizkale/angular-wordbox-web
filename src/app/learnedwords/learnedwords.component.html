@@ -14,14 +14,13 @@
                     <button class="col btn btn-primary my-1" (click)="GetLevelWords(3)">B1</button>
                     <button class="col btn btn-primary my-1" (click)="GetLevelWords(4)">B2</button>
                     <button class="col btn btn-primary my-1" (click)="GetLevelWords(5)">C1</button>
-                    <button class="col btn btn-primary my-1" (click)="GetLevelWords(6)">Hepsi</button>
                 </div>
             </div>
         </div>
     </div>
     <div class="row border bordered-info align-middle" *ngFor="let word of learnedWordsInAGroup; let i=index">
         <div class="col-sm-1 my-auto font-weight-bold">
-            {{i+1}}.{{word.id}}
+            {{i+1}}.
         </div>
         <div class="col col-sm-4 my-auto">{{word.word}}</div>
         <div class="col col-sm-4 my-auto">{{word.vocabularyDetail[0].sentenceMeaning}}</div>
