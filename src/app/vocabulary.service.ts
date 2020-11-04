@@ -49,11 +49,7 @@ export class VocabularyService {
     return this.wordsOfSelectedLevel;
   }
 
-  // getFromGlosbe(word: string): Observable<any> {
-  //   return this.httpClient.get('https://myserver-deploy.herokuapp.com/api?word=' + word, { 'responseType': 'text' });
-  // }
-
   getFromGlosbe(word: string): Observable<any> {
-    return this.httpClient.get('/glosbeapi/de/tr/' + word, { responseType: 'text' });
+    return this.httpClient.get('https://myserver-deploy.herokuapp.com/api?word=' + word, { 'responseType': 'text' });
   }
 }
