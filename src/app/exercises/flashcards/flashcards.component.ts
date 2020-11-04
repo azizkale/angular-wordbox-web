@@ -106,12 +106,6 @@ export class FlashcardsComponent implements OnInit {
     this.meaningsOfTheWord = [];
   }
 
-  WordsProgressBarHeight(): { progress: boolean } {
-    return {
-      progress: window.outerWidth < 576,
-    };
-  }
-
   SentencesFromGlosbe(word): void {
     let arr = word.split(' ');
     // the function above cut the phrase into words so to get the word without "Artikel"
