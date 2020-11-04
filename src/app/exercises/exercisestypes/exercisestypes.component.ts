@@ -15,17 +15,8 @@ export class ExercisestypesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-this.GetLevelWordsForLinkFromMotherPage();
+    this.GetLevelWordsForLinkFromMotherPage();
   }
-
-  SetMarginButtons(): object {
-    return {
-      'my-3': window.innerHeight < 576,
-      'btn-info': window.innerHeight > 0,
-      btn: window.innerHeight > 0,
-    };
-  }
-
 
   toggleFlip(): void {
     this.flip = 'inactive';
