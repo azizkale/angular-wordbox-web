@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { VocabularyService } from 'src/app/vocabulary.service';
-import { Vocabulary } from 'src/app/models/vocabulary';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-motherpage',
@@ -10,10 +9,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class MotherpageComponent implements OnInit {
   constructor(
-    private vocabularyService: VocabularyService
+    private vocabularyService: VocabularyService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
-  ngOnInit(): void {   
+  ngOnInit(): void {
+    this. GetLevelWordsForQueryFromDirectMyWordFunction();    
   }
 
   SetMarginButtons(): object {
@@ -22,5 +24,15 @@ export class MotherpageComponent implements OnInit {
       'btn-info': window.innerHeight > 0,
       btn: window.innerHeight > 0,
     };
+  }
+
+  GetLevelWordsForQueryFromDirectMyWordFunction(): void{
+    this.route.queryParamMap.subscribe(param => {
+      const group = param.get('group');
+      if (group) {
+        this.vocabularyService.GetLevelWords(+group);
+        this.router.navigate(['/learnedwords']);
+      }
+    })
   }
 }

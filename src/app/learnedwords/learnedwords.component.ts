@@ -1,6 +1,7 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service';
 import { Vocabulary } from '../models/vocabulary';
+import {  Router } from '@angular/router';
 
 @Component({
   selector: 'app-learnedwords',
@@ -13,7 +14,8 @@ export class LearnedwordsComponent implements OnInit {
   learnedWordsInAGroup: Vocabulary[];
 
   constructor(
-    private vocabularyService: VocabularyService
+    private vocabularyService: VocabularyService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -25,23 +27,8 @@ export class LearnedwordsComponent implements OnInit {
   }
 
   GetLevelWords(groupp: number): void {
-
-    this.learnedWordsInAGroup = [];
-    this.vocabularyService.getVocabularies()
-      .subscribe((data) => {
-        data.map((voc) => {
-          voc.group === groupp
-            ? this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(voc.id.toString())))
-            : this.learnedWordsInAGroup = this.learnedWordsInAGroup;
-        });
-      });
-
-
-
+    this.router.navigate(['/motherpage'], { queryParams: { group: groupp } });
   }
-
-
-
 
   StarsArray(): Array<object> {
     const array: object[] = new Array(5);

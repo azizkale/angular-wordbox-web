@@ -15,11 +15,7 @@ export class ExercisestypesComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(par => {
-      const group = par.get('group');
-      this.vocabularyService.GetLevelWords(+group);
-    }
-    );
+this.GetLevelWordsForLinkFromMotherPage();
   }
 
   SetMarginButtons(): object {
@@ -34,5 +30,13 @@ export class ExercisestypesComponent implements OnInit {
   toggleFlip(): void {
     this.flip = 'inactive';
     this.flip = this.flip === 'inactive' ? 'active' : 'inactive';
+  }
+
+  GetLevelWordsForLinkFromMotherPage(): void {
+    this.route.paramMap.subscribe(par => {
+      const group = par.get('group');
+      this.vocabularyService.GetLevelWords(+group);
+    }
+    );
   }
 }
