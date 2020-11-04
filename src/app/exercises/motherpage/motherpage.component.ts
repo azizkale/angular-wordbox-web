@@ -18,14 +18,6 @@ export class MotherpageComponent implements OnInit {
     this. GetLevelWordsForQueryFromDirectMyWordFunction();    
   }
 
-  SetMarginButtons(): object {
-    return {
-      'my-3': window.innerHeight < 576,
-      'btn-info': window.innerHeight > 0,
-      btn: window.innerHeight > 0,
-    };
-  }
-
   GetLevelWordsForQueryFromDirectMyWordFunction(): void{
     this.route.queryParamMap.subscribe(param => {
       const group = param.get('group');
