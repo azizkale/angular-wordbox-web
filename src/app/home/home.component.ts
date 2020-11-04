@@ -15,8 +15,7 @@ export class HomeComponent implements OnInit {
   SetMarginButtons(): object {
     return {
       'my-3': window.innerHeight < 576,
-      'btn-info': window.innerHeight > 0,
-      btn: window.innerHeight > 0,
+      'btn-info': window.innerHeight > 0
     };
   }
 
