@@ -41,11 +41,11 @@ export class VocabularyService {
     this.getVocabularies().subscribe((data) => {
       data.map((voc) => {
         voc.group === groupp
-          ? this.wordsOfSelectedLevel.push(voc)
+          ? this.wordsOfSelectedLevel.push(JSON.parse(localStorage.getItem(voc.id.toString())))
           : this.wordsOfSelectedLevel = this.wordsOfSelectedLevel;
       });
-    });
 
+    });
     return this.wordsOfSelectedLevel;
   }
 

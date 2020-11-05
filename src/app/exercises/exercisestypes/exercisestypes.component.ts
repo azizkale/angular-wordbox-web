@@ -24,10 +24,10 @@ export class ExercisestypesComponent implements OnInit {
   }
 
   GetLevelWordsForLinkFromMotherPage(): void {
-    this.route.paramMap.subscribe(par => {
-      const group = par.get('group');
-      this.vocabularyService.GetLevelWords(+group);
-    }
+      this.route.paramMap.subscribe(par => {
+        const group = par.get('group');
+        this.vocabularyService.GetLevelWords(+group);
+      }
     );
   }
 }

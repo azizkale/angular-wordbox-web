@@ -1,7 +1,7 @@
 import { Component, Inject, Injectable, OnInit } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service';
 import { Vocabulary } from '../models/vocabulary';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-learnedwords',
@@ -22,12 +22,25 @@ export class LearnedwordsComponent implements OnInit {
     this.GetSavedWordsFromLocalStorage();
   }
 
+  // to list the shown words
   GetSavedWordsFromLocalStorage(): void {
-    this.learnedWordsInAGroup = this.vocabularyService.wordsOfSelectedLevel;
+    this.learnedWordsInAGroup = [];
+    this.vocabularyService.wordsOfSelectedLevel.map(word => {
+      this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(word.id.toString())))
+    })
   }
 
   GetLevelWords(groupp: number): void {
-    this.router.navigate(['/motherpage'], { queryParams: { group: groupp } });
+    this.vocabularyService.GetLevelWords(groupp);
+    this.learnedWordsInAGroup = [];
+    const promise = new Promise(()=>{
+      setTimeout(()=>{
+       
+        this.learnedWordsInAGroup = this.vocabularyService.wordsOfSelectedLevel,1000
+      })
+    })
+   
+
   }
 
   StarsArray(): Array<object> {
