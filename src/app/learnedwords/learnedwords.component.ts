@@ -27,20 +27,19 @@ export class LearnedwordsComponent implements OnInit {
     this.learnedWordsInAGroup = [];
     this.vocabularyService.wordsOfSelectedLevel.map(word => {
       this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(word.id.toString())))
-    })
+    });
   }
 
   GetLevelWords(groupp: number): void {
-    this.vocabularyService.GetLevelWords(groupp);
     this.learnedWordsInAGroup = [];
-    const promise = new Promise(()=>{
-      setTimeout(()=>{
-       
-        this.learnedWordsInAGroup = this.vocabularyService.wordsOfSelectedLevel,1000
-      })
-    })
-   
-
+    this.vocabularyService.getVocabularies()
+      .subscribe((data) => {
+        data.map((voc: Vocabulary) => {
+          if (voc.group == groupp) {
+            this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(voc.id.toString())));
+          }
+        })
+      });
   }
 
   StarsArray(): Array<object> {

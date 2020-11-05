@@ -43,8 +43,10 @@ export class FlashcardsComponent implements OnInit {
   constructor(private vocabularyService: VocabularyService) { }
 
   ngOnInit(): void {
+    // two functions below run when user comes to flashcards from exercisestype
     this.GetLevelWordsFromJSON();
     this.SaveAllWords();
+    
     this.SetWordsToLearn();
     this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
     this.showMe = true;
