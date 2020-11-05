@@ -22,25 +22,24 @@ export class LearnedwordsComponent implements OnInit {
     this.GetSavedWordsFromLocalStorage();
   }
 
-  // to list the shown words
+  // to list the shown words when user comes here to from exercises menu
   GetSavedWordsFromLocalStorage(): void {
     this.learnedWordsInAGroup = [];
     this.vocabularyService.wordsOfSelectedLevel.map(word => {
       this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(word.id.toString())))
-    })
+    });
   }
 
   GetLevelWords(groupp: number): void {
-    this.vocabularyService.GetLevelWords(groupp);
     this.learnedWordsInAGroup = [];
-    const promise = new Promise(()=>{
-      setTimeout(()=>{
-       
-        this.learnedWordsInAGroup = this.vocabularyService.wordsOfSelectedLevel,1000
-      })
-    })
-   
-
+    this.vocabularyService.getVocabularies()
+      .subscribe((data) => {
+        data.map((voc: Vocabulary) => {
+          if (voc.group == groupp) {
+            this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(voc.id.toString())));
+          }
+        })
+      });
   }
 
   StarsArray(): Array<object> {

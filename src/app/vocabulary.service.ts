@@ -8,7 +8,6 @@ import { Vocabulary } from '../app/models/vocabulary';
 })
 export class VocabularyService {
   vocabularyUrl = 'assets/vocabulary.json'; // JSON
-
   wordsOfSelectedLevel: Vocabulary[];
 
   httpOptions = {
@@ -17,7 +16,9 @@ export class VocabularyService {
     }),
   };
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    
+   }
 
   handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
