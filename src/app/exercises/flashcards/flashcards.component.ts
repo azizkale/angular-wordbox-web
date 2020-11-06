@@ -38,32 +38,23 @@ export class FlashcardsComponent implements OnInit {
   error;
 
   meaningsOfTheWord: MeaningsOfTheWord[] = [];
-  // types: string[];
 
-  constructor(private vocabularyService: VocabularyService) { }
+  constructor(
+    private vocabularyService: VocabularyService
+  ) { }
 
   ngOnInit(): void {
     // two functions below run when user comes to flashcards from exercisestype
     this.GetLevelWordsFromJSON();
-    this.SaveAllWords();
-    
+
     this.SetWordsToLearn();
     this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
     this.showMe = true;
     this.screenWidth = window.outerWidth;
   }
 
-  GetLevelWordsFromJSON(): void {
+  GetLevelWordsFromJSON(): void {    
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
-  }
-
-  SaveAllWords(): void {
-    // saves the words to localstorage if it was be not saved before
-    this.levelVocabularies.map((wrd) => {
-      if (localStorage.getItem(wrd.id.toString()) === null) {
-        localStorage.setItem(wrd.id.toString(), JSON.stringify(wrd));
-      }
-    });
   }
 
   GetSavedWordsFromLocalStorage(): void {

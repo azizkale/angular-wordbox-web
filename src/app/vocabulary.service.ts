@@ -17,8 +17,15 @@ export class VocabularyService {
   };
 
   constructor(private httpClient: HttpClient) {
-    
-   }
+    // to load all words in localstorage when it wasn't done before
+    this.getVocabularies().subscribe(data => {
+      data.map((wrd) => {        
+        if (localStorage.getItem(wrd.id.toString()) === null) {
+          localStorage.setItem(wrd.id.toString(), JSON.stringify(wrd));
+        }
+      });
+    });
+  }
 
   handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
@@ -36,7 +43,7 @@ export class VocabularyService {
   getVocabularies(): Observable<Vocabulary[]> {
     return this.httpClient.get<Vocabulary[]>(this.vocabularyUrl);
   }
-  
+
   GetLevelWords(groupp: number): Vocabulary[] {
     this.wordsOfSelectedLevel = new Array<Vocabulary>();
     this.getVocabularies().subscribe((data) => {

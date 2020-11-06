@@ -38,7 +38,7 @@ export class LearnedwordsComponent implements OnInit {
           if (voc.group == groupp) {
             this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(voc.id.toString())));
           }
-        })
+        });
       });
   }
 
