@@ -1,4 +1,4 @@
-import { Component, Inject, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service';
 import { Vocabulary } from '../models/vocabulary';
 import { Router } from '@angular/router';
@@ -28,6 +28,7 @@ export class LearnedwordsComponent implements OnInit {
     this.vocabularyService.wordsOfSelectedLevel.map(word => {
       this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(word.id.toString())))
     });
+    
   }
 
   GetLevelWords(groupp: number): void {
@@ -40,6 +41,11 @@ export class LearnedwordsComponent implements OnInit {
           }
         });
       });
+
+      // loads levelwords for flashcards component if that is empty
+      if(this.vocabularyService.wordsOfSelectedLevel === undefined){
+        this.vocabularyService.GetLevelWords(groupp);
+      }
   }
 
   StarsArray(): Array<object> {
