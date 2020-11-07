@@ -3,6 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { VocabularyService } from 'src/app/vocabulary.service';
 import { Vocabulary } from 'src/app/models/vocabulary';
 import { MeaningsOfTheWord } from 'src/app/models/meaningsOfTheWord';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-flashcards',
@@ -40,11 +41,15 @@ export class FlashcardsComponent implements OnInit {
   meaningsOfTheWord: MeaningsOfTheWord[] = [];
 
   constructor(
-    private vocabularyService: VocabularyService
+    private vocabularyService: VocabularyService,
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
-    // two functions below run when user comes to flashcards from exercisestype
+    if (this.vocabularyService.wordsOfSelectedLevel == undefined) {
+      this.router.navigate(['/motherpage']);
+    }
     this.GetLevelWordsFromJSON();
 
     this.SetWordsToLearn();
@@ -53,8 +58,14 @@ export class FlashcardsComponent implements OnInit {
     this.screenWidth = window.outerWidth;
   }
 
-  GetLevelWordsFromJSON(): void {    
+  GetLevelWordsFromJSON(): void {
+    // if (this.levelVocabularies == undefined) {
+    //   this.route.queryParams.subscribe(par => {
+    //     console.log(par.get('group'))
+    //   })
+    // }
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
+
   }
 
   GetSavedWordsFromLocalStorage(): void {
