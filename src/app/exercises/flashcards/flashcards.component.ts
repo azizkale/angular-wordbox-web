@@ -49,8 +49,7 @@ export class FlashcardsComponent implements OnInit {
     if (this.vocabularyService.wordsOfSelectedLevel == undefined) {
       this.router.navigate(['/motherpage']);
     }
-    this.GetLevelWordsFromJSON();
-
+    this.GetLevelWordsFromJSON();    
     this.SetWordsToLearn();
     this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
     this.showMe = true;

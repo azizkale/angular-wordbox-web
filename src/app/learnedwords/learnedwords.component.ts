@@ -28,7 +28,6 @@ export class LearnedwordsComponent implements OnInit {
     this.vocabularyService.wordsOfSelectedLevel.map(word => {
       this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(word.id.toString())))
     });
-    
   }
 
   GetLevelWords(groupp: number): void {
