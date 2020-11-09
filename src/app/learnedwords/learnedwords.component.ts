@@ -1,7 +1,7 @@
-import { Component, Inject, Injectable, OnInit } from '@angular/core';
+import { Component, Injectable, OnInit } from '@angular/core';
 import { VocabularyService } from '../vocabulary.service';
 import { Vocabulary } from '../models/vocabulary';
-import {  Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-learnedwords',
@@ -22,12 +22,29 @@ export class LearnedwordsComponent implements OnInit {
     this.GetSavedWordsFromLocalStorage();
   }
 
+  // to list the shown words when user comes here to from exercises menu
   GetSavedWordsFromLocalStorage(): void {
-    this.learnedWordsInAGroup = this.vocabularyService.wordsOfSelectedLevel;
+    this.learnedWordsInAGroup = [];
+    this.vocabularyService.wordsOfSelectedLevel.map(word => {
+      this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(word.id.toString())))
+    });
   }
 
   GetLevelWords(groupp: number): void {
-    this.router.navigate(['/motherpage'], { queryParams: { group: groupp } });
+    this.learnedWordsInAGroup = [];
+    this.vocabularyService.getVocabularies()
+      .subscribe((data) => {
+        data.map((voc: Vocabulary) => {
+          if (voc.group == groupp) {
+            this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(voc.id.toString())));
+          }
+        });
+      });
+
+      // loads levelwords for flashcards component if that is empty
+      if(this.vocabularyService.wordsOfSelectedLevel === undefined){
+        this.vocabularyService.GetLevelWords(groupp);
+      }
   }
 
   StarsArray(): Array<object> {

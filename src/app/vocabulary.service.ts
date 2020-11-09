@@ -8,7 +8,6 @@ import { Vocabulary } from '../app/models/vocabulary';
 })
 export class VocabularyService {
   vocabularyUrl = 'assets/vocabulary.json'; // JSON
-
   wordsOfSelectedLevel: Vocabulary[];
 
   httpOptions = {
@@ -17,7 +16,16 @@ export class VocabularyService {
     }),
   };
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+    // to load all words in localstorage when it wasn't done before
+    this.getVocabularies().subscribe(data => {
+      data.map((wrd) => {        
+        if (localStorage.getItem(wrd.id.toString()) === null) {
+          localStorage.setItem(wrd.id.toString(), JSON.stringify(wrd));
+        }
+      });
+    });
+  }
 
   handleError(error: HttpErrorResponse): Observable<never> {
     if (error.error instanceof ErrorEvent) {
@@ -35,17 +43,17 @@ export class VocabularyService {
   getVocabularies(): Observable<Vocabulary[]> {
     return this.httpClient.get<Vocabulary[]>(this.vocabularyUrl);
   }
-  
+
   GetLevelWords(groupp: number): Vocabulary[] {
     this.wordsOfSelectedLevel = new Array<Vocabulary>();
     this.getVocabularies().subscribe((data) => {
       data.map((voc) => {
         voc.group === groupp
-          ? this.wordsOfSelectedLevel.push(voc)
+          ? this.wordsOfSelectedLevel.push(JSON.parse(localStorage.getItem(voc.id.toString())))
           : this.wordsOfSelectedLevel = this.wordsOfSelectedLevel;
       });
-    });
 
+    });
     return this.wordsOfSelectedLevel;
   }
 

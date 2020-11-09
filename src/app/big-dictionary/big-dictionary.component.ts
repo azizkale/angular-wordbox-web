@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MeaningsOfTheWord } from '../models/meaningsOfTheWord';
 import { VocabularyService } from '../vocabulary.service';
 
@@ -9,7 +9,6 @@ import { VocabularyService } from '../vocabulary.service';
   styleUrls: ['./big-dictionary.component.css'],
 })
 export class BigDictionaryComponent implements OnInit {
-  @ViewChild('divID') divID: ElementRef;
 
   constructor(private vocabularyService: VocabularyService) { }
   meaningsOfTheWord: MeaningsOfTheWord[];
@@ -25,10 +24,16 @@ export class BigDictionaryComponent implements OnInit {
 
   SentencesFromGlosbe(input): void {
     this.error = false;
+    this.meaningsOfTheWord = [];
     const word = input.model;
     this.vocabularyService.getFromGlosbe(word).subscribe((data) => {
       const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
+
+      // when the response is empty, it gives alert 
+      if (data === '') {
+        this.error = true;
+      }
 
       const allLiTags = htmlObject
         .getElementsByTagName('div')
@@ -95,6 +100,29 @@ export class BigDictionaryComponent implements OnInit {
           this.meaningsOfTheWord.splice(index, 1);
         } else {
           index++;
+        }
+      });
+
+      // to make the words with upprecase, which are noun
+      this.meaningsOfTheWord.forEach((w) => {
+        if (w.type === '{noun}') {
+          w.word = w.word.charAt(0).toUpperCase() + w.word.slice(1);
+          // artikel
+          const Arr = htmlObject
+            .getElementsByTagName('div')
+            .namedItem('phraseTranslation')
+            .getElementsByTagName('span');
+          for (let i = 0; i < Arr.length; i++) {
+            if (Arr[i].innerHTML.trim() === 'masculine;') {
+              w.artikel = 'der';
+            }
+            if (Arr[i].innerHTML.trim() === 'feminine;') {
+              w.artikel = 'die';
+            }
+            if (Arr[i].innerHTML.trim() === 'neuter;') {
+              w.artikel = 'das';
+            }
+          }
         }
       });
 

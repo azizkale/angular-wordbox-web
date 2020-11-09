@@ -15,16 +15,6 @@ export class MotherpageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this. GetLevelWordsForQueryFromDirectMyWordFunction();    
-  }
-
-  GetLevelWordsForQueryFromDirectMyWordFunction(): void{
-    this.route.queryParamMap.subscribe(param => {
-      const group = param.get('group');
-      if (group) {
-        this.vocabularyService.GetLevelWords(+group);
-        this.router.navigate(['/learnedwords']);
-      }
-    })
+     
   }
 }
