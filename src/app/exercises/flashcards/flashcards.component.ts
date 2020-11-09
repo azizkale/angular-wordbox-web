@@ -3,7 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { VocabularyService } from 'src/app/vocabulary.service';
 import { Vocabulary } from 'src/app/models/vocabulary';
 import { MeaningsOfTheWord } from 'src/app/models/meaningsOfTheWord';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-flashcards',
@@ -42,7 +42,6 @@ export class FlashcardsComponent implements OnInit {
 
   constructor(
     private vocabularyService: VocabularyService,
-    private route: ActivatedRoute,
     private router: Router
   ) { }
 
@@ -59,13 +58,7 @@ export class FlashcardsComponent implements OnInit {
   }
 
   GetLevelWordsFromJSON(): void {
-    // if (this.levelVocabularies == undefined) {
-    //   this.route.queryParams.subscribe(par => {
-    //     console.log(par.get('group'))
-    //   })
-    // }
     this.levelVocabularies = this.vocabularyService.wordsOfSelectedLevel;
-
   }
 
   GetSavedWordsFromLocalStorage(): void {
@@ -111,6 +104,8 @@ export class FlashcardsComponent implements OnInit {
   }
 
   SentencesFromGlosbe(word): void {
+    this.error = false;
+    this.meaningsOfTheWord = [];
     let arr = word.split(' ');
     // the function above cut the phrase into words so to get the word without "Artikel"
     this.surchedWord = arr.length >= 2 ? arr[1] : arr[0];
@@ -118,6 +113,12 @@ export class FlashcardsComponent implements OnInit {
     this.vocabularyService.getFromGlosbe(this.surchedWord).subscribe((data) => {
       const htmlObject = document.createElement('div');
       htmlObject.innerHTML = data;
+
+      // when the response is empty, it gives alert 
+      if (data === '') {
+        this.error = true;
+        this.meaningsOfTheWord = [];
+      }
 
       const allLiTags = htmlObject
         .getElementsByTagName('div')
@@ -213,13 +214,12 @@ export class FlashcardsComponent implements OnInit {
       if (this.meaningsOfTheWord.length === 0) {
         this.error = true;
       }
-      else {
-        this.error = false;
-      }
+     
     }, error => {
       if (error) {
-        this.meaningsOfTheWord = [];
         this.error = true;
+        this.meaningsOfTheWord = [];
+
       }
     });
 
