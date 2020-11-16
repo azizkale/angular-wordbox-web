@@ -29,8 +29,8 @@
                             </div>
                         </div>
                         <div class="form-group" *ngFor="let voc of searchedWord">
-                            <span class="font-weight-bold">{{voc.word}}: </span>
-                            <span class="">{{voc.vocabularyDetail && voc.vocabularyDetail[0] && voc.vocabularyDetail[0].sentenceMeaning}}</span>
+                            <span class="font-weight-bold">{{voc.title}}: </span>
+                            <span class="">{{voc.mean}}</span>
                             <hr>
                         </div>
 
