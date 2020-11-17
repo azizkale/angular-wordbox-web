@@ -90,11 +90,15 @@ export class FlashcardsComponent implements OnInit {
     if (!document.querySelector('.card').classList[2]) {
       this.shownWord.showCount = !this.shownWord.showCount ? 0 : this.shownWord.showCount;
       shownword.showCount++;
+      console.log(shownword)
+
       localStorage.setItem(shownword.id.toString(), JSON.stringify(shownword));
       setTimeout(() => {
         // changes shownWord to next one
         this.shownWord = this.wordsToLearn[Math.floor(Math.random() * 10)];
       }, 1000);
+
+      
       this.SetWordsToLearn();
       this.showMe = true;
     } else {

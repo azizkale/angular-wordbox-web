@@ -16,7 +16,9 @@ export class VocabularyService {
     }),
   };
 
-  constructor(private httpClient: HttpClient) {
+  constructor(
+    private httpClient: HttpClient
+    ) {
     // to load all words in localstorage when it wasn't done before
     this.getVocabularies().subscribe(data => {
       data.map((wrd) => {        

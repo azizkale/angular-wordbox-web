@@ -29,9 +29,9 @@ export class MylibraryComponent implements OnInit {
         query: gql`
         {
           localWords {
-            id
-            title
-            mean
+            word
+            group
+            meaning
           }
         }
       `
