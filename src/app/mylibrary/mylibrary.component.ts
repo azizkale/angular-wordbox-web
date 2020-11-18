@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Vocabulary } from '../models/vocabulary';
-import { VocabularyService } from '../vocabulary.service';
 import { Apollo } from "apollo-angular";
 import gql from "graphql-tag";
 
@@ -11,12 +10,11 @@ import gql from "graphql-tag";
 })
 export class MylibraryComponent implements OnInit {
   constructor(
-    private vocabularyService: VocabularyService,
     private apollo: Apollo
-    ) { }
+  ) { }
 
   vocabularies: Vocabulary[];
-  searchedWord: [];
+  searchedWord = [];
   word: any;
 
   ngOnInit(): void {
@@ -28,18 +26,28 @@ export class MylibraryComponent implements OnInit {
       .query<any>({
         query: gql`
         {
-          localWords {
-            word
-            group
-            meaning
-          }
+            localWords {
+              word
+              type
+              group
+              showCount
+              vocabularyDetail{
+                id
+                language
+                vocabularyId
+                sentenceMeaning
+              }
+            }
         }
       `
       })
       .subscribe(
         ({ data }) => {
-          this.searchedWord = data.localWords;
-          console.log(this.searchedWord)
+          data.localWords.map(w => {
+            if (w.word.includes(word)) {
+              this.searchedWord.push(w)
+            }
+          })
         }
       );
   }
