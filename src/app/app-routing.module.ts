@@ -7,8 +7,8 @@ import { FlashcardsComponent } from './exercises/flashcards/flashcards.component
 import { LearnedwordsComponent } from './learnedwords/learnedwords.component';
 import { BigDictionaryComponent } from './big-dictionary/big-dictionary.component';
 import { MylibraryComponent } from './mylibrary/mylibrary.component';
-import { GoogleauthComponent } from './googleauth/googleauth.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'flashcards', component: FlashcardsComponent },
   { path: 'learnedwords', component: LearnedwordsComponent },
   { path: 'bigDictionary', component: BigDictionaryComponent },
-  { path: 'login', component: GoogleauthComponent },
+  { path: 'authentication', component: AuthenticationComponent },
   { path: 'registration', component: RegistrationComponent },
 ];
 

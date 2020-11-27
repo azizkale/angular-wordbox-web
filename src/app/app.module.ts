@@ -18,6 +18,7 @@ import { BigDictionaryComponent } from './big-dictionary/big-dictionary.componen
 import { MylibraryComponent } from './mylibrary/mylibrary.component';
 import { GraphQLModule } from './graphql.module';
 import { RegistrationComponent } from './registration/registration.component';
+import { AuthenticationComponent } from './authentication/authentication.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { RegistrationComponent } from './registration/registration.component';
     BigDictionaryComponent,
     MylibraryComponent,
     RegistrationComponent,
+    AuthenticationComponent,
   ],
   imports: [
     BrowserModule,
