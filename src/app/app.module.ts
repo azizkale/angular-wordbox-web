@@ -17,6 +17,7 @@ import { LearnedwordsComponent } from './learnedwords/learnedwords.component';
 import { BigDictionaryComponent } from './big-dictionary/big-dictionary.component';
 import { MylibraryComponent } from './mylibrary/mylibrary.component';
 import { GraphQLModule } from './graphql.module';
+import { RegistrationComponent } from './registration/registration.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { GraphQLModule } from './graphql.module';
     LearnedwordsComponent,
     BigDictionaryComponent,
     MylibraryComponent,
+    RegistrationComponent,
   ],
   imports: [
     BrowserModule,
