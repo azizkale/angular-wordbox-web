@@ -2,13 +2,13 @@
     <form action="/action_page.php">
         <div class="row">
             <div class="col">
-                <a href="#" class="fb btn">
+                <a class="fb btn">
                     <i class="fa fa-facebook fa-fw"></i> Login with Facebook
                 </a>
-                <a href="#" class="twitter btn">
+                <a class="twitter btn">
                     <i class="fa fa-twitter fa-fw"></i> Login with Twitter
                 </a>
-                <a href="#" class="google btn" (click)="SignInWithGoole()"><i class="fa fa-google fa-fw">
+                <a class="google btn" (click)="SignInWithGoole()"><i class="fa fa-google fa-fw">
             </i> Login with Google+
           </a>
             </div>
@@ -28,10 +28,13 @@
 <div class="bottom-container">
     <div class="row">
         <div class="col">
-            <a href="#" style="color:white" class="btn" routerLink="/registration">Sign up</a>
+            <a style="color:white" class="btn" routerLink="/registration">Sign up</a>
         </div>
         <div class="col">
-            <a href="#" style="color:white" class="btn" data-toggle="modal" data-target="#exampleModal">Forgot password?</a>
+            <a style="color:white" class="btn" data-toggle="modal" data-target="#exampleModal">Forgot password?</a>
+        </div>
+        <div class="col">
+            <button (click)="chechAythState()">check atuthState</button>
         </div>
     </div>
 </div>

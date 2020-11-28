@@ -13,7 +13,7 @@ export class AuthenticationComponent implements OnInit {
   password: string;
   constructor(
     private authService: AuthService,
-    private registrationService:RegistrationService
+    private registrationService: RegistrationService
   ) { }
 
   ngOnInit(): void {
@@ -27,7 +27,12 @@ export class AuthenticationComponent implements OnInit {
     this.authService.SignInWithEmail(email, password);
   }
 
-  resetPassword(email){
+  resetPassword(email) {
     this.registrationService.sendPasswordResetEmail(email);
+  }
+
+  chechAythState() {
+    console.log(localStorage.getItem('user')
+    )
   }
 }

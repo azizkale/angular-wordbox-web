@@ -15,8 +15,18 @@ export class AuthService {
     public ngZone: NgZone,
     public afAuth: AngularFireAuth,
   ) {
+    this.SetUserState();
+  }
+
+  SetUserState() {
     this.afAuth.authState.subscribe(user => {
       this.user = user;
+      if (user) {
+        this.user = user;
+        localStorage.setItem('user', JSON.stringify(this.user));
+      } else {
+        localStorage.setItem('user', null);
+      }
     })
   }
 
@@ -42,19 +52,22 @@ export class AuthService {
       });
   }
 
-  SignInWithEmail(email,password){
+  SignInWithEmail(email, password) {
     this.afAuth.signInWithEmailAndPassword(email, password)
-    .then(() => {
-      this.router.navigate(['app-home'])
-    })
-    .catch(() => {
-      alert('Kullanıcı bilgilerinizi kontrol edip tekrar deneyiniz.')
-    })
+      .then((res) => {
+        this.ngZone.run(() => {
+          this.router.navigate(['app-home']);
+        })
+      })
+      .catch(() => {
+        alert('Kullanıcı bilgilerinizi kontrol edip tekrar deneyiniz.')
+      })
   }
 
   // Firebase Logout 
   SignOut() {
     return this.afAuth.signOut().then(() => {
+      localStorage.setItem('user', null);
       this.router.navigate(['authentication']);
     })
   }
