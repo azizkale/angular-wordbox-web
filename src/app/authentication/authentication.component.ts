@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service'
+import { RegistrationService } from '../registration.service';
+import { RegistrationComponent } from '../registration/registration.component';
 
 @Component({
   selector: 'app-authentication',
@@ -7,9 +9,11 @@ import { AuthService } from '../auth.service'
   styleUrls: ['./authentication.component.css']
 })
 export class AuthenticationComponent implements OnInit {
-
+  email: string;
+  password: string;
   constructor(
-    private authService: AuthService
+    private authService: AuthService,
+    private registrationService:RegistrationService
   ) { }
 
   ngOnInit(): void {
@@ -17,5 +21,13 @@ export class AuthenticationComponent implements OnInit {
 
   SignInWithGoole() {
     this.authService.SigninWithGoogle()
+  }
+
+  SignInwithEmail(email, password) {
+    this.authService.SignInWithEmail(email, password);
+  }
+
+  resetPassword(email){
+    this.registrationService.sendPasswordResetEmail(email);
   }
 }

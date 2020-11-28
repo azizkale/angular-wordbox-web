@@ -14,7 +14,6 @@ export class AuthService {
     public router: Router,
     public ngZone: NgZone,
     public afAuth: AngularFireAuth,
-    private angularFireAuth: AngularFireAuth
   ) {
     this.afAuth.authState.subscribe(user => {
       this.user = user;
@@ -37,9 +36,20 @@ export class AuthService {
   SigninWithGoogle() {
     return this.OAuthProvider(new firebase.auth.GoogleAuthProvider())
       .then(res => {
+        this.router.navigate(['app-home'])
       }).catch(error => {
         console.log(error)
       });
+  }
+
+  SignInWithEmail(email,password){
+    this.afAuth.signInWithEmailAndPassword(email, password)
+    .then(() => {
+      this.router.navigate(['app-home'])
+    })
+    .catch(() => {
+      alert('Kullanıcı bilgilerinizi kontrol edip tekrar deneyiniz.')
+    })
   }
 
   // Firebase Logout 
