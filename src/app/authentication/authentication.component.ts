@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth.service'
+import { AuthService } from '../auth.service';
 import { RegistrationService } from '../registration.service';
 import { RegistrationComponent } from '../registration/registration.component';
 
@@ -19,20 +19,20 @@ export class AuthenticationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  SignInWithGoole() {
-    this.authService.SigninWithGoogle()
+  SignInWithGoole(): void {
+    this.authService.SigninWithGoogle();
   }
 
-  SignInwithEmail(email, password) {
+  SignInwithEmail(email, password): void {
     this.authService.SignInWithEmail(email, password);
   }
 
-  resetPassword(email) {
+  resetPassword(email): void {
     this.registrationService.sendPasswordResetEmail(email);
   }
 
-  chechAythState() {
+  chechAythState(): void {
     console.log(localStorage.getItem('user')
-    )
+    );
   }
 }

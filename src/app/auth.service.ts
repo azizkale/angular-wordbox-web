@@ -1,8 +1,8 @@
 import { Injectable, NgZone } from '@angular/core';
 import firebase from 'firebase/app';
-import { User } from "./models/user";
-import { Router } from "@angular/router";
-import { AngularFireAuth } from "@angular/fire/auth";
+import { User } from './models/user';
+import { Router } from '@angular/router';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class AuthService {
     this.SetUserState();
   }
 
-  SetUserState() {
+  SetUserState(): void {
     this.afAuth.authState.subscribe(user => {
       this.user = user;
       if (user) {
@@ -27,49 +27,49 @@ export class AuthService {
       } else {
         localStorage.setItem('user', null);
       }
-    })
+    });
   }
 
   // Firebase SignInWithPopup
-  OAuthProvider(provider) {
+  OAuthProvider(provider): Promise<void> {
     return this.afAuth.signInWithPopup(provider)
       .then((res) => {
         this.ngZone.run(() => {
           this.router.navigate(['app-home']);
-        })
+        });
       }).catch((error) => {
-        window.alert(error)
-      })
-  }
-
-  // Firebase Google Sign-in
-  SigninWithGoogle() {
-    return this.OAuthProvider(new firebase.auth.GoogleAuthProvider())
-      .then(res => {
-        this.router.navigate(['app-home'])
-      }).catch(error => {
-        console.log(error)
+        window.alert(error);
       });
   }
 
-  SignInWithEmail(email, password) {
+  // Firebase Google Sign-in
+  SigninWithGoogle(): Promise<void> {
+    return this.OAuthProvider(new firebase.auth.GoogleAuthProvider())
+      .then(res => {
+        this.router.navigate(['app-home']);
+      }).catch(error => {
+        console.log(error);
+      });
+  }
+
+  SignInWithEmail(email, password): void {
     this.afAuth.signInWithEmailAndPassword(email, password)
       .then((res) => {
         this.ngZone.run(() => {
           this.router.navigate(['app-home']);
-        })
+        });
       })
       .catch(() => {
-        alert('Kullanıcı bilgilerinizi kontrol edip tekrar deneyiniz.')
-      })
+        alert('Kullanıcı bilgilerinizi kontrol edip tekrar deneyiniz.');
+      });
   }
 
   // Firebase Logout 
-  SignOut() {
+  SignOut(): Promise<void> {
     return this.afAuth.signOut().then(() => {
       localStorage.setItem('user', null);
       this.router.navigate(['authentication']);
-    })
+    });
   }
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Vocabulary } from '../models/vocabulary';
-import { Apollo } from "apollo-angular";
-import gql from "graphql-tag";
+import { Apollo } from 'apollo-angular';
+import gql from 'graphql-tag';
 
 @Component({
   selector: 'app-mylibrary',
@@ -45,9 +45,9 @@ export class MylibraryComponent implements OnInit {
         ({ data }) => {
           data.localWords.map(w => {
             if (w.word.includes(word)) {
-              this.searchedWord.push(w)
+              this.searchedWord.push(w);
             }
-          })
+          });
         }
       );
   }

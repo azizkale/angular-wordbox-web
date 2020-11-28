@@ -13,7 +13,7 @@ export class RegistrationService {
     public afAuth: AngularFireAuth,
   ) { }
 
-  register(email, password) {
+  register(email, password): void {
     this.afAuth.createUserWithEmailAndPassword(email, password)
       .then(res => {
         this.router.navigate(['/app-home']);
@@ -23,13 +23,13 @@ export class RegistrationService {
       });
   }
 
-  sendPasswordResetEmail(passwordResetEmail: string) {
+  sendPasswordResetEmail(passwordResetEmail: string): Promise<void> {
     return this.afAuth.sendPasswordResetEmail(passwordResetEmail).then(
       response => {
-        alert('mailinizi kontrol ediniz')
+        alert('mailinizi kontrol ediniz');
       }
     ).catch(error => {
-      alert("Girdiğiniz bilgiler kayıtlı değildir.")
+      alert('Girdiğiniz bilgiler kayıtlı değildir.');
     });
   }
 

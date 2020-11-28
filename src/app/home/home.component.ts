@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
    if (JSON.parse(localStorage.getItem('user')) == null) {
-      this.router.navigate(['authentication'])
+      this.router.navigate(['authentication']);
     }
   }
 

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegistrationService } from '../registration.service'
+import { RegistrationService } from '../registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -18,12 +18,12 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  register(email, password, repassword) {
-    if(password === repassword){
+  register(email, password, repassword): void {
+    if (password === repassword) {
       this.registrationService.register(email, password);
     }
-    else{
-      alert('şifreniz eşleşmiyor')
+    else {
+      alert('Şifreniz eşleşmiyor');
     }
-  } 
+  }
 }

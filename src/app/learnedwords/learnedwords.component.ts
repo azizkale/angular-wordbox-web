@@ -26,9 +26,9 @@ export class LearnedwordsComponent implements OnInit {
   GetSavedWordsFromLocalStorage(): void {
     this.learnedWordsInAGroup = [];
     this.vocabularyService.wordsOfSelectedLevel.map(word => {
-      this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(word.id.toString())))
+      this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(word.id.toString())));
     });
-    
+
   }
 
   GetLevelWords(groupp: number): void {
@@ -36,16 +36,16 @@ export class LearnedwordsComponent implements OnInit {
     this.vocabularyService.getVocabularies()
       .subscribe((data) => {
         data.map((voc: Vocabulary) => {
-          if (voc.group == groupp) {
+          if (voc.group === groupp) {
             this.learnedWordsInAGroup.push(JSON.parse(localStorage.getItem(voc.id.toString())));
           }
         });
       });
 
-      // loads levelwords for flashcards component if that is empty
-      if(this.vocabularyService.wordsOfSelectedLevel === undefined){
-        this.vocabularyService.GetLevelWords(groupp);
-      }
+    // loads levelwords for flashcards component if that is empty
+    if (this.vocabularyService.wordsOfSelectedLevel === undefined) {
+      this.vocabularyService.GetLevelWords(groupp);
+    }
   }
 
   StarsArray(): Array<object> {

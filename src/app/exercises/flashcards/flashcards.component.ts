@@ -46,7 +46,7 @@ export class FlashcardsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    if (this.vocabularyService.wordsOfSelectedLevel == undefined) {
+    if (this.vocabularyService.wordsOfSelectedLevel === undefined) {
       this.router.navigate(['/motherpage']);
     }
     this.GetLevelWordsFromJSON();
@@ -90,7 +90,6 @@ export class FlashcardsComponent implements OnInit {
     if (!document.querySelector('.card').classList[2]) {
       this.shownWord.showCount = !this.shownWord.showCount ? 0 : this.shownWord.showCount;
       shownword.showCount++;
-      console.log(shownword)
 
       localStorage.setItem(shownword.id.toString(), JSON.stringify(shownword));
       setTimeout(() => {
