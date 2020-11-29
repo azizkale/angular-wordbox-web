@@ -54,10 +54,8 @@ export class AuthService {
 
   SignInWithEmail(email, password): void {
     this.afAuth.signInWithEmailAndPassword(email, password)
-      .then((res) => {
-        this.ngZone.run(() => {
+      .then((res) => {       
           this.router.navigate(['app-home']);
-        });
       })
       .catch(() => {
         alert('Kullanıcı bilgilerinizi kontrol edip tekrar deneyiniz.');

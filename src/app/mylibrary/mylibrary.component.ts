@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Vocabulary } from '../models/vocabulary';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-mylibrary',
@@ -10,7 +11,8 @@ import gql from 'graphql-tag';
 })
 export class MylibraryComponent implements OnInit {
   constructor(
-    private apollo: Apollo
+    private apollo: Apollo,
+    private router: Router
   ) { }
 
   vocabularies: Vocabulary[];
@@ -18,7 +20,9 @@ export class MylibraryComponent implements OnInit {
   word: any;
 
   ngOnInit(): void {
-
+    if (JSON.parse(localStorage.getItem('user')) == null) {
+      this.router.navigate(['authentication']);
+    }
   }
 
   findTheMeaning(word: string): void {
