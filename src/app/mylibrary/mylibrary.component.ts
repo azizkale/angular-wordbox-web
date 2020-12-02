@@ -10,10 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./mylibrary.component.css'],
 })
 export class MylibraryComponent implements OnInit {
-  constructor(
-    private apollo: Apollo,
-    private router: Router
-  ) { }
+  constructor(private apollo: Apollo, private router: Router) {}
 
   vocabularies: Vocabulary[];
   searchedWord = [];
@@ -29,30 +26,28 @@ export class MylibraryComponent implements OnInit {
     this.apollo
       .query<any>({
         query: gql`
-        {
-            localWords {
+          {
+            listWords {
               word
               type
               group
               showCount
-              vocabularyDetail{
+              vocabularyDetail {
                 id
                 language
                 vocabularyId
                 sentenceMeaning
               }
             }
-        }
-      `
+          }
+        `,
       })
-      .subscribe(
-        ({ data }) => {
-          data.localWords.map(w => {
-            if (w.word.includes(word)) {
-              this.searchedWord.push(w);
-            }
-          });
-        }
-      );
+      .subscribe(({ data }) => {
+        data.listWords.map((w) => {
+          if (w.word.includes(word)) {
+            this.searchedWord.push(w);
+          }
+        });
+      });
   }
 }
