@@ -79,6 +79,6 @@ export class AuthService {
 
   AuthenticatedControlInServerSide(): Observable<any> {
     const user = JSON.parse(localStorage.getItem('user'));
-    return this.httpClient.post('http://localhost:5000/apiIsAuth', { user });
+    return this.httpClient.post('http://localhost:4000/apiIsAuth', { user });
   }
 }

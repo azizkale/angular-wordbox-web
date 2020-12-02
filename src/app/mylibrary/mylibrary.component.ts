@@ -26,8 +26,8 @@ export class MylibraryComponent implements OnInit {
     this.apollo
       .query<any>({
         query: gql`
-          {
-            listWords {
+          query listWords($token: Boolean) {
+            listWords(token: $token) {
               word
               type
               group
@@ -41,6 +41,9 @@ export class MylibraryComponent implements OnInit {
             }
           }
         `,
+        variables: {
+          token: true,
+        },
       })
       .subscribe(({ data }) => {
         data.listWords.map((w) => {
