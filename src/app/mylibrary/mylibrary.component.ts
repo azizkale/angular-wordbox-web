@@ -3,6 +3,24 @@ import { Vocabulary } from '../models/vocabulary';
 import { Apollo } from 'apollo-angular';
 import gql from 'graphql-tag';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+
+const queryListWords = gql`
+  query ListWords($voc: String, $token: String) {
+    listWords(voc: $voc, token: $token) {
+      word
+      type
+      group
+      showCount
+      vocabularyDetail {
+        id
+        language
+        vocabularyId
+        sentenceMeaning
+      }
+    }
+  }
+`;
 
 @Component({
   selector: 'app-mylibrary',
@@ -15,42 +33,29 @@ export class MylibraryComponent implements OnInit {
   vocabularies: Vocabulary[];
   searchedWord = [];
   word: any;
+  private querySubscription: Subscription;
 
-  ngOnInit(): void {
-    if (JSON.parse(localStorage.getItem('user')) == null) {
-      this.router.navigate(['authentication']);
-    }
-  }
+  ngOnInit(): void {}
 
-  findTheMeaning(word: string): void {
-    this.apollo
-      .query<any>({
-        query: gql`
-          query listWords($token: Boolean) {
-            listWords(token: $token) {
-              word
-              type
-              group
-              showCount
-              vocabularyDetail {
-                id
-                language
-                vocabularyId
-                sentenceMeaning
-              }
-            }
-          }
-        `,
+  findTheMeaning(wrd: string): void {
+    this.querySubscription = this.apollo
+      .watchQuery<any>({
+        query: queryListWords,
         variables: {
-          token: true,
+          voc: wrd,
+          token: localStorage.getItem('user'),
         },
       })
-      .subscribe(({ data }) => {
-        data.listWords.map((w) => {
-          if (w.word.includes(word)) {
-            this.searchedWord.push(w);
-          }
-        });
+      .valueChanges.subscribe((data) => {
+        if (data.data.listWords != null) {
+          this.searchedWord = data.data.listWords;
+        } else {
+          alert('lütfen giriş yapınız');
+        }
       });
+  }
+
+  ngOnDestroy() {
+    this.querySubscription.unsubscribe();
   }
 }
