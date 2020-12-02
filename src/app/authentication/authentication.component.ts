@@ -6,18 +6,14 @@ import { RegistrationComponent } from '../registration/registration.component';
 @Component({
   selector: 'app-authentication',
   templateUrl: './authentication.component.html',
-  styleUrls: ['./authentication.component.css']
+  styleUrls: ['./authentication.component.css'],
 })
 export class AuthenticationComponent implements OnInit {
   email: string;
   password: string;
-  constructor(
-    private authService: AuthService,
-    private registrationService: RegistrationService
-  ) { }
+  constructor(private authService: AuthService, private registrationService: RegistrationService) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   SignInWithGoole(): void {
     this.authService.SigninWithGoogle();
@@ -32,7 +28,9 @@ export class AuthenticationComponent implements OnInit {
   }
 
   chechAythState(): void {
-    console.log(localStorage.getItem('user')
-    );
+    console.log(localStorage.getItem('user'));
+    this.authService.AuthenticatedControlInServerSide().subscribe((data) => {
+      console.log(data);
+    });
   }
 }
