@@ -1,27 +1,51 @@
 <div class="container">
-    <div class="row justify-content-md-center">
-        <div class="col-6">
-            <form action="/action_page.php">
-                <div class="container">
-                    <h1>Register</h1>
-                    <hr>
+  <div class="row justify-content-md-center">
+    <div class="col-6">
+      <form action="/action_page.php">
+        <div class="container">
+          <h1>Register</h1>
+          <hr />
 
-                    <input type="text" required [(ngModel)]="email" [ngModelOptions]="{standalone: true}" name="_email" #_email="ngModel" [ngModelOptions]="{standalone: true}" placeholder="E-mail">
+          <input
+            type="text"
+            required
+            [(ngModel)]="email"
+            [ngModelOptions]="{ standalone: true }"
+            name="_email"
+            #_email="ngModel"
+            [ngModelOptions]="{ standalone: true }"
+            placeholder="E-mail"
+          />
 
-                    <input type="password" required [(ngModel)]="password" name="_password" #_password="ngModel" placeholder="Password">
+          <input
+            type="password"
+            required
+            [(ngModel)]="password"
+            name="_password"
+            #_password="ngModel"
+            placeholder="Password"
+          />
 
-                    <input type="password" required [(ngModel)]="repassword" name="_repassword" #_repassword="ngModel" placeholder="Repeat Password">
-                    <hr>
-                    <!-- <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p> -->
+          <input
+            type="password"
+            required
+            [(ngModel)]="repassword"
+            name="_repassword"
+            #_repassword="ngModel"
+            placeholder="Repeat Password"
+          />
+          <hr />
+          <!-- <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p> -->
 
-                    <button type="submit" (click)="register(email, password, repassword)" class="registerbtn">Register</button>
-                </div>
-
-                <div class="container signin">
-                    <p>Already have an account? <a href="#" routerLink="/authentication">Sign in</a>.</p>
-                </div>
-            </form>
+          <button type="submit" (click)="register(email, password, repassword)" class="registerbtn">
+            Register
+          </button>
         </div>
-    </div>
 
+        <div class="container signin">
+          <p>Already have an account? <a href="#" routerLink="/authentication">Sign in</a>.</p>
+        </div>
+      </form>
+    </div>
+  </div>
 </div>
