@@ -1,44 +1,55 @@
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 <div class="container mt-3">
-    <div class="row justify-content-center">
-        <div class="col-12 col-md-8 col-lg-6 pb-5">
-            <!--Form with header-->
-            <form>
-                <div class="card border-primary rounded-0">
-                    <div class="card-header p-0">
-                        <div class="bg-info text-white text-center py-2">
-                            <h3><i class="material-icons"></i> Dictionary</h3>
-                        </div>
-                    </div>
-                    <div class="card-body p-3">
-
-                        <!--Body-->
-                        <div class="form-group">
-                            <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text"><span class="material-icons">
-                                        create
-                                        </span></div>
-                                </div>
-                                <input type="text" class="form-control-plaintext mx-1" [(ngModel)]="word" placeholder="search" name="word" (keyup.enter)="findTheMeaning(word)">
-                                <div class="input-group-prepend mr-1">
-                                    <div class="input-group-text" (click)="findTheMeaning(word)"><span class="material-icons btn">
-                                        search
-                                        </span></div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group" *ngFor="let voc of searchedWord">
-                            <span class="font-weight-bold">{{voc.word}}: </span>
-                            <span class="">{{voc.vocabularyDetail[0].sentenceMeaning}}</span>
-                            <hr>
-                        </div>
-
-                    </div>
-
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6 pb-5">
+      <!--Form with header-->
+      <form>
+        <div class="card border-primary rounded-0">
+          <div class="card-header p-0">
+            <div class="bg-info text-white text-center py-2">
+              <h3><i class="material-icons"></i> Dictionary</h3>
+            </div>
+          </div>
+          <div class="card-body p-3">
+            <!--Body-->
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <div class="input-group-text"><span class="material-icons"> create </span></div>
                 </div>
-            </form>
-            <!--Form with header-->
+                <input
+                  type="text"
+                  class="form-control-plaintext mx-1"
+                  [(ngModel)]="word"
+                  placeholder="search"
+                  name="word"
+                  (keyup.enter)="findTheMeaning(word)"
+                />
+                <div class="input-group-prepend mr-1">
+                  <div class="input-group-text" (click)="findTheMeaning(word)">
+                    <span class="material-icons btn"> search </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <p
+              class="alert alert-danger form-group mx-sm-3 mb-2"
+              *ngIf="searchedWord.length == 0 && showAlertNothingFound"
+            >
+              Bir sonuç bulunamadı!
+              <span class="material-icons ml-2"> sentiment_very_dissatisfied </span>
+            </p>
+
+            <div class="form-group" *ngFor="let voc of searchedWord">
+              <span class="font-weight-bold">{{ voc.word }}: </span>
+              <span class="">{{ voc.vocabularyDetail[0].sentenceMeaning }}</span>
+              <hr />
+            </div>
+          </div>
         </div>
+      </form>
+      <!--Form with header-->
     </div>
+  </div>
 </div>

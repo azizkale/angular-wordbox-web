@@ -33,6 +33,7 @@ export class MylibraryComponent implements OnInit {
   vocabularies: Vocabulary[];
   searchedWord = [];
   word: any;
+  showAlertNothingFound: Boolean = false;
   private querySubscription: Subscription;
 
   ngOnInit(): void {}
@@ -49,6 +50,7 @@ export class MylibraryComponent implements OnInit {
       .valueChanges.subscribe((data) => {
         if (data.data.listWords != null) {
           this.searchedWord = data.data.listWords;
+          this.showAlertNothingFound = true;
         } else {
           alert('lütfen giriş yapınız');
         }
