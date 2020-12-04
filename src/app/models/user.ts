@@ -1,7 +1,7 @@
-export class User{
-    uid: string;
-    email: string;
-    displayName: string;
-    photoURL: string;
-    emailVerified: boolean;
+export class User {
+  userId: string;
+  email: string;
+  displayName: string;
+  photoURL: string;
+  emailVerified: boolean;
 }

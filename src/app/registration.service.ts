@@ -1,36 +1,43 @@
 import { Injectable, NgZone } from '@angular/core';
+import firebase from 'firebase/app';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RegistrationService {
+  constructor(public router: Router, public ngZone: NgZone, public afAuth: AngularFireAuth) {
+    this.SetUserState();
+  }
 
-  constructor(
-    public router: Router,
-    public ngZone: NgZone,
-    public afAuth: AngularFireAuth,
-  ) { }
+  user;
+  SetUserState(): Observable<firebase.User> {
+    this.afAuth.authState.subscribe((user) => {
+      this.user = user;
+      if (user) {
+        this.user = user;
+        localStorage.setItem('user', JSON.stringify(this.user));
+      } else {
+        localStorage.setItem('user', null);
+      }
+    });
+    console.log(localStorage.getItem('user'));
+    return this.user;
+  }
 
-  register(email, password): void {
-    this.afAuth.createUserWithEmailAndPassword(email, password)
-      .then(res => {
-        this.router.navigate(['/app-home']);
-      })
-      .catch(error => {
-        alert(error);
-      });
+  async register(email, password): Promise<any> {
+    return this.afAuth.createUserWithEmailAndPassword(email, password);
   }
 
   sendPasswordResetEmail(passwordResetEmail: string): Promise<void> {
-    return this.afAuth.sendPasswordResetEmail(passwordResetEmail).then(
-      response => {
+    return this.afAuth
+      .sendPasswordResetEmail(passwordResetEmail)
+      .then((response) => {
         alert('mailinizi kontrol ediniz');
-      }
-    ).catch(error => {
-      alert('Girdiğiniz bilgiler kayıtlı değildir.');
-    });
+      })
+      .catch((error) => {
+        alert('Girdiğiniz bilgiler kayıtlı değildir.');
+      });
   }
-
 }

@@ -6,6 +6,12 @@
           <h1>Register</h1>
           <hr />
 
+          <div class="form-group">
+            <div class="row alert alert-danger form-group mx-sm-3 mb-2" *ngIf="alert">
+              <span class="col-8">{{ alertMeassage }}</span>
+            </div>
+          </div>
+
           <input
             type="text"
             required
