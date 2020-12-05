@@ -46,7 +46,7 @@
               <div class="row alert alert-danger form-group mx-sm-3 mb-2" *ngIf="alertLogIn">
                 <span class="col-8">Lütfen oturum açınız!</span>
                 <span class="col-2 material-icons" routerLink="/authentication"> login </span>
-                <span class="col-2 material-icons" (click)="closeAlert()"> close </span>
+                <span class="col-2 material-icons" (click)="alertLogIn = false"> close </span>
               </div>
             </div>
 

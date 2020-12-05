@@ -64,8 +64,4 @@ export class MylibraryComponent implements OnInit {
     }
     this.querySubscription.unsubscribe();
   }
-
-  closeAlert() {
-    this.alertLogIn = false;
-  }
 }
