@@ -59,6 +59,9 @@ export class MylibraryComponent implements OnInit {
   }
 
   ngOnDestroy() {
+    if (this.querySubscription === undefined) {
+      this.querySubscription = new Subscription();
+    }
     this.querySubscription.unsubscribe();
   }
 
