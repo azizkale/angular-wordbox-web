@@ -1,7 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { RegistrationService } from '../registration.service';
-import { RegistrationComponent } from '../registration/registration.component';
+import { Apollo, Subscription } from 'apollo-angular';
+import gql from 'graphql-tag';
+
+const GetSingleUser = gql`
+  query getSingleUser($token: String!) {
+    getSingleUser(token: $token) {
+      email
+      userId
+    }
+  }
+`;
 
 @Component({
   selector: 'app-authentication',
@@ -11,12 +21,27 @@ import { RegistrationComponent } from '../registration/registration.component';
 export class AuthenticationComponent implements OnInit {
   email: string;
   password: string;
-  constructor(private authService: AuthService, private registrationService: RegistrationService) {}
+  subs: Subscription;
+  constructor(
+    private authService: AuthService,
+    private registrationService: RegistrationService,
+    private apollo: Apollo
+  ) {}
 
   ngOnInit(): void {}
 
   SignInWithGoole(): void {
-    this.authService.SigninWithGoogle();
+    // this.authService.SigninWithGoogle();
+    this.apollo
+      .watchQuery<any>({
+        query: GetSingleUser,
+        variables: {
+          token: localStorage.getItem('user'),
+        },
+      })
+      .valueChanges.subscribe((data) => {
+        console.log(data);
+      });
   }
 
   SignInwithEmail(email, password): void {
