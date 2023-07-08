@@ -18,10 +18,10 @@ export class VocabularyService {
 
   constructor(
     private httpClient: HttpClient
-    ) {
+  ) {
     // to load all words in localstorage when it wasn't done before
     this.getVocabularies().subscribe(data => {
-      data.map((wrd) => {        
+      data.map((wrd) => {
         if (localStorage.getItem(wrd.id.toString()) === null) {
           localStorage.setItem(wrd.id.toString(), JSON.stringify(wrd));
         }
@@ -60,6 +60,6 @@ export class VocabularyService {
   }
 
   getFromGlosbe(word: string): Observable<any> {
-    return this.httpClient.get('https://myserver-deploy.herokuapp.com/api?word=' + word, { 'responseType': 'text' });
+    return this.httpClient.get('http://localhost:5000/graphql/api?word=' + word, { 'responseType': 'text' });
   }
 }
